@@ -1,20 +1,83 @@
 plugins {
-    id 'java'
+    id ("application")
+    id ("java")
+    id ("org.openjfx.javafxplugin") version "0.1.0"
+    id ("checkstyle")
+    id ("com.github.spotbugs") version "6.2.2"
+    id ("pmd")
+    id ("jacoco")
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+application {
+    mainClass = "Driver"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+javafx {
+    version = "24.0.2"
+    modules = [ "javafx.controls" , "javafx.fxml"]
+}
+
+checkstyle {
+    toolVersion = "10.26.1"
+}
+
+tasks.named('checkstyleTest') {
+    enabled = false
+}
+
+spotbugs {
+    ignoreFailures = true
+    showStackTraces = true
+    showProgress = true
+    spotbugsTest.enabled = false
+}
+
+spotbugsMain {
+    reports {
+        html {
+            required = true
+            stylesheet = "fancy-hist.xsl"
+        }
+    }
+}
+
+pmd {
+    ignoreFailures = true
+    consoleOutput = true
+    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+    pmdTest.enabled = false
+}
+
+test {
+    ignoreFailures = true
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: "**Driver**")
+        }))
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-test {
-    useJUnitPlatform()
+    testImplementation platform("org.junit:junit-bom:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
