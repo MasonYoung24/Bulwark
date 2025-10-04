@@ -32,4 +32,11 @@ public class Assets {
         manager.load(HUMANS_SPRITE_SHEET, Texture.class);
         manager.load(ITEMS_SPRITE_SHEET, Texture.class);
     }
+
+    /**
+     * Disposes of the assets loaded into the asset manager.
+     * */
+    public void dispose() {
+        manager.dispose();
+    }
 }
