@@ -16,8 +16,15 @@ public class Assets {
     public static final String HUMANS_SPRITE_SHEET = "sprites/HumansSpriteSheet.png";
     public static final String ITEMS_SPRITE_SHEET = "sprites/ItemsSpriteSheet.png";
 
+    /**
+     * Loads all the game assets into the asset manager.
+     * */
+    public void load() {
+        loadGameplayAssets();
+    }
+
     /*
-     *  Load gameplay assets into the asset manager.
+     *  Loads gameplay assets into the asset manager.
      * */
     private void loadGameplayAssets() {
         manager.load(ANIMALS_SPRITE_SHEET, Texture.class);
