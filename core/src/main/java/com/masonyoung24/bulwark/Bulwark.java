@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Bulwark extends Game {
-    private SpriteBatch batch;
+    public SpriteBatch batch;
     private Texture image;
 
     @Override
