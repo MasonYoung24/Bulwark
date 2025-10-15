@@ -12,11 +12,13 @@ import com.masonyoung24.bulwark.objects.PlayerCharacter;
 public class GameScreen implements Screen, InputProcessor {
     private final Bulwark game;
     private final OrthographicCamera camera;
+    private final PlayerCharacter playerCharacter;
 
     public GameScreen(Bulwark game) {
         this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        AssetManager manager = game.assets.manager;
+        playerCharacter = new PlayerCharacter(1, 4, manager, 100, 100);
     }
 
     @Override
@@ -26,8 +28,6 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float v) {
-        AssetManager manager = game.assets.manager;
-        PlayerCharacter playerCharacter = new PlayerCharacter(manager, 100, 100);
         game.batch.begin();
         game.batch.draw(playerCharacter.getFrame(), 100, 100, 64, 64); // draw at (100,100)
         game.batch.end();
