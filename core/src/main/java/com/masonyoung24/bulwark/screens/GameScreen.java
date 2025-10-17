@@ -1,11 +1,14 @@
 package com.masonyoung24.bulwark.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
 
@@ -18,7 +21,7 @@ public class GameScreen implements Screen, InputProcessor {
         this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         AssetManager manager = game.assets.manager;
-        playerCharacter = new PlayerCharacter(1, 4, manager, 100, 100);
+        playerCharacter = new PlayerCharacter(1, 100, manager);
     }
 
     @Override
@@ -27,9 +30,9 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float v) {;
         game.batch.begin();
-        game.batch.draw(playerCharacter.getFrame(), 100, 100, 64, 64); // draw at (100,100)
+        playerCharacter.render(game.batch);
         game.batch.end();
     }
 
@@ -58,6 +61,22 @@ public class GameScreen implements Screen, InputProcessor {
 
     }
 
+    private void handleMovementInput() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            playerCharacter.moveLeft();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            playerCharacter.moveRight();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            playerCharacter.moveUp();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            playerCharacter.moveDown();
+        }
+    }
+
+
     /**
      * Called when a key was pressed
      *
@@ -66,6 +85,9 @@ public class GameScreen implements Screen, InputProcessor {
      */
     @Override
     public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
+//            playerCharacter.movePlayerCharacter();
+        }
         return false;
     }
 
@@ -121,7 +143,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     /**
      * Called when the touch gesture is cancelled. Reason may be from OS interruption to touch becoming a large surface such as
-     * the user cheek). Relevant on Android and iOS only. The button parameter will be {@link Buttons#LEFT} on iOS.
+     * the user cheek). Relevant on Android and iOS only.
      *
      * @param screenX
      * @param screenY
