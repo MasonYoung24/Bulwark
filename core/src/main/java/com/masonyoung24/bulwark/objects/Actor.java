@@ -25,6 +25,12 @@ public class Actor {
         this.sprite.setSize(64, 64);
     }
 
+    /*
+     * Creates a sprite from the passed sprite sheet.
+     *
+     * @param spriteSheet the sprite sheet that holds the Actor frame
+     * @return the sprite of the Actor as a TextureRegion[];
+     * */
     protected static Sprite getSprite(final Texture spriteSheet, final int targetRow, final int targetColumn) {
         TextureRegion[][] splitSpriteSheet = TextureRegion.split(
             spriteSheet,
