@@ -30,7 +30,7 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public void render(float v) {;
+    public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
         handleMovementInput();
         game.batch.begin();
