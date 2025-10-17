@@ -1,9 +1,16 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Actor {
+    private static final int SPRITE_SHEET_ROWS = 7;
+    private static final int SPRITE_SHEET_COLUMNS = 7;
+    private static final int SINGLE_FRAME_TEXTURE_REGION_LENGTH = 1;
+
     private final int healthPoints;
     protected final float speed;
     protected final Sprite sprite;
@@ -12,6 +19,17 @@ public class Actor {
         this.healthPoints = healthPoints;
         this.speed = speed;
         this.sprite = sprite;
+    }
+
+    protected static Sprite getSprite(final Texture spriteSheet) {
+        TextureRegion[][] splitSpriteSheet = TextureRegion.split(
+            spriteSheet,
+            spriteSheet.getWidth() / SPRITE_SHEET_COLUMNS,
+            spriteSheet.getHeight() / SPRITE_SHEET_ROWS);
+
+        TextureRegion actorFrame = splitSpriteSheet[Actor.SPRITE_SHEET_ROWS][Actor.SPRITE_SHEET_COLUMNS];
+
+        return new Sprite(actorFrame);
     }
 
     /**
