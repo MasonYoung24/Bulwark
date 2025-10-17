@@ -26,11 +26,13 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render(float v) {;
+        ScreenUtils.clear(Color.BLACK);
+        handleMovementInput();
         game.batch.begin();
         playerCharacter.render(game.batch);
         game.batch.end();
