@@ -33,6 +33,15 @@ public class Actor {
     }
 
     /**
+     * Draws the Actor's sprite.
+     *
+     * @param batch the game's sprite batch as a SpriteBatch
+     * */
+    public void render(SpriteBatch batch) {
+        sprite.draw(batch);
+    }
+
+    /**
      * Moves the actor left.
      * */
     public void moveLeft() {
