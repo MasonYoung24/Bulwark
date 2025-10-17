@@ -13,4 +13,36 @@ public class Actor {
         this.speed = speed;
         this.sprite = sprite;
     }
+
+    /**
+     * Moves the actor left.
+     * */
+    public void moveLeft() {
+        float delta = Gdx.graphics.getDeltaTime();
+        sprite.translateX(-speed * delta);
+    }
+
+    /**
+     * Moves the actor right.
+     * */
+    public void moveRight() {
+        float delta = Gdx.graphics.getDeltaTime();
+        sprite.translateX(speed * delta);
+    }
+
+    /**
+     * Moves the actor up.
+     * */
+    public void moveUp() {
+        float delta = Gdx.graphics.getDeltaTime();
+        sprite.translateY(speed * delta);
+    }
+
+    /**
+     * Moves the actor down.
+     * */
+    public void moveDown() {
+        float delta = Gdx.graphics.getDeltaTime();
+        sprite.translateY(-speed * delta);
+    }
 }
