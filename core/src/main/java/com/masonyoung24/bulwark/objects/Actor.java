@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.masonyoung24.bulwark.enums.Direction;
 
 public class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
@@ -16,11 +17,13 @@ public class Actor {
     private final int healthPoints;
     protected final float speed;
     protected final Sprite sprite;
+    private Direction directionFacing;
 
     public Actor(int healthPoints, float speed, Sprite sprite) {
         this.healthPoints = healthPoints;
         this.speed = speed;
         this.sprite = sprite;
+        this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
         this.sprite.setSize(64, 64);
     }
@@ -49,6 +52,20 @@ public class Actor {
      * */
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    public void faceLeft() {
+        if (directionFacing != Direction.LEFT) {
+            this.directionFacing = Direction.LEFT;
+            this.sprite.flip(true, false);
+        }
+    }
+
+    public void faceRight() {
+        if (directionFacing != Direction.RIGHT) {
+            this.directionFacing = Direction.RIGHT;
+            this.sprite.flip(true, false);
+        }
     }
 
     /**
