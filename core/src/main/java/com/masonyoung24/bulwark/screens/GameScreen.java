@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
+import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
 
 public class GameScreen implements Screen, InputProcessor {
@@ -87,8 +88,14 @@ public class GameScreen implements Screen, InputProcessor {
      */
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
-//            playerCharacter.movePlayerCharacter();
+        if ((!Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            && (keycode == Input.Keys.LEFT || keycode == Input.Keys.A)) {
+            playerCharacter.faceLeft();
+        }
+
+        if ((!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            && (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)) {
+            playerCharacter.faceRight();
         }
         return false;
     }
