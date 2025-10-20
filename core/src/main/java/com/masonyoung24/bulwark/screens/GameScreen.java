@@ -38,6 +38,7 @@ public class GameScreen implements Screen{
         ScreenUtils.clear(Color.BLACK);
         inputs.handleMovementInput();
         game.batch.begin();
+        inputs.updateDirectionPlayerFacing();
         playerCharacter.render(game.batch);
         game.batch.end();
     }

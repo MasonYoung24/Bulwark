@@ -29,6 +29,14 @@ public class Inputs implements InputProcessor {
         }
     }
 
+    public void updateDirectionPlayerFacing() {
+        if (moveLeftKeyPressed && !moveRightKeyPressed) {
+            playerCharacter.faceLeft();
+        } else if (moveRightKeyPressed && !moveLeftKeyPressed) {
+            playerCharacter.faceRight();
+        }
+    }
+
     /**
      * Called when a key was pressed
      *
@@ -39,15 +47,15 @@ public class Inputs implements InputProcessor {
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.moveLeftKeyPressed = true;
-            if (!moveRightKeyPressed) {
-                playerCharacter.faceLeft();
-            }
+//            if (!moveRightKeyPressed) {
+//                playerCharacter.faceLeft();
+//            }
         }
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             this.moveRightKeyPressed = true;
-            if (!moveLeftKeyPressed) {
-                playerCharacter.faceRight();
-            }
+//            if (!moveLeftKeyPressed) {
+//                playerCharacter.faceRight();
+//            }
         }
         return false;
     }
