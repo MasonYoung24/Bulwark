@@ -7,6 +7,8 @@ import com.masonyoung24.bulwark.objects.PlayerCharacter;
 
 public class Inputs implements InputProcessor {
     private final PlayerCharacter playerCharacter;
+    private boolean moveLeftKeyPressed = false;
+    private boolean moveRightKeyPressed = false;
 
     public Inputs(final PlayerCharacter playerCharacter) {
         this.playerCharacter = playerCharacter;
@@ -35,14 +37,17 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean keyDown(int keycode) {
-        if ((!Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            && (keycode == Input.Keys.LEFT || keycode == Input.Keys.A)) {
-            playerCharacter.faceLeft();
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
+            this.moveLeftKeyPressed = true;
+            if (!moveRightKeyPressed) {
+                playerCharacter.faceLeft();
+            }
         }
-
-        if ((!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            && (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)) {
-            playerCharacter.faceRight();
+        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
+            this.moveRightKeyPressed = true;
+            if (!moveLeftKeyPressed) {
+                playerCharacter.faceRight();
+            }
         }
         return false;
     }
@@ -55,6 +60,12 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean keyUp(int keycode) {
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
+            this.moveLeftKeyPressed = false;
+        }
+        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
+            this.moveRightKeyPressed = false;
+        }
         return false;
     }
 
