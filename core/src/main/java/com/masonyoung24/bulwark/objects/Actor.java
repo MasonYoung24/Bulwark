@@ -35,14 +35,7 @@ public class Actor {
      * @return the sprite of the Actor as a TextureRegion[];
      * */
     protected static Sprite getSprite(final Texture spriteSheet, final int targetRow, final int targetColumn) {
-        TextureRegion[][] splitSpriteSheet = TextureRegion.split(
-            spriteSheet,
-            spriteSheet.getWidth() / SPRITE_SHEET_COLUMNS,
-            spriteSheet.getHeight() / SPRITE_SHEET_ROWS);
-
-        TextureRegion actorFrame = splitSpriteSheet[targetRow][targetColumn];
-
-        return new Sprite(actorFrame);
+        return SpriteUtils.getSprite(spriteSheet, targetRow, targetColumn, SPRITE_SHEET_COLUMNS, SPRITE_SHEET_ROWS);
     }
 
     /**
