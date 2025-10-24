@@ -32,7 +32,7 @@ public class Actor {
      * Creates a sprite from the passed sprite sheet.
      *
      * @param spriteSheet the sprite sheet that holds the Actor frame
-     * @return the sprite of the Actor as a TextureRegion[];
+     * @return the sprite of the Actor as a Sprite;
      * */
     protected static Sprite getSprite(final Texture spriteSheet, final int targetRow, final int targetColumn) {
         return SpriteUtils.getSprite(spriteSheet, targetRow, targetColumn, SPRITE_SHEET_COLUMNS, SPRITE_SHEET_ROWS);

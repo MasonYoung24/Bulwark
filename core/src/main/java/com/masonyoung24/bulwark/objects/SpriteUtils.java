@@ -9,11 +9,15 @@ public class SpriteUtils {
 
     }
 
-    /*
+    /**
      * Creates a sprite from the passed sprite sheet.
      *
      * @param spriteSheet the sprite sheet that holds the Actor frame
-     * @return the sprite of the Actor as a TextureRegion[];
+     * @param targetColumn the column of the target sprite as an int
+     * @param targetRow the row of the target sprite as an int
+     * @param sprite_sheet_columns the number of columns in the spritesheet
+     * @param sprite_sheet_rows the number of rows in the spritesheet
+     * @return the sprite of the Actor as a Sprite;
      * */
     public static Sprite getSprite(final Texture spriteSheet,
                                    final int targetRow,
