@@ -18,6 +18,8 @@ public class Actor {
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
+    private float positionX;
+    private float positionY;
 
     public Actor(int healthPoints, float speed, Sprite sprite) {
         this.healthPoints = healthPoints;
@@ -26,6 +28,15 @@ public class Actor {
         this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
         this.sprite.setSize(64, 64);
+    }
+
+    /**
+     * Returns the coordinate X and Y position of Actor as an array of floats.
+     *
+     * @return an array containing the X and Y position as floats.
+     * */
+    public float[] getPosition() {
+        return new float[]{sprite.getX(), sprite.getY()};
     }
 
     /*
