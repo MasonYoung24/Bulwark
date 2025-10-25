@@ -19,6 +19,13 @@ public class Inputs implements InputProcessor {
         this.playerCharacter = playerCharacter;
     }
 
+    /**
+     * Returns the coordinates of the touch point as an array of floats
+     * */
+    public float[] getTouchPointCoordinates() {
+        return new float[]{touchPoint.x, touchPoint.y};
+    }
+
     public void handleMovementInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             playerCharacter.moveLeft();
