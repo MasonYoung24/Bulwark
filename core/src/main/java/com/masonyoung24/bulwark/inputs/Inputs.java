@@ -3,14 +3,19 @@ package com.masonyoung24.bulwark.inputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
 
 public class Inputs implements InputProcessor {
+    private final OrthographicCamera camera;
     private final PlayerCharacter playerCharacter;
     private boolean moveLeftKeyPressed = false;
     private boolean moveRightKeyPressed = false;
+    private final Vector3 touchPoint = new Vector3();
 
-    public Inputs(final PlayerCharacter playerCharacter) {
+    public Inputs(OrthographicCamera camera, final PlayerCharacter playerCharacter) {
+        this.camera = camera;
         this.playerCharacter = playerCharacter;
     }
 
@@ -93,7 +98,11 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        if (button != Input.Buttons.LEFT || pointer > 0) {
+            return false;
+        }
+        camera.unproject(touchPoint.set(screenX, screenY, 0));
+        return true;
     }
 
     /**
