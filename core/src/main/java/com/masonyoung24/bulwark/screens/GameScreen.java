@@ -25,7 +25,7 @@ public class GameScreen implements Screen{
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         AssetManager manager = game.assets.manager;
         playerCharacter = new PlayerCharacter(1, 100, manager);
-        inputs = new Inputs(playerCharacter);
+        inputs = new Inputs(camera, playerCharacter);
     }
 
     @Override
