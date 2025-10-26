@@ -11,6 +11,13 @@ public class ProjectileManager {
         activeProjectiles = new ArrayList<>();
     }
 
-
+    /**
+     * Adds a new Projectile to an array of active projectiles.
+     *
+     * @param projectile a new projectile of type Projectile
+     * */
+    public void addProjectile(Projectile projectile) {
+        activeProjectiles.add(projectile);
+    }
 
 }
