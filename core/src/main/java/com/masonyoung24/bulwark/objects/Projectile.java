@@ -34,11 +34,18 @@ public class Projectile {
     }
 
     /**
-     * Draws the Projectile.d
+     * Draws the Projectile.
      *
      * @param batch the game's sprite batch as a SpriteBatch
      * */
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    /**
+     * Returns the current position of the Projectile.
+     * */
+    public Vector3 getPosition() {
+        return new Vector3(sprite.getX(), sprite.getY(), 0);
     }
 }
