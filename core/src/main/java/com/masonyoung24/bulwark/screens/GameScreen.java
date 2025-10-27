@@ -43,12 +43,12 @@ public class GameScreen implements Screen {
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
         inputs.handleMovementInput();
-        projectileManager.updatePosition();
+        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         inputs.updateDirectionPlayerFacing();
-        playerCharacter.render(game.batch);
         projectileManager.render(game.batch);
+        playerCharacter.render(game.batch);
         game.batch.end();
     }
 
