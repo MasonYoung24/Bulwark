@@ -30,7 +30,14 @@ public class ProjectileManager {
         for (Projectile projectile : activeProjectiles) {
             projectile.render(batch);
         }
-
     }
 
+    /**
+     * Updates the position of every active Projectile.
+     * */
+    public void updatePosition() {
+        for (Projectile projectile : activeProjectiles) {
+            projectile.updatePosition();
+        }
+    }
 }
