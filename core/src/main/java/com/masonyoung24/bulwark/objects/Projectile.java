@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
 public class Projectile {
-    public static final int SPRITESHEET_ROWS = 26;
+    public static final int SPRITE_SHEET_ROWS = 26;
     public static final int SPRITE_SHEET_COLUMNS = 11;
     public static final int SPRITESHEET_TARGET_ROW = 1;
     public static final int SPRITE_SHEET_TARGET_COLUMN = 1;
@@ -22,7 +22,7 @@ public class Projectile {
             SPRITESHEET_TARGET_ROW,
             SPRITE_SHEET_TARGET_COLUMN,
             SPRITE_SHEET_COLUMNS,
-            SPRITE_SHEET_COLUMNS);
+            SPRITE_SHEET_ROWS);
         this.position = startPosition;
         this.speed = speed;
         this.direction = direction;
