@@ -10,22 +10,28 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
+import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.inputs.Inputs;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
+import com.masonyoung24.bulwark.objects.Projectile;
 
-public class GameScreen implements Screen{
+import java.util.ArrayList;
+
+public class GameScreen implements Screen {
     private final Bulwark game;
     private final OrthographicCamera camera;
     private final PlayerCharacter playerCharacter;
     private final Inputs inputs;
+    private final ProjectileManager projectileManager;
 
     public GameScreen(Bulwark game) {
         this.game = game;
+        this.projectileManager = new ProjectileManager();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         AssetManager manager = game.assets.manager;
         playerCharacter = new PlayerCharacter(1, 100, manager);
-        inputs = new Inputs(camera, playerCharacter);
+        inputs = new Inputs(camera, playerCharacter, projectileManager);
     }
 
     @Override
@@ -37,9 +43,12 @@ public class GameScreen implements Screen{
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
         inputs.handleMovementInput();
+        projectileManager.updatePosition();
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         inputs.updateDirectionPlayerFacing();
         playerCharacter.render(game.batch);
+        projectileManager.render(game.batch);
         game.batch.end();
     }
 
