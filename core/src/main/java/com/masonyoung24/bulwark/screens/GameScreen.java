@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.enums.Direction;
@@ -24,11 +26,15 @@ public class GameScreen implements Screen {
     private final PlayerCharacter playerCharacter;
     private final Inputs inputs;
     private final ProjectileManager projectileManager;
+    private final FitViewport viewport;
 
     public GameScreen(Bulwark game) {
         this.game = game;
         this.projectileManager = new ProjectileManager();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
+        camera.update();
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         AssetManager manager = game.assets.manager;
         playerCharacter = new PlayerCharacter(1, 100, manager);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
@@ -53,8 +59,8 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void resize(int i, int i1) {
-
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
     }
 
     @Override
