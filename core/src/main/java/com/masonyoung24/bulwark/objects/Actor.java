@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.enums.Direction;
 
 public class Actor {
@@ -36,8 +37,8 @@ public class Actor {
      *
      * @return an array containing the X and Y position as floats.
      * */
-    public Vector2 getPosition() {
-        return new Vector2(sprite.getX(), sprite.getY());
+    public Vector3 getPosition() {
+        return new Vector3(sprite.getX(), sprite.getY(), 0);
     }
 
     /*
