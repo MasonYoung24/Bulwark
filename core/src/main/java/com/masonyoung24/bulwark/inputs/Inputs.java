@@ -14,6 +14,7 @@ public class Inputs implements InputProcessor {
     private final PlayerCharacter playerCharacter;
     private boolean moveLeftKeyPressed = false;
     private boolean moveRightKeyPressed = false;
+    private boolean isFiring = false;
     private final Vector3 touchPoint = new Vector3();
     private final ProjectileManager projectileManager;
 
@@ -114,6 +115,7 @@ public class Inputs implements InputProcessor {
         if (button != Input.Buttons.LEFT || pointer > 0) {
             return false;
         }
+        isFiring = true;
         camera.unproject(touchPoint.set(screenX, screenY, 0));
         projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
         return true;
@@ -130,6 +132,7 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        isFiring = false;
         return false;
     }
 
@@ -158,7 +161,12 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        if (!isFiring || pointer > 0) {
+            return false;
+        }
+        camera.unproject(touchPoint.set(screenX, screenY, 0));
+        projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
+        return true;
     }
 
     /**
