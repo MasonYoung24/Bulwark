@@ -12,7 +12,6 @@ import com.masonyoung24.bulwark.enums.Direction;
 public class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
     private static final int SPRITE_SHEET_COLUMNS = 7;
-    private static final int SINGLE_FRAME_TEXTURE_REGION_LENGTH = 1;
     private static final int STARTING_X_POSITION = 100;
     private static final int STARTING_Y_POSITION = 100;
 
@@ -20,8 +19,6 @@ public class Actor {
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
-    private float positionX;
-    private float positionY;
 
     public Actor(int healthPoints, float speed, Sprite sprite) {
         this.healthPoints = healthPoints;
