@@ -5,7 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
+import com.masonyoung24.bulwark.objects.Projectile;
 
 public class Inputs implements InputProcessor {
     private final OrthographicCamera camera;
@@ -13,10 +15,14 @@ public class Inputs implements InputProcessor {
     private boolean moveLeftKeyPressed = false;
     private boolean moveRightKeyPressed = false;
     private final Vector3 touchPoint = new Vector3();
+    private final ProjectileManager projectileManager;
 
-    public Inputs(OrthographicCamera camera, final PlayerCharacter playerCharacter) {
+    public Inputs(OrthographicCamera camera,
+                  final PlayerCharacter playerCharacter,
+                  ProjectileManager projectileManager) {
         this.camera = camera;
         this.playerCharacter = playerCharacter;
+        this.projectileManager = projectileManager;
     }
 
     /**
@@ -109,6 +115,7 @@ public class Inputs implements InputProcessor {
             return false;
         }
         camera.unproject(touchPoint.set(screenX, screenY, 0));
+        projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
         return true;
     }
 
