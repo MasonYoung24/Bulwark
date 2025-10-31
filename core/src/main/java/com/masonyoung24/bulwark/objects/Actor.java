@@ -15,13 +15,13 @@ public class Actor {
     private static final int STARTING_X_POSITION = 100;
     private static final int STARTING_Y_POSITION = 100;
 
-    private final int healthPoints;
+    private final int currentHP;
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
 
-    public Actor(int healthPoints, float speed, Sprite sprite) {
-        this.healthPoints = healthPoints;
+    public Actor(int currentHP, float speed, Sprite sprite) {
+        this.currentHP = currentHP;
         this.speed = speed;
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
