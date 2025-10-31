@@ -30,7 +30,7 @@ public class Projectile {
     }
 
     public void updatePosition() {
-        sprite.translate(direction.x, direction.y);
+        sprite.translate(direction.x * speed, direction.y * speed);
     }
 
     /**
