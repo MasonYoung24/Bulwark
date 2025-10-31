@@ -19,11 +19,11 @@ public class SpriteUtils {
      * @param sprite_sheet_rows the number of rows in the spritesheet
      * @return the sprite of the Actor as a Sprite;
      * */
-    public static Sprite getSprite(final Texture spriteSheet,
-                                   final int targetRow,
-                                   final int targetColumn,
-                                   final int sprite_sheet_columns,
-                                   final int sprite_sheet_rows) {
+    public static Sprite getSpriteFromSpriteSheet(final Texture spriteSheet,
+                                                  final int targetRow,
+                                                  final int targetColumn,
+                                                  final int sprite_sheet_columns,
+                                                  final int sprite_sheet_rows) {
         TextureRegion[][] splitSpriteSheet = TextureRegion.split(
             spriteSheet,
             spriteSheet.getWidth() / sprite_sheet_columns,
