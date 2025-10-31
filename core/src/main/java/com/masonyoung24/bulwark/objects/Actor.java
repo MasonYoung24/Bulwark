@@ -15,13 +15,14 @@ public class Actor {
     private static final int STARTING_X_POSITION = 100;
     private static final int STARTING_Y_POSITION = 100;
 
-    private final int currentHP;
+    private int currentHP;
+    private int maxHP;
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
 
-    public Actor(int currentHP, float speed, Sprite sprite) {
-        this.currentHP = currentHP;
+    public Actor(int maxHP, float speed, Sprite sprite) {
+        this.currentHP = maxHP;
         this.speed = speed;
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
