@@ -17,6 +17,15 @@ public class Projectile {
     public static final int SPRITE_SHEET_COLUMNS = 11;
     public static final int SPRITESHEET_TARGET_ROW = 1;
     public static final int SPRITE_SHEET_TARGET_COLUMN = 1;
+    /**
+     * The default speed of a projectile
+     * */
+    private static final float DEFAULT_SPEED = 300f;
+    /**
+     * The default refractory period of a projectile
+     * */
+    private static final float DEFAULT_REFRACTORY_PERIOD = 1.0f;
+
     private final Sprite sprite;
     private final float speed;
     private Vector3 position;
