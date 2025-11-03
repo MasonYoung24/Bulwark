@@ -3,10 +3,15 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents a projectile that can be fired.
+ *
+ * @author Mason Young
+ * @version 2025
+ **/
 public class Projectile {
     public static final int SPRITE_SHEET_ROWS = 26;
     public static final int SPRITE_SHEET_COLUMNS = 11;
@@ -18,6 +23,15 @@ public class Projectile {
     private final Vector3 direction;
     private final float refractoryPeriod;
 
+    /**
+     * Constructs an object of type Projectile.
+     *
+     * @param startPosition the starting position of the projectile as a Vector3
+     * @param speed the speed of the projectile as a float
+     * @param direction the travel direction of the projectile as a Vector3
+     * @param assetManager the asset manager as an AssetManager
+     * @param refractoryPeriod the refractory period of the projectile as a float
+     * */
     public Projectile(Vector3 startPosition,
                       float speed,
                       Vector3 direction,
@@ -42,6 +56,9 @@ public class Projectile {
         return new Vector3(sprite.getX(), sprite.getY(), 0);
     }
 
+    /**
+     * Updates the position of the projectile by translating its sprite
+     * */
     public void updatePosition() {
         sprite.translate(direction.x * speed, direction.y * speed);
     }
