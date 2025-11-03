@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
         inputs.handleMovementInput();
+        update(v);
         projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
@@ -56,6 +57,10 @@ public class GameScreen implements Screen {
         projectileManager.render(game.batch);
         playerCharacter.render(game.batch);
         game.batch.end();
+    }
+
+    private void update(float deltaTime) {
+        playerCharacter.updateTimeSinceLastShot(deltaTime);
     }
 
     @Override
