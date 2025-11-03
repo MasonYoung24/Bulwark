@@ -16,9 +16,14 @@ public class Projectile {
     private final float speed;
     private Vector3 position;
     private final Vector3 direction;
+    private final float refractoryPeriod;
 
-    public Projectile(Vector3 startPosition, float speed, Vector3 direction, AssetManager assetManager) {
-        this.sprite = SpriteUtils.getSprite(assetManager.get(Assets.ITEMS_SPRITE_SHEET),
+    public Projectile(Vector3 startPosition,
+                      float speed,
+                      Vector3 direction,
+                      AssetManager assetManager,
+                      float refractoryPeriod) {
+        this.sprite = SpriteUtils.getSpriteFromSpriteSheet(assetManager.get(Assets.ITEMS_SPRITE_SHEET),
             SPRITESHEET_TARGET_ROW,
             SPRITE_SHEET_TARGET_COLUMN,
             SPRITE_SHEET_COLUMNS,
@@ -26,6 +31,7 @@ public class Projectile {
         this.position = startPosition;
         this.speed = speed;
         this.direction = direction;
+        this.refractoryPeriod = refractoryPeriod;
         this.sprite.setPosition(position.x, position.y);
     }
 
