@@ -19,6 +19,8 @@ public class PlayerCharacter extends Actor implements Shooter {
 
     private final AssetManager assetManager;
     private final float castSpeed;
+    private final Projectile projectile;
+    private float timeSinceLastShot = 0.0F;
 
 
     public PlayerCharacter(int healthPoints,
@@ -30,6 +32,7 @@ public class PlayerCharacter extends Actor implements Shooter {
                 CHARACTER_TARGET_ROW,
                 CHARACTER_TARGET_COLUMN)
         );
+        this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.castSpeed = BASE_CAST_SPEED;
     }
@@ -42,7 +45,7 @@ public class PlayerCharacter extends Actor implements Shooter {
      */
     @Override
     public float getTimeSinceLastShot() {
-        return 0;
+        return timeSinceLastShot;
     }
 
     /**
@@ -64,13 +67,21 @@ public class PlayerCharacter extends Actor implements Shooter {
      */
     @Override
     public boolean canFire() {
-        return false;
+        return getTimeSinceLastShot() >= projectile.getRefractoryPeriod();
     }
 
+    /**
+     * Fires a projectile.
+     *
+     * @param targetPosition the position of the target to shoot at as a Vector3
+     * @return a projectile as a Projectile
+     * */
     @Override
     public Projectile fireProjectile(Vector3 targetPosition) {
         Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
-        return new Projectile(this.getPosition(), castSpeed, direction, assetManager, 2.0F);
+        Projectile newProjectile = new Projectile(this.getPosition(), castSpeed, direction, assetManager, 2.0F);
+        this.timeSinceLastShot = 0;
+        return newProjectile;
     }
 
     /**
@@ -80,7 +91,7 @@ public class PlayerCharacter extends Actor implements Shooter {
      *
      */
     @Override
-    public void updateShootCooldown(float deltaTime) {
-
+    public void updateTimeSinceLastShot(float deltaTime) {
+        this.timeSinceLastShot += deltaTime;
     }
 }
