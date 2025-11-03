@@ -35,9 +35,26 @@ public class Projectile {
         this.sprite.setPosition(position.x, position.y);
     }
 
+    /**
+     * Returns the current position of the Projectile.
+     * */
+    public Vector3 getPosition() {
+        return new Vector3(sprite.getX(), sprite.getY(), 0);
+    }
+
     public void updatePosition() {
         sprite.translate(direction.x * speed, direction.y * speed);
     }
+
+    /**
+     * Returns the refractory period of the projectile as a float
+     *
+     * @return the refractory period of the projectile as a float
+     *  */
+    public float getRefractoryPeriod() {
+        return this.refractoryPeriod;
+    }
+
 
     /**
      * Draws the Projectile.
@@ -46,12 +63,5 @@ public class Projectile {
      * */
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
-    }
-
-    /**
-     * Returns the current position of the Projectile.
-     * */
-    public Vector3 getPosition() {
-        return new Vector3(sprite.getX(), sprite.getY(), 0);
     }
 }
