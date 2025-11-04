@@ -27,7 +27,6 @@ public class Actor {
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
-        this.sprite.setSize(64, 64);
     }
 
     /**
@@ -46,7 +45,7 @@ public class Actor {
      * @return the sprite of the Actor as a Sprite;
      * */
     protected static Sprite getSprite(final Texture spriteSheet, final int targetRow, final int targetColumn) {
-        return SpriteUtils.getSprite(spriteSheet, targetRow, targetColumn, SPRITE_SHEET_COLUMNS, SPRITE_SHEET_ROWS);
+        return SpriteUtils.getSpriteFromSpriteSheet(spriteSheet, targetRow, targetColumn, SPRITE_SHEET_COLUMNS, SPRITE_SHEET_ROWS);
     }
 
     /**
