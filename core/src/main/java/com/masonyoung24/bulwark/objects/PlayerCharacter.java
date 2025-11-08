@@ -43,17 +43,6 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
-     * Sets the time since the last shot was fired.
-     *
-     * @param time the time since the last shot was fired.
-     *
-     */
-    @Override
-    public void setTimeSinceLastShot(float time) {
-
-    }
-
-    /**
      * Determines if another shot can be fired.
      *
      * @return a boolean true if a shot can be fired, false otherwise
