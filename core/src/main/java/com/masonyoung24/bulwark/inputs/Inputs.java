@@ -117,7 +117,9 @@ public class Inputs implements InputProcessor {
         }
         isFiring = true;
         camera.unproject(touchPoint.set(screenX, screenY, 0));
-        projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
+        if (playerCharacter.canFire()) {
+            projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
+        }
         return true;
     }
 
