@@ -32,6 +32,16 @@ public class Projectile {
     private final Vector3 direction;
     private final float refractoryPeriod;
 
+    public Projectile(AssetManager assetManager) {
+        this(
+            new Vector3(0, 0, 0),               // startPosition
+            DEFAULT_SPEED,                      // speed
+            new Vector3(1, 0, 0),               // direction (default right)
+            assetManager,                       // assetManager
+            DEFAULT_REFRACTORY_PERIOD           // refractoryPeriod
+        );
+    }
+
     /**
      * Constructs an object of type Projectile.
      *
