@@ -7,7 +7,6 @@ import com.masonyoung24.bulwark.resources.Assets;
 public class PlayerCharacter extends Actor implements Shooter {
     private static final int CHARACTER_TARGET_ROW = 2;
     private static final int CHARACTER_TARGET_COLUMN = 3;
-    public static final int BASE_HP = 3;
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
 
@@ -94,11 +93,12 @@ public class PlayerCharacter extends Actor implements Shooter {
         float halfSpriteHeight = sprite.getHeight() * HALF_MULTIPLIER;
 
         float bufferDistance = (float) Math.sqrt(
-            (projectileDirectionNormalized.x * halfSpriteWidth) * (projectileDirectionNormalized.x * halfSpriteWidth) +
-                (projectileDirectionNormalized.y * halfSpriteHeight) * (projectileDirectionNormalized.y * halfSpriteHeight)
+            (projectileDirectionNormalized.x * halfSpriteWidth) *
+                (projectileDirectionNormalized.x * halfSpriteWidth) +
+                (projectileDirectionNormalized.y * halfSpriteHeight) *
+                    (projectileDirectionNormalized.y * halfSpriteHeight)
         );
 
         return new Vector3(getPosition()).add(projectileDirectionNormalized.scl(bufferDistance));
     }
-
 }
