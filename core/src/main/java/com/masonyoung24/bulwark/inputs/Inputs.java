@@ -33,6 +33,13 @@ public class Inputs implements InputProcessor {
         return new float[]{touchPoint.x, touchPoint.y};
     }
 
+    /**
+     * Returns the coordinates of the touch point as an array of floats
+     * */
+    public boolean getIsFiring() {
+        return isFiring;
+    }
+
     public void handleMovementInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             playerCharacter.moveLeft();
@@ -116,10 +123,6 @@ public class Inputs implements InputProcessor {
             return false;
         }
         isFiring = true;
-        camera.unproject(touchPoint.set(screenX, screenY, 0));
-        if (playerCharacter.canFire()) {
-            projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
-        }
         return true;
     }
 
@@ -163,12 +166,7 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (!isFiring || pointer > 0) {
-            return false;
-        }
-        camera.unproject(touchPoint.set(screenX, screenY, 0));
-        projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
-        return true;
+        return false;
     }
 
     /**

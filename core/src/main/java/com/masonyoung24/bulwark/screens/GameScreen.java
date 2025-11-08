@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -60,8 +61,24 @@ public class GameScreen implements Screen {
     }
 
     private void update(float deltaTime) {
+        if (inputs.getIsFiring()) {
+            handleFiring();
+        }
         playerCharacter.updateTimeSinceLastShot(deltaTime);
     }
+
+    /**
+     * Handles firing a projectile from the player character.
+     * */
+    private void handleFiring() {
+        if (!playerCharacter.canFire()) return;
+
+        Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        camera.unproject(touchPoint);
+
+        projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
+    }
+
 
     @Override
     public void resize(int width, int height) {
