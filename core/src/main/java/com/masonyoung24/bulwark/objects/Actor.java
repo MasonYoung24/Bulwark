@@ -108,4 +108,22 @@ public class Actor {
         float delta = Gdx.graphics.getDeltaTime();
         sprite.translateY(-speed * delta);
     }
+
+    /**
+     * Removes an ability known to the Actor.
+     *
+     * @param ability the Ability to remove
+     * */
+    public void removeAbility(Ability ability) {
+        abilities.remove(ability);
+    }
+
+    /**
+     * Adds an ability that the Actor can use.
+     *
+     * @param ability the Ability to add
+     * */
+    public void addAbility(Ability ability) {
+        abilities.add(ability);
+    }
 }
