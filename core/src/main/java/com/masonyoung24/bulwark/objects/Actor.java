@@ -126,4 +126,13 @@ public class Actor {
     public void addAbility(Ability ability) {
         abilities.add(ability);
     }
+
+    /**
+     * Executes an ability known to the actor.
+     *
+     * @param ability the Ability to execute
+     * */
+    public void executeAbility(Ability ability) {
+        ability.cast();
+    }
 }
