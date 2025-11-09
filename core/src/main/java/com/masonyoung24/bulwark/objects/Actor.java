@@ -115,7 +115,9 @@ public class Actor {
      * @param ability the Ability to remove
      * */
     public void removeAbility(Ability ability) {
-        abilities.remove(ability);
+        if (ability != null) {
+            abilities.remove(ability);
+        }
     }
 
     /**
@@ -124,7 +126,9 @@ public class Actor {
      * @param ability the Ability to add
      * */
     public void addAbility(Ability ability) {
-        abilities.add(ability);
+        if (ability != null) {
+            abilities.add(ability);
+        }
     }
 
     /**
@@ -133,6 +137,8 @@ public class Actor {
      * @param ability the Ability to execute
      * */
     public void executeAbility(Ability ability) {
-        ability.cast();
+        if (ability != null) {
+            ability.cast();
+        }
     }
 }
