@@ -16,4 +16,9 @@ public abstract class Ability {
     public boolean checkIfExecutable() {
         return timeSinceCast >= cooldown;
     }
+
+    /**
+     * Executes the ability.
+     * */
+    abstract void execute();
 }
