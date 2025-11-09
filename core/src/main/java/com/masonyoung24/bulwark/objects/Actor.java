@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.enums.Direction;
+import com.masonyoung24.bulwark.objects.spells.Ability;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
@@ -20,6 +24,7 @@ public class Actor {
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
+    private List<Ability> abilities;
 
     public Actor(int maxHP, float speed, Sprite sprite) {
         this.currentHP = maxHP;
@@ -27,6 +32,7 @@ public class Actor {
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
+        this.abilities = new ArrayList<>();
     }
 
     /**
