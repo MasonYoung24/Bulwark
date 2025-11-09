@@ -5,4 +5,8 @@ public abstract class Ability {
     private float cooldown;
     private float cooldownRemaining;
     private String name;
+
+    public Ability() {
+
+    }
 }
