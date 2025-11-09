@@ -6,8 +6,11 @@ public abstract class Ability {
     private float timeSinceCast;
     private String name;
 
-    public Ability() {
-
+    public Ability(final String name, final float damage, final float cooldown) {
+        this.name = name;
+        this.damage = damage;
+        this.cooldown = cooldown;
+        this.timeSinceCast = cooldown;
     }
 
     /**
