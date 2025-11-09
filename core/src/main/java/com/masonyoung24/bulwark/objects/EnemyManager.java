@@ -12,9 +12,28 @@ public class EnemyManager {
     }
 
     /**
+     * Handles the death of an enemy.
+     *
+     * @param slainEnemy the Enemy who has been slain
+     * */
+    public void handleEnemyDeath(Enemy slainEnemy) {
+        removeEnemy(slainEnemy);
+        incrementEnemiesSlain();
+    }
+
+    /**
+     * The enemy to remove from the list of active enemies.
+     *
+     * @param enemy the enemy to remove from the active enemies
+     * */
+    private void removeEnemy(Enemy enemy) {
+        activeEnemies.remove(enemy);
+    }
+
+    /**
      * Increments the number of enemies slain by the player character.
      * */
-    public void incrementEnemiesSlain() {
+    private void incrementEnemiesSlain() {
         enemiesSlain++;
     }
 }
