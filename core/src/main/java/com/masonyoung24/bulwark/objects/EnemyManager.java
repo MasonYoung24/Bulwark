@@ -82,20 +82,25 @@ public class EnemyManager {
         switch (sidesOfScreen[RANDOM.nextInt(sidesOfScreen.length)]) {
             case "Top": {
                 spawnPosition = new Vector3(RANDOM.nextFloat(viewportWidth), viewportHeight, 0);
+                break;
             }
             case "Bottom": {
                 spawnPosition = new Vector3(RANDOM.nextFloat(viewportWidth), MINIMUM_SPAWN_POSITION_Y_COORDINATE, 0);
+                break;
             }
             case "Left": {
                 spawnPosition = new Vector3(MINIMUM_SPAWN_POSITION_X_COORDINATE, RANDOM.nextFloat(viewportHeight), 0);
+                break;
             }
             case "Right": {
                 spawnPosition = new Vector3(viewportWidth, RANDOM.nextFloat(viewportHeight), 0);
+                break;
             }
             default: {
                 spawnPosition = null;
+                break;
             }
-            return spawnPosition;
         }
+        return spawnPosition;
     }
 }
