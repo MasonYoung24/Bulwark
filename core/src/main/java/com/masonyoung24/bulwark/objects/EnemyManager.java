@@ -1,5 +1,7 @@
 package com.masonyoung24.bulwark.objects;
 
+import com.badlogic.gdx.math.Vector3;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +37,16 @@ public class EnemyManager {
      * */
     private void incrementEnemiesSlain() {
         enemiesSlain++;
+    }
+
+     /**
+     * Moves each enemy depending on the position of the player.
+      *
+     * @param playerPosition the position of the player
+     * */
+    public void updateEnemyPosition(Vector3 playerPosition) {
+        for (Enemy enemy : activeEnemies) {
+            enemy.move(playerPosition);
+        }
     }
 }
