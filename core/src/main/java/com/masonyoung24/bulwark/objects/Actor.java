@@ -17,8 +17,6 @@ import java.util.Vector;
 public class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
     private static final int SPRITE_SHEET_COLUMNS = 7;
-    private static final int STARTING_X_POSITION = 100;
-    private static final int STARTING_Y_POSITION = 100;
 
     private int currentHP;
     private int maxHP;
@@ -26,7 +24,7 @@ public class Actor {
     protected final Sprite sprite;
     private Direction directionFacing;
     private Vector3 spawnPosition;
-    private List<Ability> abilities;
+    private final List<Ability> abilities;
 
     public Actor(final int maxHP, final float speed, Sprite sprite, final Vector3 spawnPosition) {
         this.currentHP = maxHP;
