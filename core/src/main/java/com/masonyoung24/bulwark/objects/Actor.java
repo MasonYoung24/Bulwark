@@ -12,6 +12,7 @@ import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
@@ -24,14 +25,15 @@ public class Actor {
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
+    private Vector3 spawnPosition;
     private List<Ability> abilities;
 
-    public Actor(int maxHP, float speed, Sprite sprite) {
+    public Actor(final int maxHP, final float speed, Sprite sprite, final Vector3 spawnPosition) {
         this.currentHP = maxHP;
         this.speed = speed;
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
-        this.sprite.setPosition(STARTING_X_POSITION, STARTING_Y_POSITION);
+        this.sprite.setPosition(spawnPosition.x, spawnPosition.y);
         this.abilities = new ArrayList<>();
     }
 
@@ -138,7 +140,7 @@ public class Actor {
      * */
     public void executeAbility(Ability ability) {
         if (ability != null) {
-            ability.cast();
+//            ability.cast();
         }
     }
 }
