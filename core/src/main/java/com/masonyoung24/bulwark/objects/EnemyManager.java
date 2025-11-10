@@ -103,4 +103,17 @@ public class EnemyManager {
         }
         return spawnPosition;
     }
+
+    /**
+     * Adds a new enemy to the list of active enemies.
+     * */
+    public void spawnEnemy(float viewportWidth, float viewportHeight) {
+        activeEnemies.add(new Goblin(
+            3,
+            3.0F,
+            assetManager,
+            determineSpawnPosition(viewportWidth, viewportHeight)));
+        System.out.println("Enemy added");
+        System.out.println("Active enemies: " + activeEnemies.size());
+    }
 }
