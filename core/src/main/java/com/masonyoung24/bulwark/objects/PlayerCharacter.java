@@ -16,7 +16,6 @@ public class PlayerCharacter extends Actor implements Shooter {
     private float timeSinceLastShot = 0.0F;
     private Vector3 previousPosition;
 
-
     public PlayerCharacter(int healthPoints,
                            float speed,
                            AssetManager assetManager) {
@@ -51,6 +50,15 @@ public class PlayerCharacter extends Actor implements Shooter {
         if (previousPosition != null) {
             this.previousPosition = previousPosition;
         }
+    }
+
+    /**
+     * Gets the current movement direction of the player character.
+     *
+     * @return the movement direction of the player as a Vector3
+     * */
+    public Vector3 getMovementDirection() {
+        return this.getPosition().sub(previousPosition);
     }
 
     /**
