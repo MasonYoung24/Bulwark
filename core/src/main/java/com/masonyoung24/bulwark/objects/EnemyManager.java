@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EnemyManager {
-    private List<Enemy> activeEnemies;
+    private final List<Enemy> activeEnemies;
     public static int enemiesSlain = 0;
     public static final Random RANDOM = new Random();
     public static final float MINIMUM_SPAWN_POSITION_X_COORDINATE = 0.0f;
@@ -105,9 +105,26 @@ public class EnemyManager {
     }
 
     /**
+     * Spawns enemies and add them to the list of active enemies.
+     *
+     * @param viewportWidth the width of the viewport as a float
+     * @param viewportHeight the height of the viewport as a float
+     * @param enemiesToSpawn the number of enemies to spawn
+     * */
+    public void spawnEnemies(float viewportWidth, float viewportHeight, int enemiesToSpawn) {
+        for (int i = 0; i < enemiesToSpawn; i++) {
+            spawnEnemy(viewportWidth, viewportHeight);
+        }
+    }
+
+    /**
      * Adds a new enemy to the list of active enemies.
+     *
+     * @param viewportWidth the width of the viewport as a float
+     * @param viewportHeight the height of the viewport as a float
      * */
     public void spawnEnemy(float viewportWidth, float viewportHeight) {
+
         activeEnemies.add(new Goblin(
             3,
             3.0F,
