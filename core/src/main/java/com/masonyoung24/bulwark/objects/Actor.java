@@ -112,6 +112,16 @@ public class Actor {
     }
 
     /**
+     * Moves the Actor to a target position.
+     *
+     * @param targetPosition the target position to move the Actor to as a Vector3
+     * */
+    public void moveToTarget(Vector3 targetPosition) {
+        Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+        this.sprite.translate(direction.x, direction.y);
+    }
+
+    /**
      * Removes an ability known to the Actor.
      *
      * @param ability the Ability to remove
