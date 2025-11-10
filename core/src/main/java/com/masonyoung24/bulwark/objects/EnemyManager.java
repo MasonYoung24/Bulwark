@@ -6,10 +6,14 @@ import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EnemyManager {
     private List<Enemy> activeEnemies;
     public static int enemiesSlain = 0;
+    public static final Random RANDOM = new Random();
+    public static final float MINIMUM_SPAWN_POSITION_X_COORDINATE = 0.0f;
+    public static final float MINIMUM_SPAWN_POSITION_Y_COORDINATE = 0.0f;
 
     private final AssetManager assetManager;
 
@@ -63,6 +67,35 @@ public class EnemyManager {
     public void updateEnemyPosition(Vector3 playerPosition) {
         for (Enemy enemy : activeEnemies) {
             enemy.move(playerPosition);
+        }
+    }
+
+    /**
+     * Determines randomly the spawn position of the Enemy on the edge of the viewport.
+     *
+     * @param viewportWidth the width of the game screen viewport as a float
+     * @param viewportHeight the height of the game screen viewport as a float
+     * */
+    private Vector3 determineSpawnPosition(float viewportWidth, float viewportHeight) {
+        String[] sidesOfScreen = {"Top", "Bottom", "Left", "Right"};
+        Vector3 spawnPosition;
+        switch (sidesOfScreen[RANDOM.nextInt(sidesOfScreen.length)]) {
+            case "Top": {
+                spawnPosition = new Vector3(RANDOM.nextFloat(viewportWidth), viewportHeight, 0);
+            }
+            case "Bottom": {
+                spawnPosition = new Vector3(RANDOM.nextFloat(viewportWidth), MINIMUM_SPAWN_POSITION_Y_COORDINATE, 0);
+            }
+            case "Left": {
+                spawnPosition = new Vector3(MINIMUM_SPAWN_POSITION_X_COORDINATE, RANDOM.nextFloat(viewportHeight), 0);
+            }
+            case "Right": {
+                spawnPosition = new Vector3(viewportWidth, RANDOM.nextFloat(viewportHeight), 0);
+            }
+            default: {
+                spawnPosition = null;
+            }
+            return spawnPosition;
         }
     }
 }
