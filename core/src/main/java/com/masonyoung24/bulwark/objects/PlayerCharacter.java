@@ -14,6 +14,7 @@ public class PlayerCharacter extends Actor implements Shooter {
     private final float castSpeed;
     private final Projectile projectile;
     private float timeSinceLastShot = 0.0F;
+    private Vector3 previousPosition;
 
 
     public PlayerCharacter(int healthPoints,
@@ -39,6 +40,17 @@ public class PlayerCharacter extends Actor implements Shooter {
     @Override
     public float getTimeSinceLastShot() {
         return timeSinceLastShot;
+    }
+
+    /**
+     * Sets the position of the player character before moving.
+     *
+     * @param previousPosition the previous position as a Vector 3
+     * */
+    public void setPreviousPosition(final Vector3 previousPosition) {
+        if (previousPosition != null) {
+            this.previousPosition = previousPosition;
+        }
     }
 
     /**
