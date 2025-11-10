@@ -117,13 +117,13 @@ public class EnemyManager {
         }
     }
 
-    /**
+    /*
      * Adds a new enemy to the list of active enemies.
      *
      * @param viewportWidth the width of the viewport as a float
      * @param viewportHeight the height of the viewport as a float
      * */
-    public void spawnEnemy(float viewportWidth, float viewportHeight) {
+    private void spawnEnemy(float viewportWidth, float viewportHeight) {
 
         activeEnemies.add(new Goblin(
             3,
