@@ -8,11 +8,11 @@ public class Goblin extends Enemy {
     /**
      * The row in the spritesheet with the desired Goblin sprite
      * */
-    private static final int GOBLIN_TARGET_ROW = 1;
+    private static final int GOBLIN_TARGET_ROW = 0;
     /**
      * The column in the spritesheet with the desired Goblin sprite
      * */
-    private static final int GOBLIN_TARGET_COLUMN = 3;
+    private static final int GOBLIN_TARGET_COLUMN = 2;
 
     /**
      * Constructs an object of type Bird.
