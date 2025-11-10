@@ -1,5 +1,7 @@
 package com.masonyoung24.bulwark.objects;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
@@ -9,8 +11,11 @@ public class EnemyManager {
     private List<Enemy> activeEnemies;
     public static int enemiesSlain = 0;
 
-    public EnemyManager() {
+    private final AssetManager assetManager;
+
+    public EnemyManager(final AssetManager assetManager) {
         activeEnemies = new ArrayList<>();
+        this.assetManager = assetManager;
     }
 
     /**
@@ -39,9 +44,20 @@ public class EnemyManager {
         enemiesSlain++;
     }
 
-     /**
+    /**
+     * Draws the enemies.
+     *
+     * @param batch the game's sprite batch as a SpriteBatch
+     * */
+    public void render(SpriteBatch batch) {
+        for (Enemy enemy : activeEnemies) {
+            enemy.render(batch);
+        }
+    }
+
+    /**
      * Moves each enemy depending on the position of the player.
-      *
+     *
      * @param playerPosition the position of the player
      * */
     public void updateEnemyPosition(Vector3 playerPosition) {
