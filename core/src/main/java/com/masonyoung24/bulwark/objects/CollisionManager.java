@@ -1,0 +1,35 @@
+package com.masonyoung24.bulwark.objects;
+
+import com.masonyoung24.bulwark.Managers.ProjectileManager;
+
+import javax.management.modelmbean.InvalidTargetObjectTypeException;
+
+public class CollisionManager {
+    private EnemyManager enemyManager;
+    private ProjectileManager projectileManager;
+    private PlayerCharacter playerCharacter;
+
+    /**
+     * Constructs an object of type CollisionManager.
+     *
+     * @param enemyManager an enemy manager of type EnemyManager
+     * @param projectileManager a projectile manager of type ProjectileManager
+     * @param playerCharacter a player character of type PlayerCharacter
+     * */
+    public CollisionManager(final EnemyManager enemyManager,
+                            final ProjectileManager projectileManager,
+                            final PlayerCharacter playerCharacter) {
+        if (enemyManager == null) {
+            throw new IllegalArgumentException("Null enemyManager");
+        }
+        if (projectileManager == null) {
+            throw new IllegalArgumentException("Null projectileManager");
+        }
+        if (playerCharacter == null) {
+            throw new IllegalArgumentException("Null playerCharacter");
+        }
+        this.enemyManager = enemyManager;
+        this.projectileManager = projectileManager;
+        this.playerCharacter = playerCharacter;
+    }
+}
