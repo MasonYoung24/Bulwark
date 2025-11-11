@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
@@ -91,6 +92,14 @@ public class Projectile {
         return this.refractoryPeriod;
     }
 
+    /**
+     * Returns the bounding box of the Projectile
+     *
+     * @return the bounding box of the Projectile as a Rectangle
+     * */
+    public Rectangle getBoundingBox() {
+        return this.sprite.getBoundingRectangle();
+    }
 
     /**
      * Draws the Projectile.
