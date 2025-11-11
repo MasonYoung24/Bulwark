@@ -16,8 +16,10 @@ import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.inputs.Inputs;
+import com.masonyoung24.bulwark.objects.EnemyManager;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
 import com.masonyoung24.bulwark.objects.Projectile;
+import com.masonyoung24.bulwark.objects.spells.Blink;
 
 import java.util.ArrayList;
 
@@ -27,16 +29,18 @@ public class GameScreen implements Screen {
     private final PlayerCharacter playerCharacter;
     private final Inputs inputs;
     private final ProjectileManager projectileManager;
+    private final EnemyManager enemyManager;
     private final FitViewport viewport;
 
     public GameScreen(Bulwark game) {
         this.game = game;
+        AssetManager manager = game.assets.manager;
         this.projectileManager = new ProjectileManager();
+        this.enemyManager = new EnemyManager(manager);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
         camera.update();
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        AssetManager manager = game.assets.manager;
         playerCharacter = new PlayerCharacter(1, 100, manager);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
     }
@@ -44,19 +48,23 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(inputs);
+        enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, 5);
     }
 
     @Override
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
+        playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         inputs.handleMovementInput();
         update(v);
         projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
+        enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         inputs.updateDirectionPlayerFacing();
         projectileManager.render(game.batch);
         playerCharacter.render(game.batch);
+        enemyManager.render(game.batch);
         game.batch.end();
     }
 
@@ -65,6 +73,8 @@ public class GameScreen implements Screen {
             handleFiring();
         }
         playerCharacter.updateTimeSinceLastShot(deltaTime);
+
+
     }
 
     /**
