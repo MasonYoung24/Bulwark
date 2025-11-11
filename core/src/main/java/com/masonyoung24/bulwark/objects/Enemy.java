@@ -22,4 +22,13 @@ public abstract class Enemy extends Actor {
                  Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
     }
+
+    /**
+     * Draws the Enemy.
+     *
+     * @param batch the game's sprite batch as a SpriteBatch
+     * */
+    public void render(SpriteBatch batch) {
+        sprite.draw(batch);
+    }
 }
