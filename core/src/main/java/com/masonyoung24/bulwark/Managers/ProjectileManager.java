@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Projectile;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ProjectileManager {
-    private ArrayList<Projectile> activeProjectiles;
+    private List<Projectile> activeProjectiles;
 
     public ProjectileManager() {
         activeProjectiles = new ArrayList<>();
@@ -45,5 +47,14 @@ public class ProjectileManager {
             }
         }
         activeProjectiles.removeAll(projectilesToRemove);
+    }
+
+    /**
+     * Returns an unmodifiable list of active Projectile objects.
+     *
+     * @return an unmodifiable list of active Projectile objects
+     * */
+    public List<Projectile> getProjectiles() {
+        return Collections.unmodifiableList(activeProjectiles);
     }
 }
