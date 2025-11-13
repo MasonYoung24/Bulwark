@@ -2,6 +2,7 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
 public class Goblin extends Enemy {
@@ -21,7 +22,7 @@ public class Goblin extends Enemy {
      * @param speed the movement speed of the goblin as a float
      * @param assetManager the AssetManger used to get the sprite
      * */
-    public Goblin(final int healthPoints, final float speed, final AssetManager assetManager) {
+    public Goblin(final int healthPoints, final float speed, final AssetManager assetManager, Vector3 spawnPosition) {
         super(healthPoints,
             speed,
             SpriteUtils.getSpriteFromSpriteSheet(
@@ -30,6 +31,7 @@ public class Goblin extends Enemy {
                 GOBLIN_TARGET_COLUMN,
                 Enemy.SPRITE_SHEET_COLUMNS,
                 Enemy.SPRITE_SHEET_ROWS
-            ));
+            ),
+            spawnPosition);
     }
 }
