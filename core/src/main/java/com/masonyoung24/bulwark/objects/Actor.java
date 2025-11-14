@@ -156,4 +156,14 @@ public class Actor {
 //            ability.cast();
         }
     }
+
+    /**
+     * Reduces the current HP of the Actor by one.
+     * */
+    public void takeDamage() {
+        this.currentHP = currentHP - 1;
+        if (currentHP <= 0) {
+            handleDeath();
+        }
+    }
 }
