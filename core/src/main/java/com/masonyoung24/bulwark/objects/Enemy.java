@@ -31,6 +31,13 @@ public abstract class Enemy extends Actor {
         shapeRenderer = new ShapeRenderer();
     }
 
+    /**
+     * Returns true if the enemy is alive, otherwise false.
+     */
+    public boolean getIsLiving() {
+        return this.isLiving;
+    }
+
     public void render(SpriteBatch batch) {
         batch.begin();
         sprite.draw(batch);
