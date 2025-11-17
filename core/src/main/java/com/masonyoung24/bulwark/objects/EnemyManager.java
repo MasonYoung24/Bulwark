@@ -29,12 +29,14 @@ public class EnemyManager {
 
     /**
      * Handles the death of an enemy.
-     *
-     * @param slainEnemy the Enemy who has been slain
      * */
-    public void handleEnemyDeath(Enemy slainEnemy) {
-        removeEnemy(slainEnemy);
-        incrementEnemiesSlain();
+    public void handleEnemyDeath() {
+        for (Enemy enemy : activeEnemies) {
+            if (enemy.getIsLiving()) {
+                removeEnemy(enemy);
+                incrementEnemiesSlain();
+            }
+        }
     }
 
     /**
