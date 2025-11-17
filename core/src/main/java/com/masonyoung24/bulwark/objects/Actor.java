@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class Actor {
+public abstract class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
     private static final int SPRITE_SHEET_COLUMNS = 7;
 
@@ -166,4 +166,9 @@ public class Actor {
             handleDeath();
         }
     }
+
+    /**
+     * Handles the death of the actor.
+     * */
+    public abstract void handleDeath();
 }
