@@ -168,7 +168,7 @@ public abstract class Actor {
     }
 
     /**
-     * Handles the death of the actor.
+     * Handles the death of the Actor.
      * */
     public abstract void handleDeath();
 }
