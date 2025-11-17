@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.masonyoung24.bulwark.enums.Direction;
@@ -15,11 +13,13 @@ import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public abstract class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
     private static final int SPRITE_SHEET_COLUMNS = 7;
+    private static final float DAMAGE_TINT_TIME = 0.2f;
+    private static final int HP_DECREMENT_VALUE = 1;
+    private static final int MINIMUM_HP = 1;
 
     private int currentHP;
     private int maxHP;
@@ -168,8 +168,8 @@ public abstract class Actor {
      * */
     public void takeDamage() {
         applyDamageTint();
-        this.currentHP = currentHP - 1;
-        if (currentHP <= 0) {
+        this.currentHP = currentHP - HP_DECREMENT_VALUE;
+        if (currentHP < MINIMUM_HP) {
             handleDeath();
         }
 
@@ -184,7 +184,7 @@ public abstract class Actor {
             }
         };
 
-        Timer.schedule(tintTask, 0.2f);
+        Timer.schedule(tintTask, DAMAGE_TINT_TIME);
     }
 
     /*
