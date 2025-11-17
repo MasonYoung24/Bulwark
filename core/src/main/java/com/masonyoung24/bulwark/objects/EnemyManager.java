@@ -34,7 +34,7 @@ public class EnemyManager {
         Iterator<Enemy> iterator = activeEnemies.iterator();
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
-            if (enemy.getIsLiving()) {
+            if (!enemy.getIsLiving()) {
                 iterator.remove();
                 incrementEnemiesSlain();
             }
