@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +21,10 @@ public class EnemyManager {
     public EnemyManager(final AssetManager assetManager) {
         activeEnemies = new ArrayList<>();
         this.assetManager = assetManager;
+    }
+
+    public List<Enemy> getActiveEnemies() {
+        return activeEnemies;
     }
 
     /**
