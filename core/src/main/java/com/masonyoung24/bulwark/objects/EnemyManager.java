@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -31,9 +31,11 @@ public class EnemyManager {
      * Handles the death of an enemy.
      * */
     public void handleEnemyDeath() {
-        for (Enemy enemy : activeEnemies) {
+        Iterator<Enemy> iterator = activeEnemies.iterator();
+        while (iterator.hasNext()) {
+            Enemy enemy = iterator.next();
             if (enemy.getIsLiving()) {
-                removeEnemy(enemy);
+                iterator.remove();
                 incrementEnemiesSlain();
             }
         }
