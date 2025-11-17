@@ -124,4 +124,11 @@ public class PlayerCharacter extends Actor implements Shooter {
         return new Vector3(getPosition()).add(projectileDirectionNormalized.scl(bufferDistance));
     }
 
+    /**
+     * Handles the death of the player character. TODO
+     * */
+    @Override
+    public void handleDeath() {
+        System.out.println("The game is over!");
+    }
 }
