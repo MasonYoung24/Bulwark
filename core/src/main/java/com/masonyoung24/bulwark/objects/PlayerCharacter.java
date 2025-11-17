@@ -9,6 +9,7 @@ public class PlayerCharacter extends Actor implements Shooter {
     private static final int CHARACTER_TARGET_COLUMN = 3;
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
+    public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
 
     private final AssetManager assetManager;
     private final float castSpeed;
@@ -23,7 +24,8 @@ public class PlayerCharacter extends Actor implements Shooter {
             speed,
             Actor.getSprite(assetManager.get(Assets.HUMANS_SPRITE_SHEET),
                 CHARACTER_TARGET_ROW,
-                CHARACTER_TARGET_COLUMN)
+                CHARACTER_TARGET_COLUMN),
+            DEFAULT_SPAWN_POSITION
         );
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
@@ -121,4 +123,5 @@ public class PlayerCharacter extends Actor implements Shooter {
 
         return new Vector3(getPosition()).add(projectileDirectionNormalized.scl(bufferDistance));
     }
+
 }
