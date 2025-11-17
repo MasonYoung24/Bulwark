@@ -12,6 +12,7 @@ public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_COLUMNS = 12;
 
     private final ShapeRenderer shapeRenderer;
+    private boolean isLiving;
 
     /**
      * Constructs an object of type Enemy.
@@ -26,6 +27,7 @@ public abstract class Enemy extends Actor {
                  Sprite sprite,
                  Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
+        this.isLiving = true;
         shapeRenderer = new ShapeRenderer();
     }
 
@@ -40,5 +42,13 @@ public abstract class Enemy extends Actor {
         shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 
         shapeRenderer.end();
+    }
+
+    /**
+     * Handles the death of an Enemy by flagging it as dead.
+     */
+    @Override
+    public void handleDeath() {
+        this.isLiving = false;
     }
 }
