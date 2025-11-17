@@ -1,6 +1,7 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Timer;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 
@@ -26,6 +28,8 @@ public abstract class Actor {
     private Direction directionFacing;
     private Vector3 spawnPosition;
     private final List<Ability> abilities;
+    private Timer.Task tintTask;
+    private final Color originalSpriteColor;
 
     public Actor(final int maxHP, final float speed, Sprite sprite, final Vector3 spawnPosition) {
         this.currentHP = maxHP;
@@ -34,6 +38,8 @@ public abstract class Actor {
         this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(spawnPosition.x, spawnPosition.y);
         this.abilities = new ArrayList<>();
+        this.originalSpriteColor = new Color(this.sprite.getColor());
+
     }
 
     /**
@@ -161,10 +167,38 @@ public abstract class Actor {
      * Reduces the current HP of the Actor by one.
      * */
     public void takeDamage() {
+        applyDamageTint();
         this.currentHP = currentHP - 1;
         if (currentHP <= 0) {
             handleDeath();
         }
+
+        if (tintTask != null) {
+            tintTask.cancel();
+        }
+
+        tintTask = new Timer.Task() {
+            @Override
+            public void run() {
+                removeTint();
+            }
+        };
+
+        Timer.schedule(tintTask, 0.2f);
+    }
+
+    /*
+     * Tints the Actor's sprite red to indicate that damage has been taken.
+     * */
+    private void applyDamageTint() {
+        this.sprite.setColor(Color.RED);
+    }
+
+    /*
+     * Removes and tint that has been applied to the Actor's sprite.
+     * */
+    private void removeTint() {
+        this.sprite.setColor(originalSpriteColor);
     }
 
     /**
