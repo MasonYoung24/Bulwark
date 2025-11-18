@@ -2,6 +2,7 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class EnemyManager {
     public static final Random RANDOM = new Random();
     public static final float MINIMUM_SPAWN_POSITION_X_COORDINATE = 0.0f;
     public static final float MINIMUM_SPAWN_POSITION_Y_COORDINATE = 0.0f;
+    private static final float HALF_WIDTH_DIVISOR = 2.0f;
+    private static final float OVERLAP_DIVISOR = 2.0f;
 
     private final AssetManager assetManager;
 
@@ -133,7 +136,6 @@ public class EnemyManager {
      * @param viewportHeight the height of the viewport as a float
      * */
     private void spawnEnemy(float viewportWidth, float viewportHeight) {
-
         activeEnemies.add(new Goblin(
             3,
             3.0F,
@@ -141,5 +143,84 @@ public class EnemyManager {
             determineSpawnPosition(viewportWidth, viewportHeight)));
         System.out.println("Enemy added");
         System.out.println("Active enemies: " + activeEnemies.size());
+    }
+
+    /**
+     * Detects and handles collisions between two balls.
+     * <p>
+     * On collision, the velocities of the balls are swapped, and
+     * they are separated slightly to avoid sticking and ghost
+     * collisions.
+     *</p>
+     *
+     *
+     *
+     * */
+    public void checkEnemyCollision() {
+        for (Enemy enemy : activeEnemies) {
+            for (Enemy otherEnemy : activeEnemies) {
+                if (!otherEnemy.equals(enemy) && otherEnemy.getSpriteBoundingBox()
+                    .overlaps(enemy.getSpriteBoundingBox())) {
+                    handleEnemyCollision(enemy, otherEnemy);
+                }
+            }
+        }
+    }
+
+    /*
+     * Ensures that colliding enemies do not overlap each-other.
+     *
+     * @param enemy the first sprite as an Enemy
+     * @param otherEnemy the second sprite as an Enemy
+     * */
+    private void handleEnemyCollision(Enemy enemy, Enemy otherEnemy) {
+        // compute overlaps
+        float overlap = getOverlap(enemy, otherEnemy);
+        // Determines the distance between the sprites
+        double midpointXSprite1 = enemy.getPosition().x + enemy.sprite.getWidth() / HALF_WIDTH_DIVISOR;
+        double midpointYSprite1 = enemy.getPosition().y + enemy.sprite.getHeight() / HALF_WIDTH_DIVISOR;
+        double midpointXSprite2 = otherEnemy.getPosition().x + otherEnemy.sprite.getWidth() / HALF_WIDTH_DIVISOR;
+        double midpointYSprite2 = otherEnemy.getPosition().y + otherEnemy.sprite.getHeight() / HALF_WIDTH_DIVISOR;
+
+        double midpointXDifference = midpointXSprite1 - midpointXSprite2;
+        double midpointYDifference = midpointYSprite1 - midpointYSprite2;
+        double distanceSquared = midpointXDifference * midpointXDifference
+            + midpointYDifference * midpointYDifference;
+
+        // Optional: Separate the balls slightly to prevent sticking/ghost collisions
+        double distance = Math.sqrt(distanceSquared);
+        // Normalize the collision vector
+        double normalX = midpointXDifference / distance;
+        double normalY = midpointYDifference / distance;
+
+        // Move each ball half the overlap amount away from each other
+        enemy.translate((float) (overlap / OVERLAP_DIVISOR * normalX),
+            (float) (overlap / OVERLAP_DIVISOR * normalY));
+        otherEnemy.translate((float) (-overlap / OVERLAP_DIVISOR * normalX),
+            (float) (-overlap / OVERLAP_DIVISOR * normalY));
+    }
+
+    /*
+     * Gets the smallest overlap between two enemies.
+     *
+     * @param enemy the first sprite as an Enemy
+     * @param otherEnemy the second sprite as an Enemy
+     * @return the smallest of the horizontal or vertical overlaps as a double
+     * */
+    private float getOverlap(final Enemy enemy, final Enemy otherEnemy) {
+        float overlapLeft = (enemy.getPosition().x + enemy.getSpriteBoundingBox().getWidth())
+            - otherEnemy.getPosition().x;
+        float overlapRight = (otherEnemy.getPosition().x + otherEnemy.getSpriteBoundingBox().getWidth())
+            - enemy.getPosition().x;
+        float overlapTop = (enemy.getPosition().y + enemy.getSpriteBoundingBox().getHeight())
+            - otherEnemy.getPosition().y;
+        float overlapBottom = (otherEnemy.getPosition().y + otherEnemy.getSpriteBoundingBox().getHeight())
+            - enemy.getPosition().y;
+
+        // find the smallest overlap
+        return Math.min(
+            Math.min(overlapLeft, overlapRight),
+            Math.min(overlapTop, overlapBottom)
+        );
     }
 }
