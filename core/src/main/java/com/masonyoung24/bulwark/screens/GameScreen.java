@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
     private final EnemyManager enemyManager;
     private final FitViewport viewport;
     private final CollisionManager collisionManager;
-
+    private final GamePlayHUD gamePlayHUD;
 
     public GameScreen(Bulwark game) {
         this.game = game;
@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         camera.update();
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
-
+        this.gamePlayHUD = new GamePlayHUD(game.batch);
     }
 
     @Override
@@ -63,18 +63,18 @@ public class GameScreen implements Screen {
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         inputs.handleMovementInput();
         update(v);
-
-
+        game.batch.setProjectionMatrix(gamePlayHUD.stage.getCamera().combined);
+        gamePlayHUD.stage.draw();
         projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
         collisionManager.detectProjectileCollisionWithEnemy();
         enemyManager.handleEnemyDeath();
+        gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         inputs.updateDirectionPlayerFacing();
         projectileManager.render(game.batch);
-
         playerCharacter.render(game.batch);
         game.batch.end();
         enemyManager.render(game.batch);
@@ -86,6 +86,7 @@ public class GameScreen implements Screen {
             handleFiring();
         }
         playerCharacter.updateTimeSinceLastShot(deltaTime);
+        gamePlayHUD.updateGameTimer(deltaTime);
     }
 
     /**
