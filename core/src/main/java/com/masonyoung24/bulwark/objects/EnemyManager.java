@@ -31,6 +31,15 @@ public class EnemyManager {
     }
 
     /**
+     * Returns the number of enemies that have been slain.
+     *
+     * @return the number of enemies that have been slain as an int
+     * */
+    public static int getEnemiesSlain() {
+        return enemiesSlain;
+    }
+
+    /**
      * Handles the death of an enemy.
      * */
     public void handleEnemyDeath() {
