@@ -13,6 +13,7 @@ import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public abstract class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
@@ -26,10 +27,12 @@ public abstract class Actor {
     protected final float speed;
     protected final Sprite sprite;
     private Direction directionFacing;
-    private Vector3 spawnPosition;
     private final List<Ability> abilities;
     private Timer.Task tintTask;
     private final Color originalSpriteColor;
+    private Vector3 movementDirection;
+    private float movementDirectionX;
+    private float movementDirectionY;
 
     public Actor(final int maxHP, final float speed, Sprite sprite, final Vector3 spawnPosition) {
         this.currentHP = maxHP;
@@ -39,7 +42,7 @@ public abstract class Actor {
         this.sprite.setPosition(spawnPosition.x, spawnPosition.y);
         this.abilities = new ArrayList<>();
         this.originalSpriteColor = new Color(this.sprite.getColor());
-
+        this.movementDirection = new Vector3();
     }
 
     /**
@@ -93,6 +96,8 @@ public abstract class Actor {
      * */
     public void moveLeft() {
         float delta = Gdx.graphics.getDeltaTime();
+        movementDirectionX = -speed;
+        movementDirection.set(movementDirectionX, movementDirectionY, 0).nor();
         sprite.translateX(-speed * delta);
     }
 
@@ -101,6 +106,8 @@ public abstract class Actor {
      * */
     public void moveRight() {
         float delta = Gdx.graphics.getDeltaTime();
+        movementDirectionX = speed;
+        movementDirection.set(movementDirectionX, movementDirectionY, 0).nor();
         sprite.translateX(speed * delta);
     }
 
@@ -109,6 +116,8 @@ public abstract class Actor {
      * */
     public void moveUp() {
         float delta = Gdx.graphics.getDeltaTime();
+        movementDirectionY = speed;
+        movementDirection.set(movementDirectionX, movementDirectionY, 0).nor();
         sprite.translateY(speed * delta);
     }
 
@@ -117,6 +126,8 @@ public abstract class Actor {
      * */
     public void moveDown() {
         float delta = Gdx.graphics.getDeltaTime();
+        movementDirectionY = -speed;
+        this.movementDirection.set(movementDirectionX, movementDirectionY, 0).nor();
         sprite.translateY(-speed * delta);
     }
 
@@ -128,6 +139,15 @@ public abstract class Actor {
      * */
     public void translate(float xAmount, float yAmount) {
         this.sprite.translate(xAmount, yAmount);
+    }
+
+    /**
+     * Returns the movement direction of the Actor.
+     *
+     * @return the movement direction of the Actor as a Vector3
+     * */
+    public Vector3 getMovementDirection() {
+        return movementDirection;
     }
 
     /**
