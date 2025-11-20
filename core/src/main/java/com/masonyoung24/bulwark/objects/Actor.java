@@ -121,6 +121,16 @@ public abstract class Actor {
     }
 
     /**
+     * Translates the Actor's sprite by the given x and y amounts.
+     *
+     * @param xAmount the x amount to translate as a float
+     * @param yAmount the y amount to translate as a float
+     * */
+    public void translate(float xAmount, float yAmount) {
+        this.sprite.translate(xAmount, yAmount);
+    }
+
+    /**
      * Moves the Actor to a target position.
      *
      * @param targetPosition the target position to move the Actor to as a Vector3
@@ -159,7 +169,7 @@ public abstract class Actor {
      * */
     public void executeAbility(Ability ability) {
         if (ability != null) {
-//            ability.cast();
+            ability.cast(this);
         }
     }
 
