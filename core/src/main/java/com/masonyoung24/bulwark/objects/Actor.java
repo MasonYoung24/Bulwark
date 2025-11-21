@@ -12,6 +12,7 @@ import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,9 +26,9 @@ public abstract class Actor {
     private int currentHP;
     private int maxHP;
     protected final float speed;
-    protected final Sprite sprite;
+    public final Sprite sprite;
     private Direction directionFacing;
-    private final List<Ability> abilities;
+    private final HashMap<String, Ability> abilities;
     private Timer.Task tintTask;
     private final Color originalSpriteColor;
     private Vector3 movementDirection;
@@ -40,7 +41,7 @@ public abstract class Actor {
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
         this.sprite.setPosition(spawnPosition.x, spawnPosition.y);
-        this.abilities = new ArrayList<>();
+        this.abilities = new HashMap<>();
         this.originalSpriteColor = new Color(this.sprite.getColor());
         this.movementDirection = new Vector3();
     }
@@ -174,22 +175,29 @@ public abstract class Actor {
     /**
      * Adds an ability that the Actor can use.
      *
+     * @param abilityName the name of the Ability to execute
      * @param ability the Ability to add
+     * @throws IllegalArgumentException if provided ability name or Ability object are null
      * */
-    public void addAbility(Ability ability) {
-        if (ability != null) {
-            abilities.add(ability);
+    public void addAbility(String abilityName, Ability ability) {
+        if (ability == null) {
+            throw new IllegalArgumentException("Ability cannot be null");
         }
+        if (abilityName == null) {
+            throw new IllegalArgumentException("Ability name cannot be null");
+        }
+        abilities.put(abilityName, ability);
     }
 
     /**
      * Executes an ability known to the actor.
      *
-     * @param ability the Ability to execute
+     * @param abilityName the Ability to execute
      * */
-    public void executeAbility(Ability ability) {
-        if (ability != null) {
-            ability.cast(this);
+    public void executeAbility(String abilityName) {
+        Ability abilityToExecute = abilities.get(abilityName);
+        if (abilityToExecute != null) {
+            abilityToExecute.cast(this);
         }
     }
 
