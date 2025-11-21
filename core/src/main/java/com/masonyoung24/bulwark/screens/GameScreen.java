@@ -21,6 +21,7 @@ import com.masonyoung24.bulwark.objects.CollisionManager;
 import com.masonyoung24.bulwark.objects.EnemyManager;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
 import com.masonyoung24.bulwark.objects.Projectile;
+import com.masonyoung24.bulwark.objects.spells.Ability;
 import com.masonyoung24.bulwark.objects.spells.Blink;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class GameScreen implements Screen {
         this.projectileManager = new ProjectileManager();
         this.enemyManager = new EnemyManager(manager);
         playerCharacter = new PlayerCharacter(1, 100, manager);
+        playerCharacter.addAbility("Blink", new Blink(0, 1.0f) {
+        });
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
