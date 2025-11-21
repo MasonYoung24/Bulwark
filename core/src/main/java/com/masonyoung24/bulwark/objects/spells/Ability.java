@@ -1,16 +1,33 @@
 package com.masonyoung24.bulwark.objects.spells;
 
+import com.masonyoung24.bulwark.objects.Actor;
+
 public abstract class Ability {
     private float damage;
     private float cooldown;
     private float timeSinceCast;
-    private String name;
 
-    public Ability(final String name, final float damage, final float cooldown) {
-        this.name = name;
+    /**
+     * Constructs an object of type Ability.
+     *
+     * @param damage the damage done by the Ability as a float
+     * @param cooldown the cooldown of the Ability as a float
+     * */
+    public Ability(final float damage, final float cooldown) {
         this.damage = damage;
         this.cooldown = cooldown;
         this.timeSinceCast = cooldown;
+    }
+
+    /**
+     * Casts the ability if it is executable.
+     *
+     * @param actor the Actor casting the Ability
+     * */
+    public void cast(Actor actor) {
+        if (checkIfExecutable()) {
+            execute(actor);
+        }
     }
 
     /**
@@ -23,5 +40,5 @@ public abstract class Ability {
     /**
      * Executes the ability.
      * */
-    abstract void execute();
+    abstract void execute(Actor actor);
 }
