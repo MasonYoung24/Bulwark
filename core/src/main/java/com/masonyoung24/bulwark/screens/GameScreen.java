@@ -79,8 +79,7 @@ public class GameScreen implements Screen {
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         inputs.handleMovementInput();
         update(v);
-        game.batch.setProjectionMatrix(gamePlayHUD.stage.getCamera().combined);
-        gamePlayHUD.stage.draw();
+        gamePlayHUD.draw();
         projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
