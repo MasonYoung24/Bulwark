@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,32 +24,41 @@ import com.masonyoung24.bulwark.objects.PlayerCharacter;
 import com.masonyoung24.bulwark.objects.Projectile;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 import com.masonyoung24.bulwark.objects.spells.Blink;
+import com.masonyoung24.bulwark.resources.Assets;
 
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
+    public static final float UNIT_SCALE = 1f / 32f;
+
     private final Bulwark game;
     private final OrthographicCamera camera;
+    private final FitViewport viewport;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final GamePlayHUD gamePlayHUD;
     private final PlayerCharacter playerCharacter;
     private final Inputs inputs;
     private final ProjectileManager projectileManager;
     private final EnemyManager enemyManager;
-    private final FitViewport viewport;
     private final CollisionManager collisionManager;
-    private final GamePlayHUD gamePlayHUD;
+    private final AssetManager assetManager;
+
 
     public GameScreen(Bulwark game) {
         this.game = game;
-        AssetManager manager = game.assets.manager;
+        this.assetManager = game.assets.manager;
         this.projectileManager = new ProjectileManager();
-        this.enemyManager = new EnemyManager(manager);
-        playerCharacter = new PlayerCharacter(1, 100, manager);
+        this.enemyManager = new EnemyManager(assetManager);
+        playerCharacter = new PlayerCharacter(1, 100, assetManager);
         playerCharacter.addAbility("Blink", new Blink(0, 1.0f) {
         });
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
         camera.update();
+        this.mapRenderer = new OrthogonalTiledMapRenderer(
+            null,
+            this.game.batch);
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
         this.gamePlayHUD = new GamePlayHUD(game.batch);
@@ -58,11 +68,14 @@ public class GameScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(inputs);
         enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, 5);
+        this.mapRenderer.setMap(assetManager.get(Assets.MAIN_TILESET));
     }
 
     @Override
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
+        this.mapRenderer.setView(this.camera);
+        this.mapRenderer.render();
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         inputs.handleMovementInput();
         update(v);
@@ -127,6 +140,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.mapRenderer.dispose();
     }
 }
