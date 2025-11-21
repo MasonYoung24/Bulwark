@@ -71,6 +71,9 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.SPACE) {
+            playerCharacter.executeAbility("Blink");
+        }
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.moveLeftKeyPressed = true;
         }
