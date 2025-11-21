@@ -39,5 +39,6 @@ public class Bulwark extends Game {
     public void dispose() {
         batch.dispose();
         image.dispose();
+        assets.dispose();
     }
 }
