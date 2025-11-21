@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class EnemyManager {
     private final List<Enemy> activeEnemies;
@@ -18,6 +15,8 @@ public class EnemyManager {
     public static final float MINIMUM_SPAWN_POSITION_Y_COORDINATE = 0.0f;
     private static final float HALF_WIDTH_DIVISOR = 2.0f;
     private static final float OVERLAP_DIVISOR = 2.0f;
+    private static final int MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN = 5;
+    private static final int SPAWN_MULTIPLIER = 2;
 
     private final AssetManager assetManager;
 
@@ -132,10 +131,25 @@ public class EnemyManager {
      * @param viewportHeight the height of the viewport as a float
      * @param enemiesToSpawn the number of enemies to spawn
      * */
-    public void spawnEnemies(float viewportWidth, float viewportHeight, int enemiesToSpawn) {
-        for (int i = 0; i < enemiesToSpawn; i++) {
+    public void spawnEnemies(float viewportWidth, float viewportHeight, int enemiesToSpawn, int minutesSurvived) {
+        int numberToSpawn = generateNumberOfEnemiesToSpawn(minutesSurvived);
+        for (int i = 0; i < numberToSpawn; i++) {
             spawnEnemy(viewportWidth, viewportHeight);
         }
+    }
+
+    /**
+     * Randomly generates a number of enemies.
+     *
+     * @return the number of enemies randomly generated as an int
+     * */
+    private int generateNumberOfEnemiesToSpawn(int minutesSurvived) {
+        Random random = new Random();
+        int maximumNumberOfEnemiesToSpawn = MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN
+            + (minutesSurvived * SPAWN_MULTIPLIER);
+        return random.nextInt(
+            maximumNumberOfEnemiesToSpawn
+                - MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN + 1) + MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN;
     }
 
     /*
