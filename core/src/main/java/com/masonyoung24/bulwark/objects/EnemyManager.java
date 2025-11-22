@@ -172,8 +172,11 @@ public class EnemyManager {
             3.0F,
             assetManager,
             determineSpawnPosition(viewportWidth, viewportHeight)));
-        System.out.println("Enemy added");
-        System.out.println("Active enemies: " + activeEnemies.size());
+        activeEnemies.add(new SkeletonWizard(
+            3,
+            3.0F,
+            assetManager,
+            determineSpawnPosition(viewportWidth, viewportHeight)));
     }
 
     /**
