@@ -15,14 +15,18 @@ public class EnemyManager {
     public static final float MINIMUM_SPAWN_POSITION_Y_COORDINATE = 0.0f;
     private static final float HALF_WIDTH_DIVISOR = 2.0f;
     private static final float OVERLAP_DIVISOR = 2.0f;
-    private static final int MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN = 5;
+    private static final int MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN = 1;
     private static final int SPAWN_MULTIPLIER = 2;
+    private static final float SPAWN_TIMER_START = 0.0f;
+    private static final float BASE_SPAWN_INTERVAL = 2.0f;
 
     private final AssetManager assetManager;
+    private float spawnTimer;
 
     public EnemyManager(final AssetManager assetManager) {
         activeEnemies = new ArrayList<>();
         this.assetManager = assetManager;
+        this.spawnTimer = SPAWN_TIMER_START;
     }
 
     public List<Enemy> getActiveEnemies() {
@@ -129,13 +133,17 @@ public class EnemyManager {
      *
      * @param viewportWidth the width of the viewport as a float
      * @param viewportHeight the height of the viewport as a float
-     * @param enemiesToSpawn the number of enemies to spawn
      * */
-    public void spawnEnemies(float viewportWidth, float viewportHeight, int enemiesToSpawn, int minutesSurvived) {
-        int numberToSpawn = generateNumberOfEnemiesToSpawn(minutesSurvived);
-        for (int i = 0; i < numberToSpawn; i++) {
-            spawnEnemy(viewportWidth, viewportHeight);
+    public void spawnEnemies(float viewportWidth, float viewportHeight, int minutesSurvived, float deltaTime) {
+        spawnTimer += deltaTime;
+        if (spawnTimer > BASE_SPAWN_INTERVAL) {
+            int numberToSpawn = generateNumberOfEnemiesToSpawn(minutesSurvived);
+            for (int i = 0; i < numberToSpawn; i++) {
+                spawnEnemy(viewportWidth, viewportHeight);
+            }
+            spawnTimer = SPAWN_TIMER_START;
         }
+
     }
 
     /**
