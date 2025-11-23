@@ -10,12 +10,14 @@ public class PlayerCharacter extends Actor implements Shooter {
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
     public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
+    private static final float BASE_FIRE_RATE_MODIFIER = 0.25f;
 
     private final AssetManager assetManager;
     private final float castSpeed;
     private final Projectile projectile;
     private float timeSinceLastShot = 0.0F;
     private Vector3 previousPosition;
+    private final float fireRateModifier;
 
     public PlayerCharacter(int healthPoints,
                            float speed,
@@ -30,6 +32,7 @@ public class PlayerCharacter extends Actor implements Shooter {
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.castSpeed = BASE_CAST_SPEED;
+        this.fireRateModifier = BASE_FIRE_RATE_MODIFIER;
     }
 
     /**
@@ -71,7 +74,7 @@ public class PlayerCharacter extends Actor implements Shooter {
      */
     @Override
     public boolean canFire() {
-        return getTimeSinceLastShot() >= projectile.getRefractoryPeriod();
+        return getTimeSinceLastShot() >= projectile.getRefractoryPeriod() * fireRateModifier;
     }
 
     /**
