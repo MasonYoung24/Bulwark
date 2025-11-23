@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
 
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
+import java.util.Iterator;
 
 public class CollisionManager {
     private EnemyManager enemyManager;
@@ -29,7 +30,23 @@ public class CollisionManager {
             throw new IllegalArgumentException("Null playerCharacter");
         }
         this.enemyManager = enemyManager;
-        this.projectileManager = projectileManager;
+        this.projectileManager = ProjectileManager.getInstance();
         this.playerCharacter = playerCharacter;
+    }
+
+    public void detectProjectileCollisionWithEnemy() {
+        Iterator<Projectile> projectileIterator = projectileManager.getProjectiles().iterator();
+
+        while (projectileIterator.hasNext()) {
+            Projectile projectile = projectileIterator.next();
+            for (Enemy enemy : enemyManager.getActiveEnemies()) {
+                if (projectile.getBoundingBox().overlaps(enemy.getSpriteBoundingBox())
+                    && projectile.getIsFriendly()) {
+                    projectileIterator.remove();
+                    enemy.takeDamage();
+                    break;
+                }
+            }
+        }
     }
 }
