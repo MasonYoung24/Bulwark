@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class RangedEnemy extends Enemy {
     private static final int CHARACTER_TARGET_ROW = 2;
@@ -11,6 +12,7 @@ public abstract class RangedEnemy extends Enemy {
     public static final float HALF_MULTIPLIER = 0.5f;
     public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
     private static final float TIME_SINCE_LAST_SHOT_RESET_VALUE = 0.0f;
+    private static final float DEFAULT_MINIMUM_DISTANCE = 250.0f;
 
     private final AssetManager assetManager;
     private final float castSpeed;
@@ -26,6 +28,20 @@ public abstract class RangedEnemy extends Enemy {
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.castSpeed = BASE_CAST_SPEED;
+    }
+
+    /**
+     * Moves the Ranged Enemy depending on the target position.
+     *
+     * @param targetPosition the target position as a float
+     * */
+    @Override
+    public void move(Vector3 targetPosition) {
+        Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+        float distanceBetweenEnemyAndPlayer = targetPosition.dst(this.getPosition());
+        if (distanceBetweenEnemyAndPlayer > DEFAULT_MINIMUM_DISTANCE) {
+            this.sprite.translate(direction.x, direction.y);
+        }
     }
 
     /**
