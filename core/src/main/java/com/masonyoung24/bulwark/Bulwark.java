@@ -58,6 +58,15 @@ public class Bulwark extends Game {
         return this.viewport;
     }
 
+    /**
+     * Returns the game's camera.
+     *
+     * @return the game's camera as an OrthographicCamera
+     * */
+    public OrthographicCamera getCamera() {
+        return this.camera;
+    }
+
     @Override
     public void dispose() {
         batch.dispose();
