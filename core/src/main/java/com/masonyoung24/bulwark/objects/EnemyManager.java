@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.Managers.ProjectileManager;
 
 import java.util.*;
 
@@ -93,6 +94,25 @@ public class EnemyManager {
             enemy.moveToTarget(playerPosition);
         }
     }
+
+    /**
+     * Fires a projectile as the target projectile if the Enemy can fire.
+     *
+     * @param targetPosition the target position to fire at as a Vector3
+     * */
+    public void updateEnemyFire(Vector3 targetPosition) {
+        for (Enemy enemy : activeEnemies) {
+            if (enemy instanceof RangedEnemy) {
+                RangedEnemy rangedEnemy = (RangedEnemy) enemy;
+                if (rangedEnemy.canFire()) {
+                    Projectile projectile = rangedEnemy.fireProjectile(targetPosition);
+                    ProjectileManager.getInstance().addProjectile(projectile);
+                }
+            }
+        }
+
+    }
+
 
     /**
      * Determines randomly the spawn position of the Enemy on the edge of the viewport.
