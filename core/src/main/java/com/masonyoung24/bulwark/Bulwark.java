@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.masonyoung24.bulwark.resources.Assets;
 import com.masonyoung24.bulwark.screens.GameScreen;
 
@@ -17,7 +17,7 @@ public class Bulwark extends Game {
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
-    private Viewport viewport;
+    private FitViewport viewport;
     private Texture image;
     public Assets assets;
     public GameScreen gameScreen;
