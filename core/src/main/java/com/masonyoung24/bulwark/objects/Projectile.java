@@ -25,13 +25,14 @@ public class Projectile {
     /**
      * The default refractory period of a projectile
      * */
-    private static final float DEFAULT_REFRACTORY_PERIOD = 1.0f;
+    private static final float DEFAULT_REFRACTORY_PERIOD = 2.0f;
 
     private final Sprite sprite;
     private final float speed;
     private Vector3 position;
     private final Vector3 direction;
     private final float refractoryPeriod;
+    private boolean isFriendly;
 
     public Projectile(AssetManager assetManager) {
         this(
@@ -67,6 +68,7 @@ public class Projectile {
         this.direction = direction;
         this.refractoryPeriod = refractoryPeriod;
         this.sprite.setPosition(position.x, position.y);
+        this.isFriendly = true;
     }
 
     /**
@@ -93,12 +95,29 @@ public class Projectile {
     }
 
     /**
-     * Returns the bounding box of the Projectile
+     * Returns the bounding box of the Projectile.
      *
      * @return the bounding box of the Projectile as a Rectangle
      * */
     public Rectangle getBoundingBox() {
         return this.sprite.getBoundingRectangle();
+    }
+
+    /**
+     * Returns true if the Projectile is friendly to the player character, otherwise false.
+     *
+     * @return true if the Projectile is friendly to the player character, otherwise false as a boolean
+     *
+     */
+    public boolean getIsFriendly() {
+        return this.isFriendly;
+    }
+
+    /**
+     * Sets the IsFriendly state of the Projectile.
+     *  */
+    public void setIsFriendly(boolean isFriendly) {
+        this.isFriendly = isFriendly;
     }
 
     /**
