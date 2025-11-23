@@ -4,7 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
-public class SkeletonWizard extends Enemy implements Shooter{
+public class SkeletonWizard extends RangedEnemy {
     /**
      * The row in the spritesheet with the desired Goblin sprite
      * */
@@ -35,51 +35,7 @@ public class SkeletonWizard extends Enemy implements Shooter{
                 Enemy.SPRITE_SHEET_COLUMNS,
                 Enemy.SPRITE_SHEET_ROWS
             ),
-            spawnPosition);
-    }
-
-    /**
-     * Gets the time since last shot as a float.
-     *
-     * @return the time since last shot as a float
-     *
-     */
-    @Override
-    public float getTimeSinceLastShot() {
-        return 0;
-    }
-
-    /**
-     * Determines if another shot can be fired.
-     *
-     * @return a boolean true if a shot can be fired, false otherwise
-     *
-     */
-    @Override
-    public boolean canFire() {
-        return false;
-    }
-
-    /**
-     * Fires a projectile.
-     *
-     * @param targetPosition the position of the target to shoot at as a Vector3
-     * @return a projectile as a Projectile
-     *
-     */
-    @Override
-    public Projectile fireProjectile(final Vector3 targetPosition) {
-        return null;
-    }
-
-    /**
-     * Updates the time until the next shot can be fired.
-     *
-     * @param deltaTime the time elapsed since the last update
-     *
-     */
-    @Override
-    public void updateTimeSinceLastShot(final float deltaTime) {
-
+            spawnPosition,
+            assetManager);
     }
 }
