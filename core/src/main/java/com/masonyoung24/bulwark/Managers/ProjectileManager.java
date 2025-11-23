@@ -63,6 +63,6 @@ public class ProjectileManager {
      * @return an unmodifiable list of active Projectile objects
      * */
     public List<Projectile> getProjectiles() {
-      return Collections.unmodifiableList(activeProjectiles);
+        return activeProjectiles;
     }
 }
