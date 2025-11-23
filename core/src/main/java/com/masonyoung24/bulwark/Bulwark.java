@@ -49,6 +49,15 @@ public class Bulwark extends Game {
         return this.batch;
     }
 
+    /**
+     * Returns the game's viewport.
+     *
+     * @return the game's viewport as a FitViewport
+     * */
+    public FitViewport getViewport() {
+        return this.viewport;
+    }
+
     @Override
     public void dispose() {
         batch.dispose();
