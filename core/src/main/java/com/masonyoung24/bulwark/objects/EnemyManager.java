@@ -91,7 +91,7 @@ public class EnemyManager {
      * */
     public void updateEnemyPosition(Vector3 playerPosition) {
         for (Enemy enemy : activeEnemies) {
-            enemy.moveToTarget(playerPosition);
+            enemy.move(playerPosition);
         }
     }
 
