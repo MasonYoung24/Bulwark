@@ -8,10 +8,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProjectileManager {
+    private static ProjectileManager instance;
     private List<Projectile> activeProjectiles;
 
-    public ProjectileManager() {
+    private ProjectileManager() {
         activeProjectiles = new ArrayList<>();
+    }
+
+    public static ProjectileManager getInstance() {
+        if (instance == null) {
+            instance = new ProjectileManager();
+        }
+        return instance;
     }
 
     /**
@@ -55,6 +63,6 @@ public class ProjectileManager {
      * @return an unmodifiable list of active Projectile objects
      * */
     public List<Projectile> getProjectiles() {
-        return Collections.unmodifiableList(activeProjectiles);
+      return Collections.unmodifiableList(activeProjectiles);
     }
 }
