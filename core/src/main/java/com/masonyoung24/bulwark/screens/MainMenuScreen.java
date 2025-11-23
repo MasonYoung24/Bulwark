@@ -6,6 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.masonyoung24.bulwark.Bulwark;
 
 public class MainMenuScreen implements Screen {
+    private final Bulwark game;
+
+    public MainMenuScreen(final Bulwark game) {
+        this.game = game;
+    }
 
     /**
      * Called when this screen becomes the current screen for a {@link Game}.
