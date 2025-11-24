@@ -7,11 +7,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class RangedEnemy extends Enemy {
-    private static final int CHARACTER_TARGET_ROW = 2;
-    private static final int CHARACTER_TARGET_COLUMN = 3;
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
-    public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
     private static final float TIME_SINCE_LAST_SHOT_RESET_VALUE = 0.0f;
     private static final float DEFAULT_MINIMUM_DISTANCE = 250.0f;
     private static final float RANDOM_TIME_SINCE_LAST_SHOT_LOWER_BOUND = 0.0f;
