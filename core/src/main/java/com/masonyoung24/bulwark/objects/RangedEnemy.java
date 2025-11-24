@@ -2,6 +2,7 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -13,11 +14,13 @@ public abstract class RangedEnemy extends Enemy {
     public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
     private static final float TIME_SINCE_LAST_SHOT_RESET_VALUE = 0.0f;
     private static final float DEFAULT_MINIMUM_DISTANCE = 250.0f;
+    private static final float RANDOM_TIME_SINCE_LAST_SHOT_LOWER_BOUND = 0.0f;
+    private static final float RANDOM_TIME_SINCE_LAST_SHOT_UPPER_BOUND = 3.0f;
 
     private final AssetManager assetManager;
     private final float castSpeed;
     private final Projectile projectile;
-    private float timeSinceLastShot = 5.0F;
+    private float timeSinceLastShot;
 
     public RangedEnemy(final int maxHP,
                        final float speed,
@@ -28,6 +31,8 @@ public abstract class RangedEnemy extends Enemy {
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.castSpeed = BASE_CAST_SPEED;
+        this.timeSinceLastShot = MathUtils.random(RANDOM_TIME_SINCE_LAST_SHOT_LOWER_BOUND,
+            RANDOM_TIME_SINCE_LAST_SHOT_UPPER_BOUND);
     }
 
     /**
