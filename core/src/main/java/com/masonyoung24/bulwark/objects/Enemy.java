@@ -10,6 +10,7 @@ import com.masonyoung24.bulwark.statuses.StatusEffect;
 import jdk.jshell.Snippet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Enemy extends Actor {
@@ -73,6 +74,21 @@ public abstract class Enemy extends Actor {
      * */
     public void addStatusEffect(StatusEffect statusEffect) {
         this.statusEffects.add(statusEffect);
+    }
+
+    /**
+     * Updates any status effects applied to the enemy. If the duration
+     * of the effect is finished, the effect will be removed.
+     * */
+    private void updateStatusEffect(float deltaTime) {
+        Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
+        while (statusEffectIterator.hasNext()) {
+            StatusEffect statusEffect = statusEffectIterator.next();
+            statusEffect.updateDuration(deltaTime);
+            if (statusEffect.isFinished()) {
+                statusEffectIterator.remove();
+            }
+        }
     }
 
     /**
