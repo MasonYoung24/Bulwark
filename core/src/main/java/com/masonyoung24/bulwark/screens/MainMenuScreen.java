@@ -27,11 +27,9 @@ public class MainMenuScreen implements Screen {
     private final Bulwark game;
     private Stage stage;
     private ImageButton startButton;
-    private boolean enterStartButton;
 
     public MainMenuScreen(Bulwark game) {
         this.game = game;
-        this.enterStartButton = false;
     }
 
     /**
