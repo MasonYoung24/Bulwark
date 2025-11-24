@@ -98,6 +98,15 @@ public class GamePlayHUD {
     }
 
     /**
+     * Returns the game duration in minutes.
+     *
+     * @return the game duration in minutes as an int
+     * */
+    public int getMinutes() {
+        return this.minutes;
+    }
+
+    /**
      * Draws the HUD.
      * */
     public void draw() {
