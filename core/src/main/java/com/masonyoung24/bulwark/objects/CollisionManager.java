@@ -49,4 +49,21 @@ public class CollisionManager {
             }
         }
     }
+
+    /**
+     * Handles the collision between an enemy projectile and the player character.
+     * */
+    public void handleProjectileCollisionWithPlayerCharacter() {
+        Iterator<Projectile> projectileIterator = projectileManager.getProjectiles().iterator();
+
+        while (projectileIterator.hasNext()) {
+            Projectile projectile = projectileIterator.next();
+            if (projectile.getBoundingBox().overlaps(playerCharacter.getSpriteBoundingBox())
+                && !projectile.getIsFriendly()) {
+                projectileIterator.remove();
+                playerCharacter.takeDamage();
+                break;
+            }
+        }
+    }
 }
