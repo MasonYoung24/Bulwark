@@ -100,17 +100,17 @@ public class EnemyManager {
      *
      * @param targetPosition the target position to fire at as a Vector3
      * */
-    public void updateEnemyFire(Vector3 targetPosition) {
+    public void updateEnemyFire(Vector3 targetPosition, float deltaTime) {
         for (Enemy enemy : activeEnemies) {
             if (enemy instanceof RangedEnemy) {
                 RangedEnemy rangedEnemy = (RangedEnemy) enemy;
+                ((RangedEnemy) enemy).updateTimeSinceLastShot(deltaTime);
                 if (rangedEnemy.canFire()) {
                     Projectile projectile = rangedEnemy.fireProjectile(targetPosition);
                     ProjectileManager.getInstance().addProjectile(projectile);
                 }
             }
         }
-
     }
 
 
