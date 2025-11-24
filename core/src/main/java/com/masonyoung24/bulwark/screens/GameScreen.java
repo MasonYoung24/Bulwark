@@ -47,7 +47,7 @@ public class GameScreen implements Screen {
     public GameScreen(Bulwark game) {
         this.game = game;
         this.assetManager = game.assets.manager;
-        this.projectileManager = new ProjectileManager();
+        this.projectileManager = ProjectileManager.getInstance();
         this.enemyManager = new EnemyManager(assetManager);
         playerCharacter = new PlayerCharacter(1, 100, assetManager);
         playerCharacter.addAbility("Blink", new Blink(0, 1.0f) {
@@ -58,16 +58,15 @@ public class GameScreen implements Screen {
         camera.update();
         this.mapRenderer = new OrthogonalTiledMapRenderer(
             null,
-            this.game.batch);
+            this.game.getSpriteBatch());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
-        this.gamePlayHUD = new GamePlayHUD(game.batch);
+        this.gamePlayHUD = new GamePlayHUD(game.getSpriteBatch());
     }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(inputs);
-        enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, 5);
         this.mapRenderer.setMap(assetManager.get(Assets.MAIN_TILESET));
     }
 
@@ -84,30 +83,32 @@ public class GameScreen implements Screen {
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
         collisionManager.detectProjectileCollisionWithEnemy();
+        collisionManager.handleProjectileCollisionWithPlayerCharacter();
         enemyManager.handleEnemyDeath();
         gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
-        game.batch.setProjectionMatrix(camera.combined);
-        game.batch.begin();
+        game.getSpriteBatch().setProjectionMatrix(camera.combined);
+        game.getSpriteBatch().begin();
         inputs.updateDirectionPlayerFacing();
-        projectileManager.render(game.batch);
-        playerCharacter.render(game.batch);
-        game.batch.end();
-        enemyManager.render(game.batch);
-
+        projectileManager.render(game.getSpriteBatch());
+        playerCharacter.render(game.getSpriteBatch());
+        game.getSpriteBatch().end();
+        enemyManager.render(game.getSpriteBatch());
     }
 
     private void update(float deltaTime) {
         if (inputs.getIsFiring()) {
-            handleFiring();
+            handlePlayerFiring();
         }
         playerCharacter.updateTimeSinceLastShot(deltaTime);
+        enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, gamePlayHUD.getMinutes(), deltaTime);
+        enemyManager.updateEnemyFire(playerCharacter.getPosition(), deltaTime);
         gamePlayHUD.updateGameTimer(deltaTime);
     }
 
     /**
      * Handles firing a projectile from the player character.
      * */
-    private void handleFiring() {
+    private void handlePlayerFiring() {
         if (!playerCharacter.canFire()) return;
 
         Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -115,7 +116,6 @@ public class GameScreen implements Screen {
 
         projectileManager.addProjectile(playerCharacter.fireProjectile(touchPoint));
     }
-
 
     @Override
     public void resize(int width, int height) {
