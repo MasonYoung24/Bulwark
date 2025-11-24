@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.statuses.StatusEffect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_ROWS = 13;
@@ -13,6 +17,7 @@ public abstract class Enemy extends Actor {
 
     private final ShapeRenderer shapeRenderer;
     private boolean isLiving;
+    private List<StatusEffect> statusEffects;
 
     /**
      * Constructs an object of type Enemy.
@@ -28,6 +33,7 @@ public abstract class Enemy extends Actor {
                  Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
         this.isLiving = true;
+        this.statusEffects = new ArrayList<>();
         shapeRenderer = new ShapeRenderer();
     }
 
@@ -49,6 +55,16 @@ public abstract class Enemy extends Actor {
         shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 
         shapeRenderer.end();
+    }
+
+    /**
+     * Moves the Enemy.
+     *
+     * @param targetPosition the target position to move the Actor to as a Vector3
+     * */
+    public void move(Vector3 targetPosition) {
+        Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+        this.sprite.translate(direction.x, direction.y);
     }
 
     /**
