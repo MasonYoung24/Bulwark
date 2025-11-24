@@ -2,13 +2,29 @@ package com.masonyoung24.bulwark.screens;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.masonyoung24.bulwark.Bulwark;
+import com.masonyoung24.bulwark.resources.Assets;
 
 public class MainMenuScreen implements Screen {
-    private final Bulwark game;
 
-    public MainMenuScreen(final Bulwark game) {
+    private static final float START_BUTTON_SCALE_MODIFIER = 0.2f;
+
+    private final Bulwark game;
+    private Stage stage;
+
+    public MainMenuScreen(Bulwark game) {
         this.game = game;
     }
 
@@ -17,6 +33,30 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void show() {
+        stage = new Stage(new ScreenViewport(), game.getSpriteBatch());
+
+        Texture startButtonTexture = game.assets.getTexture(Assets.START_BUTTON);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(startButtonTexture);
+
+        ImageButton startButton = new ImageButton(drawable);
+
+        Table table = new Table();
+        table.setFillParent(true);
+        table.center();
+        table.add(startButton).width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
+            .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+
+        stage.addActor(table);
+
+        startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new GameScreen(game));
+            }
+        });
+
+        // Enable input to be processed for this stage
+        Gdx.input.setInputProcessor(stage);
     }
 
     /**
@@ -25,8 +65,12 @@ public class MainMenuScreen implements Screen {
      * @param delta The time in seconds since the last render.
      */
     @Override
-    public void render(final float delta) {
+    public void render(float delta) {
+        ScreenUtils.clear(Color.BLACK);
 
+        // Update and draw the stage
+        stage.act(delta);
+        stage.draw();
     }
 
     /**
@@ -35,8 +79,8 @@ public class MainMenuScreen implements Screen {
      * @see ApplicationListener#resize(int, int)
      */
     @Override
-    public void resize(final int width, final int height) {
-
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     /**
@@ -44,7 +88,6 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void pause() {
-
     }
 
     /**
@@ -52,7 +95,6 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void resume() {
-
     }
 
     /**
@@ -60,7 +102,6 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void hide() {
-
     }
 
     /**
@@ -68,6 +109,7 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
+
