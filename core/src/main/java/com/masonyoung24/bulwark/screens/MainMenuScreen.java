@@ -39,6 +39,11 @@ public class MainMenuScreen implements Screen {
     public void show() {
         stage = new Stage(new ScreenViewport(), game.getSpriteBatch());
 
+        Texture backgroundTexture = game.assets.getTexture(Assets.MAIN_MENU_BACKGROUND);
+        Image backgroundImage = new Image(backgroundTexture);
+        backgroundImage.setFillParent(true);
+        stage.addActor(backgroundImage);
+
         Texture startButtonTexture = game.assets.getTexture(Assets.START_BUTTON);
         TextureRegionDrawable drawable = new TextureRegionDrawable(startButtonTexture);
 
