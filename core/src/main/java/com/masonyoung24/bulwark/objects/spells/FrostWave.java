@@ -1,16 +1,15 @@
 package com.masonyoung24.bulwark.objects.spells;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.masonyoung24.bulwark.objects.Actor;
 import com.masonyoung24.bulwark.objects.Enemy;
 import com.masonyoung24.bulwark.objects.EnemyManager;
 
-public class Freeze extends Ability {
+public class FrostWave extends Ability {
     private final float distance;
 
-    public Freeze(final float damage,
-                  final float cooldown) {
+    public FrostWave(final float damage,
+                     final float cooldown) {
         super(damage, cooldown);
         this.distance = 100;
 
