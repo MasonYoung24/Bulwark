@@ -61,8 +61,8 @@ public class MainMenuScreen implements Screen {
         startButton.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                startButtonCell.width(startButtonTexture.getWidth() * 0.25f);
-                startButtonCell.height(startButtonTexture.getHeight() * 0.25f);
+                startButtonCell.width(startButtonTexture.getWidth() * 0.21f);
+                startButtonCell.height(startButtonTexture.getHeight() * 0.21f);
                 table.invalidateHierarchy();
             }
 
