@@ -26,6 +26,9 @@ public class Assets {
     public static final String HEALTH_HEART = "sprites/health.png";
 //    public final Texture health = new Texture(Gdx.files.internal("image.jpg"));
 
+    //Main Menu
+    public static final String START_BUTTON = "MainMenu/startbutton.png";
+
     // Tilesets
     public static final String MAIN_TILESET = "maps/objects/main.tmx";
 
@@ -45,6 +48,7 @@ public class Assets {
         manager.load(HUMANS_SPRITE_SHEET, Texture.class);
         manager.load(ITEMS_SPRITE_SHEET, Texture.class);
         manager.load(HEALTH_HEART, Texture.class);
+        manager.load(START_BUTTON, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
