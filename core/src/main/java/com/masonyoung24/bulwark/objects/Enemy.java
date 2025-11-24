@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
+import jdk.jshell.Snippet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,13 @@ public abstract class Enemy extends Actor {
     public void move(Vector3 targetPosition) {
         Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
         this.sprite.translate(direction.x, direction.y);
+    }
+
+    /**
+     * Applies a status effect to the enemy.
+     * */
+    public void addStatusEffect(StatusEffect statusEffect) {
+        this.statusEffects.add(statusEffect);
     }
 
     /**
