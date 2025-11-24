@@ -49,18 +49,20 @@ public class MainMenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         table.center();
+        table.setDebug(true);
+
         Cell<ImageButton> startButtonCell = table.add(startButton).
             width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
             .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
-
+        startButtonCell.padTop(300f);
         stage.addActor(table);
 
 
         startButton.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                startButtonCell.width(startButtonTexture.getWidth() * 0.3f);
-                startButtonCell.height(startButtonTexture.getHeight() * 0.3f);
+                startButtonCell.width(startButtonTexture.getWidth() * 0.25f);
+                startButtonCell.height(startButtonTexture.getHeight() * 0.25f);
                 table.invalidateHierarchy();
             }
 
@@ -89,10 +91,6 @@ public class MainMenuScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
-
-        if (enterStartButton) {
-            this.startButton.setScale(2f);
-        }
 
         // Update and draw the stage
         stage.act(delta);
