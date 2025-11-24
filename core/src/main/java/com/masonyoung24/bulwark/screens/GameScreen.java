@@ -50,8 +50,6 @@ public class GameScreen implements Screen {
         this.projectileManager = ProjectileManager.getInstance();
         this.enemyManager = new EnemyManager(assetManager);
         playerCharacter = new PlayerCharacter(1, 100, assetManager);
-        playerCharacter.addAbility("Blink", new Blink(0, 1.0f) {
-        });
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
