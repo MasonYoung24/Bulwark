@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.masonyoung24.bulwark.resources.Assets;
 import com.masonyoung24.bulwark.screens.GameScreen;
+import com.masonyoung24.bulwark.screens.MainMenuScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Bulwark extends Game {
@@ -28,11 +29,16 @@ public class Bulwark extends Game {
         assets = new Assets();
         image = new Texture("libgdx.png");
 
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
+        camera.update();
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+
         assets.load();
         assets.manager.finishLoading();
 
         gameScreen = new GameScreen(this);
-        setScreen(gameScreen);
+        setScreen(new MainMenuScreen(this));
     }
 
     @Override
