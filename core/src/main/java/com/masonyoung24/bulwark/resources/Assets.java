@@ -39,6 +39,20 @@ public class Assets {
         loadGameplayAssets();
     }
 
+    /**
+     * Returns a texture stores in the AssetManager.
+     *
+     * @param filename the filename of the texture as a String
+     * @return the texture as a Texture
+     * @throws IllegalArgumentException if a null or empty argument is passed
+     * */
+    public Texture getTexture(String filename) {
+        if (filename == null || filename.isEmpty()) {
+            throw new IllegalArgumentException("Texture filename cannot be null or empty.");
+        }
+        return manager.get(filename, Texture.class);
+    }
+
     /*
      *  Loads gameplay assets into the asset manager.
      * */
