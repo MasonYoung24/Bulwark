@@ -10,7 +10,7 @@ public abstract class StatusEffect {
     private static final float DEFAULT_DURATION = 2.0f;
     private static final float MINIMUM_DURATION = 0.0f;
 
-    private float duration;
+    private final float duration;
 
     public StatusEffect(float duration) {
         if (duration > MINIMUM_DURATION) {
@@ -18,5 +18,14 @@ public abstract class StatusEffect {
         } else {
             this.duration = DEFAULT_DURATION;
         }
+    }
+
+    /**
+     * Returns true if the status effect is finished, otherwise false.
+     *
+     * @return true if the status effect is finished, otherwise false as a boolean
+     * */
+    public boolean isFinished() {
+        return duration <= MINIMUM_DURATION;
     }
 }
