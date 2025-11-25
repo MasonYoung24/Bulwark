@@ -100,6 +100,11 @@ public class GameScreen implements Screen {
         playerCharacter.updateTimeSinceLastShot(deltaTime);
         enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, gamePlayHUD.getMinutes(), deltaTime);
         enemyManager.updateEnemyFire(playerCharacter.getPosition(), deltaTime);
+
+        // if the player character dies, switch to the game over screen
+        if (!playerCharacter.getIsAlive()) {
+            game.setScreen(new GameOverScreen());
+        }
         gamePlayHUD.updateGameTimer(deltaTime);
     }
 
