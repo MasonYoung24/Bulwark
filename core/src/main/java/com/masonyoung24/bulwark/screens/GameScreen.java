@@ -103,7 +103,8 @@ public class GameScreen implements Screen {
 
         // if the player character dies, switch to the game over screen
         if (!playerCharacter.getIsAlive()) {
-            game.setScreen(new GameOverScreen());
+            this.dispose();
+            game.setScreen(new GameOverScreen(game));
         }
         gamePlayHUD.updateGameTimer(deltaTime);
     }
@@ -143,5 +144,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         this.mapRenderer.dispose();
+        this.projectileManager.dispose();
     }
 }
