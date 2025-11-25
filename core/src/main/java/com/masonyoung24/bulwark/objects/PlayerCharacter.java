@@ -15,6 +15,7 @@ public class PlayerCharacter extends Actor implements Shooter {
     private static final float BASE_FIRE_RATE_MODIFIER = 0.25f;
 
     private final AssetManager assetManager;
+    private boolean isAlive;
     private final float castSpeed;
     private final Projectile projectile;
     private float timeSinceLastShot = 0.0F;
@@ -37,6 +38,7 @@ public class PlayerCharacter extends Actor implements Shooter {
         this.addAbility("FrostWave", new FrostWave(1, 5.0f));
         this.castSpeed = BASE_CAST_SPEED;
         this.fireRateModifier = BASE_FIRE_RATE_MODIFIER;
+        this.isAlive = true;
     }
 
     /**
@@ -132,10 +134,10 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
-     * Handles the death of the player character. TODO
+     * Handles the death of the player character.
      * */
     @Override
     public void handleDeath() {
-        System.out.println("The game is over!");
+        this.isAlive = false;
     }
 }
