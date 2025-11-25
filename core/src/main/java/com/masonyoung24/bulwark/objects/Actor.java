@@ -16,6 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Represents an Actor.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public abstract class Actor {
     private static final int SPRITE_SHEET_ROWS = 7;
     private static final int SPRITE_SHEET_COLUMNS = 7;
@@ -35,6 +41,14 @@ public abstract class Actor {
     private float movementDirectionX;
     private float movementDirectionY;
 
+    /**
+     * Constructs an object of type Actor.
+     *
+     * @param maxHP the maximum health of the Actor as an int
+     * @param speed the movement speed of the Actor as a float
+     * @param sprite the Sprite to use for the Actor as a Sprite
+     * @param spawnPosition the spawn position of the Actor as a Vector3
+     * */
     public Actor(final int maxHP, final float speed, Sprite sprite, final Vector3 spawnPosition) {
         this.currentHP = maxHP;
         this.speed = speed;
@@ -55,6 +69,9 @@ public abstract class Actor {
         return new Vector3(sprite.getX(), sprite.getY(), 0);
     }
 
+    /**
+     * Returns the bounding box of the Actor as a Rectangle.
+     * */
     public Rectangle getSpriteBoundingBox() {
         return this.sprite.getBoundingRectangle();
     }
@@ -78,6 +95,9 @@ public abstract class Actor {
         sprite.draw(batch);
     }
 
+    /**
+     * Faces the Actor in the left direction.
+     * */
     public void faceLeft() {
         if (directionFacing != Direction.LEFT) {
             this.directionFacing = Direction.LEFT;
@@ -85,6 +105,9 @@ public abstract class Actor {
         }
     }
 
+    /**
+     * Faces the Actor in the right direction.
+     * */
     public void faceRight() {
         if (directionFacing != Direction.RIGHT) {
             this.directionFacing = Direction.RIGHT;
