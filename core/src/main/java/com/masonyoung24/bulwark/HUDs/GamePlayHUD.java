@@ -26,6 +26,8 @@ public class GamePlayHUD {
 
     private Label countdownLabel, timeLabel, linkLabel;
     private Label enemiesSlainLabel;
+    private Label healthLabel;
+    private Label healthValue;
 
     private float timeCount;
     private int seconds;
@@ -38,7 +40,7 @@ public class GamePlayHUD {
      *
      * @param spriteBatch the SpriteBatch used to render the HUD
      * */
-    public GamePlayHUD(final SpriteBatch spriteBatch) {
+    public GamePlayHUD(final SpriteBatch spriteBatch, int playerHealth) {
         enemiesSlain = 0;
         seconds = GAME_START_TIME;
         minutes = GAME_START_TIME;
@@ -52,8 +54,10 @@ public class GamePlayHUD {
 
         countdownLabel = new Label(String.format("%d:%d:%03d", hours, minutes, seconds), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIMER", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         linkLabel = new Label("ENEMIES SLAIN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         enemiesSlainLabel = new Label(String.format("%d", enemiesSlain), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthValue = new Label(String.format("%d", playerHealth), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //define a table used to organize hud's labels
         Table table = new Table();
@@ -62,9 +66,11 @@ public class GamePlayHUD {
 
         //add labels to table, padding the top, and giving them all equal width with expandX
         table.add(linkLabel).expandX().padTop(10);
+        table.add(healthLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         table.row();
         table.add(enemiesSlainLabel).expandX();
+        table.add(healthValue);
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
