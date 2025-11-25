@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
             this.game.getSpriteBatch());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         inputs = new Inputs(camera, playerCharacter, projectileManager);
-        this.gamePlayHUD = new GamePlayHUD(game.getSpriteBatch());
+        this.gamePlayHUD = new GamePlayHUD(game.getSpriteBatch(), playerCharacter.getCurrentHP());
     }
 
     @Override
