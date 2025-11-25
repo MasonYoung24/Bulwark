@@ -173,6 +173,15 @@ public abstract class Actor {
     }
 
     /**
+     * Returns the current HP of the Actor.
+     *
+     * @return the current HP of the Actor as an int
+     * */
+    public int getCurrentHP() {
+        return this.currentHP;
+    }
+
+    /**
      * Adds an ability that the Actor can use.
      *
      * @param abilityName the name of the Ability to execute
