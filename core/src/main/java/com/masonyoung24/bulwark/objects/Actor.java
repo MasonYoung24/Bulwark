@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
+import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public abstract class Actor {
     private Vector3 movementDirection;
     private float movementDirectionX;
     private float movementDirectionY;
+    private List<StatusEffect> statusEffects;
 
     /**
      * Constructs an object of type Actor.
@@ -58,6 +60,7 @@ public abstract class Actor {
         this.abilities = new HashMap<>();
         this.originalSpriteColor = new Color(this.sprite.getColor());
         this.movementDirection = new Vector3();
+        this.statusEffects = new ArrayList<>()
     }
 
     /**
