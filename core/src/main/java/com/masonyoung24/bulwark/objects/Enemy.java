@@ -19,7 +19,7 @@ public abstract class Enemy extends Actor {
 
     private final ShapeRenderer shapeRenderer;
     private boolean isLiving;
-    private List<StatusEffect> statusEffects;
+
 
     /**
      * Constructs an object of type Enemy.
@@ -35,7 +35,6 @@ public abstract class Enemy extends Actor {
                  Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
         this.isLiving = true;
-        this.statusEffects = new ArrayList<>();
         shapeRenderer = new ShapeRenderer();
     }
 
@@ -67,28 +66,6 @@ public abstract class Enemy extends Actor {
     public void move(Vector3 targetPosition) {
         Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
         this.sprite.translate(direction.x, direction.y);
-    }
-
-    /**
-     * Applies a status effect to the enemy.
-     * */
-    public void addStatusEffect(StatusEffect statusEffect) {
-        this.statusEffects.add(statusEffect);
-    }
-
-    /**
-     * Updates any status effects applied to the enemy. If the duration
-     * of the effect is finished, the effect will be removed.
-     * */
-    private void updateStatusEffect(float deltaTime) {
-        Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
-        while (statusEffectIterator.hasNext()) {
-            StatusEffect statusEffect = statusEffectIterator.next();
-            statusEffect.updateDuration(deltaTime);
-            if (statusEffect.isFinished()) {
-                statusEffectIterator.remove();
-            }
-        }
     }
 
     /**
