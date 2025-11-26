@@ -12,10 +12,7 @@ import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Represents an Actor.
@@ -60,7 +57,7 @@ public abstract class Actor {
         this.abilities = new HashMap<>();
         this.originalSpriteColor = new Color(this.sprite.getColor());
         this.movementDirection = new Vector3();
-        this.statusEffects = new ArrayList<>()
+        this.statusEffects = new ArrayList<>();
     }
 
     /**
@@ -233,6 +230,28 @@ public abstract class Actor {
         Ability abilityToExecute = abilities.get(abilityName);
         if (abilityToExecute != null) {
             abilityToExecute.cast(this);
+        }
+    }
+
+    /**
+     * Applies a status effect to the enemy.
+     * */
+    public void addStatusEffect(StatusEffect statusEffect) {
+        this.statusEffects.add(statusEffect);
+    }
+
+    /**
+     * Updates any status effects applied to the enemy. If the duration
+     * of the effect is finished, the effect will be removed.
+     * */
+    private void updateStatusEffect(float deltaTime) {
+        Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
+        while (statusEffectIterator.hasNext()) {
+            StatusEffect statusEffect = statusEffectIterator.next();
+            statusEffect.updateDuration(deltaTime);
+            if (statusEffect.isFinished()) {
+                statusEffectIterator.remove();
+            }
         }
     }
 
