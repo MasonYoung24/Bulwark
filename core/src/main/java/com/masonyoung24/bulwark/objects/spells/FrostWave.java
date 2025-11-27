@@ -17,6 +17,8 @@ public class FrostWave extends Ability implements Collidable {
     private float speed;
     private boolean expired;
     private Texture texture;
+    private float startPointX;
+    private float startPointY;
 
     public FrostWave(final float damage,
                      final float cooldown) {
