@@ -38,8 +38,11 @@ public class FrostWave extends Ability implements Collidable {
      *
      */
     @Override
-    public void update() {
-
+    public void update(float deltaTime) {
+        this.radius += speed * deltaTime;
+        if (radius >= maxRadius) {
+            expired = true;
+        }
     }
 
     /**
