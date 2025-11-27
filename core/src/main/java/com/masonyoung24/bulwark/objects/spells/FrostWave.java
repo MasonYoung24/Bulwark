@@ -49,7 +49,8 @@ public class FrostWave extends Ability implements Collidable {
      */
     @Override
     void execute(Actor actor) {
-
+        this.startPointX = actor.getPosition().x;
+        this.startPointY = actor.getPosition().y;
     }
 
     /**
@@ -85,6 +86,12 @@ public class FrostWave extends Ability implements Collidable {
     }
 
     public void render(SpriteBatch batch) {
-
+        batch.draw(
+            texture,
+            this.startPointX - radius,
+            this.startPointY - radius,
+            radius * 2,
+            radius * 2
+        );
     }
 }
