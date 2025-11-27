@@ -48,4 +48,9 @@ public abstract class Ability {
      * Executes the ability.
      * */
     abstract void execute(Actor actor);
+
+    /**
+     * Updates the state of the Ability.
+     * */
+    public abstract void update();
 }
