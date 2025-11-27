@@ -1,5 +1,6 @@
 package com.masonyoung24.bulwark.objects;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
@@ -20,6 +21,17 @@ public class AbilityManager {
         if (activeAbilities != null && !activeAbilities.isEmpty()) {
             for (Ability ability : activeAbilities) {
                 ability.update();
+            }
+        }
+    }
+
+    /**
+     * Renders each active ability.
+     * */
+    public void render(SpriteBatch spriteBatch) {
+        if (activeAbilities != null && !activeAbilities.isEmpty()) {
+            for (Ability ability : activeAbilities) {
+                ability.render(spriteBatch);
             }
         }
     }
