@@ -35,4 +35,11 @@ public class AbilityManager {
             }
         }
     }
+
+    /**
+     * Adds a new ability to the list of active abilities.
+     * */
+    public void add(Ability ability) {
+        activeAbilities.add(ability);
+    }
 }
