@@ -17,10 +17,10 @@ public class AbilityManager {
     /**
      * Updates each active ability.
      * */
-    public void update() {
+    public void update(float deltaTime) {
         if (activeAbilities != null && !activeAbilities.isEmpty()) {
             for (Ability ability : activeAbilities) {
-                ability.update();
+                ability.update(deltaTime);
             }
         }
     }
