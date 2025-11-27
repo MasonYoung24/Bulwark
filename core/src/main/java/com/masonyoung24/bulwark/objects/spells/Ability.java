@@ -57,7 +57,12 @@ public abstract class Ability {
     public abstract void update(float deltaTime);
 
     /**
-     * Renders the ability.
+     * Renders the Ability.
      * */
     public abstract void render(SpriteBatch batch);
+
+    /**
+     * Disposes of the Ability.
+     * */
+    public abstract void dispose();
 }
