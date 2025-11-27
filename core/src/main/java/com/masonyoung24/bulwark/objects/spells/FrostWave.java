@@ -16,7 +16,7 @@ public class FrostWave extends Ability implements Collidable {
     private float maxRadius;
     private float speed;
     private boolean expired;
-    private static Texture texture;
+    private  Texture texture;
 
     public FrostWave(final float damage,
                      final float cooldown) {
@@ -25,7 +25,21 @@ public class FrostWave extends Ability implements Collidable {
         this.maxRadius = MAX_RADIUS;
         this.speed = SPEED;
         this.expired = false;
+        texture = loadTexture();
+    }
 
+    /**
+     * Creates the FrostWave texture to be drawn.
+     *
+     * @return the texture of the FrostWave to be drawn as a Texture
+     * */
+    private Texture createTexture() {
+        Pixmap pixmap = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
+        pixmap.setColor(0f, 0.5f, 1f, 0.7f);
+        pixmap.fillCircle(32, 32, 32);
+        Texture texture = new Texture(pixmap);
+        pixmap.dispose();
+        return texture;
     }
 
     /**
