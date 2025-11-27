@@ -2,6 +2,7 @@ package com.masonyoung24.bulwark.objects.spells;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Actor;
 import com.masonyoung24.bulwark.statuses.Frozen;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
@@ -10,10 +11,12 @@ public class FrostWave extends Ability implements Collidable {
     private static final float MAX_RADIUS = 300f;
     private static final float SPEED = 150f;
     private static final float START_RADIUS = 0.0f;
+
     private float radius;
     private float maxRadius;
     private float speed;
     private boolean expired;
+    private static Texture texture;
 
     public FrostWave(final float damage,
                      final float cooldown) {
@@ -63,5 +66,9 @@ public class FrostWave extends Ability implements Collidable {
         StatusEffect frozenStatus = new Frozen(50.0f);
         actor.addStatusEffect(frozenStatus);
         actor.takeDamage();
+    }
+
+    public void render(SpriteBatch batch) {
+
     }
 }
