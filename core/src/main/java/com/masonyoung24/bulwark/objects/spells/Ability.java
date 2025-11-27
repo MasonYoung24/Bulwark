@@ -55,4 +55,9 @@ public abstract class Ability {
      * Updates the state of the Ability.
      * */
     public abstract void update(float deltaTime);
+
+    /**
+     * Renders the ability.
+     * */
+    public abstract void render(SpriteBatch batch);
 }
