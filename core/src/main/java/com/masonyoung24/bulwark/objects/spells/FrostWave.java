@@ -16,7 +16,7 @@ public class FrostWave extends Ability implements Collidable {
     private float maxRadius;
     private float speed;
     private boolean expired;
-    private  Texture texture;
+    private Texture texture;
 
     public FrostWave(final float damage,
                      final float cooldown) {
@@ -25,7 +25,7 @@ public class FrostWave extends Ability implements Collidable {
         this.maxRadius = MAX_RADIUS;
         this.speed = SPEED;
         this.expired = false;
-        texture = loadTexture();
+        texture = createTexture();
     }
 
     /**
