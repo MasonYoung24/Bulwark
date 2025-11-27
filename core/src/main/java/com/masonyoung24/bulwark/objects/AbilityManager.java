@@ -12,4 +12,15 @@ public class AbilityManager {
     public AbilityManager() {
         this.activeAbilities = new ArrayList<>();
     }
+
+    /**
+     * Updates each active ability.
+     * */
+    public void update() {
+        if (activeAbilities != null && !activeAbilities.isEmpty()) {
+            for (Ability ability : activeAbilities) {
+                ability.update();
+            }
+        }
+    }
 }
