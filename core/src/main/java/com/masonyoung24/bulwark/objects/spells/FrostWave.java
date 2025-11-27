@@ -46,6 +46,13 @@ public class FrostWave extends Ability implements Collidable {
     }
 
     /**
+     * Returns true of the FrostWave has expired, otherwise, false
+     * */
+    public boolean getExpired() {
+        return this.expired;
+    }
+
+    /**
      * Affects an Actor on collision
      *
      * @param actor the Actor that is being effected by the collision as an Actor
