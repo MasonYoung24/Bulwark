@@ -1,11 +1,13 @@
 package com.masonyoung24.bulwark.objects.spells;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Actor;
 
 public abstract class Ability {
     private float damage;
     private float cooldown;
     private float timeSinceCast;
+    private float sprite;
 
     /**
      * Constructs an object of type Ability.
@@ -52,5 +54,5 @@ public abstract class Ability {
     /**
      * Updates the state of the Ability.
      * */
-    public abstract void update();
+    public abstract void update(float deltaTime);
 }
