@@ -61,7 +61,7 @@ public class FrostWave extends Ability implements Collidable {
     public void update(float deltaTime) {
         this.radius += speed * deltaTime;
         if (radius >= maxRadius) {
-            expired = true;
+            this.setIsExpired(true);
         }
     }
 
@@ -93,5 +93,13 @@ public class FrostWave extends Ability implements Collidable {
             radius * 2,
             radius * 2
         );
+    }
+
+    /**
+     * Disposes of the Ability.
+     */
+    @Override
+    public void dispose() {
+        this.texture.dispose();
     }
 }
