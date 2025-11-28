@@ -35,7 +35,7 @@ public class PlayerCharacter extends Actor implements Shooter {
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.addAbility("Blink", new Blink(0, 1.0f));
-        this.addAbility("FrostWave", new FrostWave(1, 5.0f));
+        this.addAbility("FrostWave", new FrostWave(1, 5.0f, this.getPosition()));
         this.castSpeed = BASE_CAST_SPEED;
         this.fireRateModifier = BASE_FIRE_RATE_MODIFIER;
         this.isAlive = true;
