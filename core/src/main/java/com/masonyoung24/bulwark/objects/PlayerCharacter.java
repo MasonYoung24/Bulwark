@@ -73,6 +73,15 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
+     * Returns true if the player character is alive, otherwise false.
+     *
+     * @return true if the player character is alive, otherwise false as a boolean
+     * */
+    public boolean getIsAlive() {
+        return this.isAlive;
+    }
+
+    /**
      * Determines if another shot can be fired.
      *
      * @return a boolean true if a shot can be fired, false otherwise
