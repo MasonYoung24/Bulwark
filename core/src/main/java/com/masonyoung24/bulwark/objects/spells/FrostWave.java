@@ -9,7 +9,7 @@ import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 public class FrostWave extends Ability implements Collidable {
     private static final float MAX_RADIUS = 300f;
-    private static final float SPEED = 150f;
+    private static final float SPEED = 300f;
     private static final float START_RADIUS = 0.0f;
 
     private float radius;
