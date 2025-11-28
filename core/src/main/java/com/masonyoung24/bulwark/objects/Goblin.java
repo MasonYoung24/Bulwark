@@ -1,7 +1,6 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
