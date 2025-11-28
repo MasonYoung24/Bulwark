@@ -68,11 +68,6 @@ public abstract class Ability {
     public abstract void dispose();
 
     /**
-     * Creates a copy of the Ability.
-     * */
-    public abstract Ability copy();
-
-    /**
      * Returns true of the FrostWave has expired, otherwise, false
      * */
     public boolean getIsExpired() {
