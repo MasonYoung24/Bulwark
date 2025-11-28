@@ -20,7 +20,7 @@ public class EnemyManager {
     private static final int SPAWN_MULTIPLIER = 2;
     private static final float SPAWN_TIMER_START = 0.0f;
     private static final float BASE_SPAWN_INTERVAL = 2.0f;
-    private static final float GOBLIN_SPAWN_CHANCE = 0.07f;
+    private static final float GOBLIN_SPAWN_CHANCE = 0.70f;
 
     private final AssetManager assetManager;
     private float spawnTimer;
