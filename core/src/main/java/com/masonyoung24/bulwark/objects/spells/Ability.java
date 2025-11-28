@@ -7,7 +7,7 @@ public abstract class Ability {
     private float damage;
     private float cooldown;
     private float timeSinceCast;
-    private float sprite;
+    private boolean isExpired;
 
     /**
      * Constructs an object of type Ability.
@@ -19,6 +19,7 @@ public abstract class Ability {
         this.damage = damage;
         this.cooldown = cooldown;
         this.timeSinceCast = cooldown;
+        this.isExpired = false;
     }
 
     /**
@@ -65,4 +66,18 @@ public abstract class Ability {
      * Disposes of the Ability.
      * */
     public abstract void dispose();
+
+    /**
+     * Returns true of the FrostWave has expired, otherwise, false
+     * */
+    public boolean getIsExpired() {
+        return this.isExpired;
+    }
+
+    /**
+     * Returns true of the FrostWave has expired, otherwise, false
+     * */
+    public void setIsExpired(Boolean expiredStatus) {
+        this.isExpired = expiredStatus;
+    }
 }
