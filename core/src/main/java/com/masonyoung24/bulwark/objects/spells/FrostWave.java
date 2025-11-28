@@ -87,6 +87,11 @@ public class FrostWave extends Ability implements Collidable {
         actor.takeDamage();
     }
 
+    /**
+     * Renders the FrostWave.
+     *
+     * @param batch the sprite batch to use for rendering as a SpriteBatch
+     * */
     public void render(SpriteBatch batch) {
         batch.draw(
             texture,
