@@ -38,7 +38,7 @@ public class FrostWave extends Ability implements Collidable {
     private Texture createTexture() {
         Pixmap pixmap = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
         pixmap.setColor(0f, 0.5f, 1f, 0.7f);
-        pixmap.fillCircle(32, 32, 32);
+        pixmap.drawCircle(32, 32, 32);
         Texture texture = new Texture(pixmap);
         pixmap.dispose();
         return texture;
