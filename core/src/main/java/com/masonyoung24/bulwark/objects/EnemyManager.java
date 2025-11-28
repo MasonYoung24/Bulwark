@@ -20,6 +20,7 @@ public class EnemyManager {
     private static final int SPAWN_MULTIPLIER = 2;
     private static final float SPAWN_TIMER_START = 0.0f;
     private static final float BASE_SPAWN_INTERVAL = 2.0f;
+    private static final float GOBLIN_SPAWN_CHANCE = 0.07f;
 
     private final AssetManager assetManager;
     private float spawnTimer;
@@ -187,16 +188,19 @@ public class EnemyManager {
      * @param viewportHeight the height of the viewport as a float
      * */
     private void spawnEnemy(float viewportWidth, float viewportHeight) {
-        activeEnemies.add(new Goblin(
-            3,
-            3.0F,
-            assetManager,
-            determineSpawnPosition(viewportWidth, viewportHeight)));
-        activeEnemies.add(new SkeletonWizard(
-            3,
-            3.0F,
-            assetManager,
-            determineSpawnPosition(viewportWidth, viewportHeight)));
+        if (Math.random() < GOBLIN_SPAWN_CHANCE) {
+            activeEnemies.add(new Goblin(
+                3,
+                3.0F,
+                assetManager,
+                determineSpawnPosition(viewportWidth, viewportHeight)));
+        } else {
+            activeEnemies.add(new SkeletonWizard(
+                3,
+                3.0F,
+                assetManager,
+                determineSpawnPosition(viewportWidth, viewportHeight)));
+        }
     }
 
     /**
