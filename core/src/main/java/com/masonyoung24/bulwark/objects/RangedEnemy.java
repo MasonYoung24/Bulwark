@@ -40,10 +40,12 @@ public abstract class RangedEnemy extends Enemy {
      * */
     @Override
     public void move(Vector3 targetPosition) {
-        Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
-        float distanceBetweenEnemyAndPlayer = targetPosition.dst(this.getPosition());
-        if (distanceBetweenEnemyAndPlayer > DEFAULT_MINIMUM_DISTANCE) {
-            this.sprite.translate(direction.x, direction.y);
+        if (!getIsFrozen()) {
+            Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+            float distanceBetweenEnemyAndPlayer = targetPosition.dst(this.getPosition());
+            if (distanceBetweenEnemyAndPlayer > DEFAULT_MINIMUM_DISTANCE) {
+                this.sprite.translate(direction.x, direction.y);
+            }
         }
     }
 
