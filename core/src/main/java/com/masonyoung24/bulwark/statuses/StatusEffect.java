@@ -43,4 +43,9 @@ public abstract class StatusEffect {
      * Modifies the actor according to the status effect.
      * */
     public abstract void applyEffect(Actor actor);
+
+    /**
+     * Returns the type of the status effect.
+     * */
+    public abstract StatusEffectType getType();
 }
