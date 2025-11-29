@@ -1,5 +1,7 @@
 package com.masonyoung24.bulwark.statuses;
 
+import com.masonyoung24.bulwark.objects.Actor;
+
 /**
  * Represents a status effect.
  *
@@ -35,4 +37,10 @@ public abstract class StatusEffect {
     public void updateDuration(float deltaTime) {
         this.duration -= deltaTime;
     }
+
+
+    /**
+     * Modifies the actor according to the status effect.
+     * */
+    public abstract void applyEffect(Actor actor);
 }
