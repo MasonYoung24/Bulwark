@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
+import com.masonyoung24.bulwark.objects.spells.AbilityFactory;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 import java.util.*;
@@ -226,10 +227,15 @@ public abstract class Actor {
      *
      * @param abilityName the Ability to execute
      * */
-    public void executeAbility(String abilityName) {
+    public void executeAbility(String abilityName, AbilityManager abilityManager) {
         Ability abilityToExecute = abilities.get(abilityName);
         if (abilityToExecute != null) {
             abilityToExecute.cast(this);
+            Ability newInstance = AbilityFactory.createAbility(abilityName, this);
+            if (newInstance == null) {
+                System.out.println("empty");
+            }
+            abilityManager.add(newInstance);
         }
     }
 
