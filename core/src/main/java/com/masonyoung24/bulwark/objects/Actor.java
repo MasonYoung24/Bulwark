@@ -251,6 +251,9 @@ public abstract class Actor {
      * of the effect is finished, the effect will be removed.
      * */
     public void updateStatusEffect(float deltaTime) {
+        if (statusEffects.isEmpty()) {
+            return;
+        }
         Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
         while (statusEffectIterator.hasNext()) {
             StatusEffect statusEffect = statusEffectIterator.next();
