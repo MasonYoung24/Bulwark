@@ -3,12 +3,18 @@ package com.masonyoung24.bulwark.objects.spells;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.objects.Actor;
 import com.masonyoung24.bulwark.statuses.Frozen;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
 
-public class FrostWave extends Ability implements Collidable {
+import java.util.HashSet;
+import java.util.Set;
+
+public class FrostWave extends Ability implements CollidableAbility {
     private static final float MAX_RADIUS = 300f;
     private static final float SPEED = 300f;
     private static final float START_RADIUS = 0.0f;
@@ -19,6 +25,8 @@ public class FrostWave extends Ability implements Collidable {
     private boolean expired;
     private Texture texture;
     private Vector3 pointOfExecution;
+    private final Circle collisionCircle;
+    private final Set<Actor> enemiesHit;
 
 
     public FrostWave(final float damage,
@@ -31,6 +39,8 @@ public class FrostWave extends Ability implements Collidable {
         this.expired = false;
         texture = createTexture();
         this.pointOfExecution = pointOfExecution;
+        this.collisionCircle = new Circle();
+        this.enemiesHit = new HashSet<>();
     }
 
     /**
@@ -65,6 +75,7 @@ public class FrostWave extends Ability implements Collidable {
         if (radius >= maxRadius) {
             this.setIsExpired(true);
         }
+        collisionCircle.set(pointOfExecution.x, pointOfExecution.y, radius);
     }
 
     /**
@@ -85,6 +96,22 @@ public class FrostWave extends Ability implements Collidable {
         StatusEffect frozenStatus = new Frozen(50.0f);
         actor.addStatusEffect(frozenStatus);
         actor.takeDamage();
+    }
+
+    /**
+     * Handles the collision between the FrostWave and Actor.
+     *
+     * @param actor the actor to check for collision with
+     * */
+    @Override
+    public void handleCollision(Actor actor) {
+        Rectangle bounds = actor.getSpriteBoundingBox();
+        if (Intersector.overlaps(this.collisionCircle, bounds)) {
+            if (!enemiesHit.contains(actor)) {
+                enemiesHit.add(actor);
+                affect(actor);
+            }
+        }
     }
 
     /**
