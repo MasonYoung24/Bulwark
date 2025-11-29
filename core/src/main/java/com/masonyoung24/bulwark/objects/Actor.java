@@ -250,7 +250,7 @@ public abstract class Actor {
      * Updates any status effects applied to the enemy. If the duration
      * of the effect is finished, the effect will be removed.
      * */
-    private void updateStatusEffect(float deltaTime) {
+    public void updateStatusEffect(float deltaTime) {
         Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
         while (statusEffectIterator.hasNext()) {
             StatusEffect statusEffect = statusEffectIterator.next();
