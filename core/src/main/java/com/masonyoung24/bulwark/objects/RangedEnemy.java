@@ -13,6 +13,7 @@ public abstract class RangedEnemy extends Enemy {
     private static final float DEFAULT_MINIMUM_DISTANCE = 250.0f;
     private static final float RANDOM_TIME_SINCE_LAST_SHOT_LOWER_BOUND = 0.0f;
     private static final float RANDOM_TIME_SINCE_LAST_SHOT_UPPER_BOUND = 3.0f;
+    private static final float BASE_REFRACTORY_PERIOD_MODIFIER = 2.0f;
 
     private final AssetManager assetManager;
     private final float castSpeed;
@@ -63,7 +64,8 @@ public abstract class RangedEnemy extends Enemy {
      *
      */
     public boolean canFire() {
-        return getTimeSinceLastShot() >= projectile.getRefractoryPeriod();
+        return getTimeSinceLastShot() >= projectile.getRefractoryPeriod()
+            * BASE_REFRACTORY_PERIOD_MODIFIER;
     }
 
     /**
