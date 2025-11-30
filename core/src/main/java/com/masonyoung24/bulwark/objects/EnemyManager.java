@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 import java.util.*;
 
@@ -114,6 +115,16 @@ public class EnemyManager {
         }
     }
 
+    /**
+     * Updates the status effect of the Enemy.
+     *
+     * @param deltaTime the change in time as a float
+     * */
+    private void updateEnemyStatusEffects(float deltaTime) {
+        for (Enemy enemy : activeEnemies) {
+            enemy.updateStatusEffect(deltaTime);
+        }
+    }
 
     /**
      * Determines randomly the spawn position of the Enemy on the edge of the viewport.
