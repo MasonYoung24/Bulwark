@@ -1,15 +1,21 @@
 package com.masonyoung24.bulwark.HUDs;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.masonyoung24.bulwark.objects.SpriteUtils;
+import com.masonyoung24.bulwark.resources.Assets;
 
 /**
  * Represents the main gameplay HUD.
@@ -40,7 +46,7 @@ public class GamePlayHUD {
      *
      * @param spriteBatch the SpriteBatch used to render the HUD
      * */
-    public GamePlayHUD(final SpriteBatch spriteBatch, int playerHealth) {
+    public GamePlayHUD(final SpriteBatch spriteBatch, int playerHealth, AssetManager assetManager) {
         enemiesSlain = 0;
         seconds = GAME_START_TIME;
         minutes = GAME_START_TIME;
@@ -58,6 +64,10 @@ public class GamePlayHUD {
         linkLabel = new Label("ENEMIES SLAIN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         enemiesSlainLabel = new Label(String.format("%d", enemiesSlain), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthValue = new Label(String.format("%d", playerHealth), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Sprite frostWaveSprite = SpriteUtils.getSpriteFromSpriteSheet(
+            assetManager.get(Assets.FROST_ABILITIES_SPRITE_SHEET), 1, 0, 5, 5);
+
+        Image frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
 
         //define a table used to organize hud's labels
         this.table = new Table();
@@ -74,6 +84,16 @@ public class GamePlayHUD {
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
+
+        // New table for abilities
+        Table abilitiesTable = new Table();
+        abilitiesTable.bottom();
+        abilitiesTable.setFillParent(true);
+
+        abilitiesTable.add(frostWaveIcon).size(50, 50).pad(10);
+
+        stage.addActor(abilitiesTable);
+
     }
 
     public void updateEnemiesSlain(final int enemiesSlain) {
