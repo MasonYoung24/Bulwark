@@ -253,6 +253,7 @@ public abstract class Actor {
      * */
     public void addStatusEffect(StatusEffect statusEffect) {
         this.statusEffects.add(statusEffect);
+        statusEffect.applyEffect(this);
     }
 
     /**
