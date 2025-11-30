@@ -27,6 +27,7 @@ public abstract class Actor {
     private static final float DAMAGE_TINT_TIME = 0.2f;
     private static final int HP_DECREMENT_VALUE = 1;
     private static final int MINIMUM_HP = 1;
+    private static final float[] FROZEN_TINT_RGBA = {0.6f, 0.8f, 1.0f, 1.0f};
 
     private int currentHP;
     private int maxHP;
@@ -330,7 +331,11 @@ public abstract class Actor {
         if (isDamageTintActive) {
             this.sprite.setColor(Color.RED);
         } else if (isFrozen) {
-            this.sprite.setColor(Color.BLUE);
+            this.sprite.setColor(
+                FROZEN_TINT_RGBA[0],
+                FROZEN_TINT_RGBA[1],
+                FROZEN_TINT_RGBA[2],
+                FROZEN_TINT_RGBA[3]);
         } else {
             this.sprite.setColor(originalSpriteColor);
         }
