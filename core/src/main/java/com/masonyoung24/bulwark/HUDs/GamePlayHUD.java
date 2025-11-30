@@ -41,6 +41,9 @@ public class GamePlayHUD {
     private int hours;
     private int enemiesSlain;
 
+    // Abilities
+    private Image frostWaveIcon;
+
     /**
      * Constructs an object of type GamePlayHUD.
      *
@@ -67,7 +70,7 @@ public class GamePlayHUD {
         Sprite frostWaveSprite = SpriteUtils.getSpriteFromSpriteSheet(
             assetManager.get(Assets.FROST_ABILITIES_SPRITE_SHEET), 1, 0, 5, 5);
 
-        Image frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
+        this.frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
 
         //define a table used to organize hud's labels
         this.table = new Table();
@@ -93,7 +96,6 @@ public class GamePlayHUD {
         abilitiesTable.add(frostWaveIcon).size(50, 50).pad(10);
 
         stage.addActor(abilitiesTable);
-
     }
 
     public void updateEnemiesSlain(final int enemiesSlain) {
