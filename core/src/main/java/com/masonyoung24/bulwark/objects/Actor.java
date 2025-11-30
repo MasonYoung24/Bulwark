@@ -75,6 +75,13 @@ public abstract class Actor {
     }
 
     /**
+     * Returns the isFrozen status of the Actor.
+     * */
+    public boolean getIsFrozen() {
+        return !this.isFrozen;
+    }
+
+    /**
      * Sets the frozen status of the Actor.
      * */
     public void setIsFrozen(boolean frozenStatus) {
