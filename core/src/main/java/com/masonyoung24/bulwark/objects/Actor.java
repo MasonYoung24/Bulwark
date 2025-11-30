@@ -242,6 +242,13 @@ public abstract class Actor {
     }
 
     /**
+     * Updates the time since last cast for each stored ability.
+     * */
+    public void updateTimeSinceCast(float deltaTime) {
+        abilities.forEach((abilityName, ability) -> ability.setTimeSinceLastCast(deltaTime));
+    }
+
+    /**
      * Executes an ability known to the actor.
      *
      * @param abilityName the Ability to execute
