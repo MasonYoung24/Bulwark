@@ -40,6 +40,7 @@ public abstract class Actor {
     private float movementDirectionX;
     private float movementDirectionY;
     private List<StatusEffect> statusEffects;
+    private boolean isFrozen;
 
     /**
      * Constructs an object of type Actor.
@@ -59,6 +60,7 @@ public abstract class Actor {
         this.originalSpriteColor = new Color(this.sprite.getColor());
         this.movementDirection = new Vector3();
         this.statusEffects = new ArrayList<>();
+        this.isFrozen = false;
     }
 
     /**
@@ -68,6 +70,13 @@ public abstract class Actor {
      * */
     public Vector3 getPosition() {
         return new Vector3(sprite.getX(), sprite.getY(), 0);
+    }
+
+    /**
+     * Sets the frozen status of the Actor.
+     * */
+    public void setIsFrozen(boolean frozenStatus) {
+        this.isFrozen = frozenStatus;
     }
 
     /**
