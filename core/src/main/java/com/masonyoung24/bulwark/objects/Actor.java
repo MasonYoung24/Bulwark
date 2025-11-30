@@ -304,26 +304,28 @@ public abstract class Actor {
      * Tints the Actor's sprite red to indicate that damage has been taken.
      * */
     private void applyDamageTint() {
-        this.sprite.setColor(Color.RED);
+        isDamageTintActive = true;
+        updateSpriteColor();
     }
 
     /*
      * Removes and tint that has been applied to the Actor's sprite.
      * */
     private void removeTint() {
-        this.sprite.setColor(originalSpriteColor);
+        isDamageTintActive = false;
+        updateSpriteColor();
     }
 
     /*
      * Updates the colour of the Actor's sprite depending on the Actor's condition.
-    * */
+     * */
     private void updateSpriteColor() {
         if (isDamageTintActive) {
             this.sprite.setColor(Color.RED);
         } else if (isFrozen) {
             this.sprite.setColor(Color.BLUE);
         } else {
-            removeTint();
+            this.sprite.setColor(originalSpriteColor);
         }
     }
 
