@@ -22,11 +22,14 @@ public class Assets {
     public static final String HUMANS_SPRITE_SHEET = "sprites/HumansSpriteSheet.png";
     public static final String ITEMS_SPRITE_SHEET = "sprites/ItemsSpriteSheet.png";
 
-    //HUD
+    // Abilities
+    public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frostAbilities.png";
+
+    // HUD
     public static final String HEALTH_HEART = "sprites/health.png";
 //    public final Texture health = new Texture(Gdx.files.internal("image.jpg"));
 
-    //Main Menu
+    // Main Menu
     public static final String START_BUTTON = "MainMenu/startbutton.png";
     public static final String MAIN_MENU_BACKGROUND = "MainMenu/MainMenuBackground.png";
 
@@ -65,6 +68,7 @@ public class Assets {
         manager.load(HEALTH_HEART, Texture.class);
         manager.load(START_BUTTON, Texture.class);
         manager.load(MAIN_MENU_BACKGROUND, Texture.class);
+        manager.load(FROST_ABILITIES_SPRITE_SHEET, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
