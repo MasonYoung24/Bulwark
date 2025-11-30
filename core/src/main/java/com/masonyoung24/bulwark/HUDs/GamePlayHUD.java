@@ -60,7 +60,7 @@ public class GamePlayHUD {
         healthValue = new Label(String.format("%d", playerHealth), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //define a table used to organize hud's labels
-        Table table = new Table();
+        this.table = new Table();
         table.top();
         table.setFillParent(true);
 
