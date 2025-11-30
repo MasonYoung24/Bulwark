@@ -28,6 +28,7 @@ public class Assets {
 
     //Main Menu
     public static final String START_BUTTON = "MainMenu/startbutton.png";
+    public static final String MAIN_MENU_BACKGROUND = "MainMenu/MainMenuBackground.png";
 
     // Tilesets
     public static final String MAIN_TILESET = "maps/objects/main.tmx";
@@ -63,6 +64,7 @@ public class Assets {
         manager.load(ITEMS_SPRITE_SHEET, Texture.class);
         manager.load(HEALTH_HEART, Texture.class);
         manager.load(START_BUTTON, Texture.class);
+        manager.load(MAIN_MENU_BACKGROUND, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
