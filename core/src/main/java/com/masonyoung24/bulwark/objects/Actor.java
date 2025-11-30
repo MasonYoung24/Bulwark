@@ -28,6 +28,7 @@ public abstract class Actor {
     private static final int HP_DECREMENT_VALUE = 1;
     private static final int MINIMUM_HP = 1;
     private static final float[] FROZEN_TINT_RGBA = {0.6f, 0.8f, 1.0f, 1.0f};
+    private static final float LOWER_SCALE_VALUE_BOUND_EXCLUSIVE = 0.0f;
 
     private int currentHP;
     private int maxHP;
@@ -345,6 +346,17 @@ public abstract class Actor {
                 FROZEN_TINT_RGBA[3]);
         } else {
             this.sprite.setColor(originalSpriteColor);
+        }
+    }
+
+    /**
+     * Scales the size of the Actor's sprite.
+     *
+     * @param scaleAmount the amount to scale by as a float
+     * */
+    public void scaleActorSize(float scaleAmount) {
+        if (scaleAmount > LOWER_SCALE_VALUE_BOUND_EXCLUSIVE) {
+            this.sprite.scale(scaleAmount);
         }
     }
 
