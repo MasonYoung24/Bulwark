@@ -41,6 +41,7 @@ public abstract class Actor {
     private float movementDirectionY;
     private List<StatusEffect> statusEffects;
     private boolean isFrozen;
+    private boolean isDamageTintActive;
 
     /**
      * Constructs an object of type Actor.
@@ -61,6 +62,7 @@ public abstract class Actor {
         this.movementDirection = new Vector3();
         this.statusEffects = new ArrayList<>();
         this.isFrozen = false;
+        this.isDamageTintActive = false;
     }
 
     /**
@@ -310,6 +312,19 @@ public abstract class Actor {
      * */
     private void removeTint() {
         this.sprite.setColor(originalSpriteColor);
+    }
+
+    /*
+     * Updates the colour of the Actor's sprite depending on the Actor's condition.
+    * */
+    private void updateSpriteColor() {
+        if (isDamageTintActive) {
+            this.sprite.setColor(Color.RED);
+        } else if (isFrozen) {
+            this.sprite.setColor(Color.BLUE);
+        } else {
+            removeTint();
+        }
     }
 
     /**
