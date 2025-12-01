@@ -148,7 +148,7 @@ public class EnemyManager {
      *
      * @param deltaTime the change in time as a float
      * */
-    private void updateEnemyStatusEffects(float deltaTime) {
+    public void updateEnemyStatusEffects(float deltaTime) {
         for (Enemy enemy : activeEnemies) {
             enemy.updateStatusEffect(deltaTime);
         }
