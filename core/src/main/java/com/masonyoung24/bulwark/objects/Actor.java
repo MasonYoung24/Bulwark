@@ -297,8 +297,10 @@ public abstract class Actor {
         Iterator<StatusEffect> statusEffectIterator = statusEffects.iterator();
         while (statusEffectIterator.hasNext()) {
             StatusEffect statusEffect = statusEffectIterator.next();
-            statusEffect.updateDuration(deltaTime);
+            statusEffect.updateTimeSinceApplication(deltaTime);
             if (statusEffect.isFinished()) {
+                statusEffect.clearEffect(this);
+                this.updateSpriteColor();
                 statusEffectIterator.remove();
             }
         }
