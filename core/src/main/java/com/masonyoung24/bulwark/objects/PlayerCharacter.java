@@ -46,11 +46,19 @@ public class PlayerCharacter extends Actor implements Shooter {
      * Gets the time since last shot as a float.
      *
      * @return the time since last shot as a float
-     *
      */
     @Override
     public float getTimeSinceLastShot() {
         return timeSinceLastShot;
+    }
+
+    /**
+     * Returns the fire rate modifier of the PlayerCharacter.
+     *
+     * @return the fire rate modifier as a float
+     */
+    public float getFireRateModifier() {
+        return fireRateModifier;
     }
 
     /**
