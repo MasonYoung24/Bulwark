@@ -30,6 +30,7 @@ public abstract class Ability {
     public void cast(Actor actor) {
         if (checkIfExecutable()) {
             execute(actor);
+            this.timeSinceCast = 0.0f;
         }
     }
 
