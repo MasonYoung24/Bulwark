@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AbilityManager {
 
-    private List<Ability> activeAbilities;
+    public List<Ability> activeAbilities;
 
     public AbilityManager() {
         this.activeAbilities = new ArrayList<>();
@@ -18,9 +19,14 @@ public class AbilityManager {
      * Updates each active ability.
      * */
     public void update(float deltaTime) {
-        if (activeAbilities != null && !activeAbilities.isEmpty()) {
-            for (Ability ability : activeAbilities) {
-                ability.update(deltaTime);
+        Iterator<Ability> iterator = activeAbilities.iterator();
+
+        while (iterator.hasNext()) {
+            Ability ability = iterator.next();
+            ability.update(deltaTime);
+            if (ability.getIsExpired()) {
+                ability.dispose();
+                iterator.remove();
             }
         }
     }
