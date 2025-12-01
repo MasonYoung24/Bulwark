@@ -38,6 +38,15 @@ public class EnemyManager {
     }
 
     /**
+     * Add a new Enemy to the list of active Enemies.
+     *
+     * @param newEnemy a new Enemy to add as an Enemy
+     * */
+    public void addEnemy(Enemy newEnemy) {
+        this.activeEnemies.add(newEnemy);
+    }
+
+    /**
      * Returns the number of enemies that have been slain.
      *
      * @return the number of enemies that have been slain as an int
@@ -176,7 +185,6 @@ public class EnemyManager {
             }
             spawnTimer = SPAWN_TIMER_START;
         }
-
     }
 
     /**
