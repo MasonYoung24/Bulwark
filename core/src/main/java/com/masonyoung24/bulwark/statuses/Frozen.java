@@ -22,6 +22,16 @@ public class Frozen extends StatusEffect {
     }
 
     /**
+     * Clears the effect from the Actor.
+     *
+     * @param actor the Actor to clear the effect on
+     * */
+    @Override
+    public void clearEffect(final Actor actor) {
+        actor.setIsFrozen(false);
+    }
+
+    /**
      * Returns the type of the status effect.
      *
      */

@@ -52,6 +52,13 @@ public abstract class StatusEffect {
     public abstract void applyEffect(Actor actor);
 
     /**
+     * Clears the effect from the Actor.
+     *
+     * @param actor the Actor to clear the effect on
+     * */
+    public abstract void clearEffect(Actor actor);
+
+    /**
      * Returns the type of the status effect.
      * */
     public abstract StatusEffectType getType();
