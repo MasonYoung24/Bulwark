@@ -23,7 +23,8 @@ public class Assets {
     public static final String ITEMS_SPRITE_SHEET = "sprites/ItemsSpriteSheet.png";
 
     // Abilities
-    public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frostAbilities.png";
+    public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frost/frostAbilities.png";
+    public static final String BLINK_ABILITY_SPRITE = "sprites/abilities/arcane/blink.png";
 
     // HUD
     public static final String HEALTH_HEART = "sprites/health.png";
@@ -69,6 +70,7 @@ public class Assets {
         manager.load(START_BUTTON, Texture.class);
         manager.load(MAIN_MENU_BACKGROUND, Texture.class);
         manager.load(FROST_ABILITIES_SPRITE_SHEET, Texture.class);
+        manager.load(BLINK_ABILITY_SPRITE, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
