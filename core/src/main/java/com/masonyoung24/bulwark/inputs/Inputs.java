@@ -6,8 +6,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.enums.AbilityName;
+import com.masonyoung24.bulwark.objects.AbilityManager;
 import com.masonyoung24.bulwark.objects.PlayerCharacter;
-import com.masonyoung24.bulwark.objects.Projectile;
 
 public class Inputs implements InputProcessor {
     private final OrthographicCamera camera;
@@ -17,13 +18,16 @@ public class Inputs implements InputProcessor {
     private boolean isFiring = false;
     private final Vector3 touchPoint = new Vector3();
     private final ProjectileManager projectileManager;
+    private final AbilityManager abilityManager;
 
-    public Inputs(OrthographicCamera camera,
+    public Inputs(final OrthographicCamera camera,
                   final PlayerCharacter playerCharacter,
-                  ProjectileManager projectileManager) {
+                  final ProjectileManager projectileManager,
+                  final AbilityManager abilityManager) {
         this.camera = camera;
         this.playerCharacter = playerCharacter;
         this.projectileManager = projectileManager;
+        this.abilityManager = abilityManager;
     }
 
     /**
@@ -72,7 +76,7 @@ public class Inputs implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.SPACE) {
-            playerCharacter.executeAbility("Blink");
+            playerCharacter.executeAbility(AbilityName.BLINK, abilityManager);
         }
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.moveLeftKeyPressed = true;
@@ -122,6 +126,9 @@ public class Inputs implements InputProcessor {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            playerCharacter.executeAbility(AbilityName.FROSTWAVE, abilityManager);
+        }
         if (button != Input.Buttons.LEFT || pointer > 0) {
             return false;
         }
