@@ -37,6 +37,11 @@ public abstract class Enemy extends Actor {
         return this.isLiving;
     }
 
+    /**
+     * Renders the Enemy sprite.
+     *
+     * @param batch the game's sprite batch as a SpriteBatch used to render the Enemy
+     * */
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // outline
