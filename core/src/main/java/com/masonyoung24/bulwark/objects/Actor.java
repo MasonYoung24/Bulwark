@@ -268,7 +268,7 @@ public abstract class Actor {
      * */
     public void executeAbility(AbilityName abilityName, AbilityManager abilityManager) {
         Ability abilityToExecute = abilities.get(abilityName);
-        if (abilityToExecute != null) {
+        if (abilityToExecute != null && checkIfAbilityIsExecutable(abilityName)) {
             abilityToExecute.cast(this);
             Ability newInstance = AbilityFactory.createAbility(abilityName, this);
             if (newInstance == null) {
