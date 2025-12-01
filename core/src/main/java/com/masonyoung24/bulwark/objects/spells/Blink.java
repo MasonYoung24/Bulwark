@@ -3,12 +3,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.objects.Actor;
 
+/**
+ * Represents the teleportation ability Blink.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class Blink extends Ability {
 
     private static final float BASE_BLINK_DISTANCE = 150.0f;
 
     private final float distance;
 
+    /**
+     * Creates an object of type Blink.
+     *
+     * @param damage the damage done by the ability as a float
+     * @param cooldown the cooldown of the ability as a float
+     * */
     public Blink(final float damage,
                  final float cooldown) {
         super(damage, cooldown);
