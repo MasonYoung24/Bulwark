@@ -33,4 +33,14 @@ public class Goblin extends Enemy {
             ),
             spawnPosition);
     }
+
+    /**
+     * Handles the death of an Enemy by flagging it as dead.
+     *
+     * @param enemyManager an enemy manager as an EnemyManager
+     */
+    @Override
+    public void handleDeath(final EnemyManager enemyManager) {
+
+    }
 }
