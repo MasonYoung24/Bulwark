@@ -229,7 +229,7 @@ public class EnemyManager {
         if (Math.random() < GOBLIN_SPAWN_CHANCE) {
             activeEnemies.add(new Goblin(
                 3,
-                3.0F,
+                1.5F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)));
         } else if (Math.random() < 0.40f) {
@@ -243,7 +243,7 @@ public class EnemyManager {
                 SlimeSize.LARGE,
                 2f,
                 6,
-                1.0F,
+                0.9F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)
             ));
