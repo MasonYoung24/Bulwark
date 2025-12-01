@@ -1,9 +1,10 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.objects.spells.Ability;
 
-import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import java.util.Iterator;
+import java.util.List;
 
 public class CollisionManager {
     private EnemyManager enemyManager;
@@ -46,6 +47,17 @@ public class CollisionManager {
                     enemy.takeDamage();
                     break;
                 }
+            }
+        }
+    }
+
+    /**
+     * Handles collisions between active abilities and enemies.
+     * */
+    public void detectAbilityCollisionWithEnemy(List<Ability> activeAbilities, List<Enemy> activeEnemies) {
+        for (final Ability ability : activeAbilities) {
+            for (Enemy enemy : activeEnemies) {
+                ability.handleCollision(enemy);
             }
         }
     }
