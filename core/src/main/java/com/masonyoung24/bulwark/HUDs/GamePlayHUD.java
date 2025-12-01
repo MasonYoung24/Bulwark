@@ -14,8 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.masonyoung24.bulwark.enums.AbilityName;
 import com.masonyoung24.bulwark.objects.SpriteUtils;
 import com.masonyoung24.bulwark.resources.Assets;
+
+import java.util.HashMap;
 
 /**
  * Represents the main gameplay HUD.
@@ -43,6 +46,7 @@ public class GamePlayHUD {
 
     // Abilities
     private Image frostWaveIcon;
+    private HashMap<AbilityName, Image> abilityIcons;
 
     /**
      * Constructs an object of type GamePlayHUD.
@@ -55,11 +59,15 @@ public class GamePlayHUD {
         minutes = GAME_START_TIME;
         hours = GAME_START_TIME;
 
+        abilityIcons = new HashMap<>();
+
         viewport = new FitViewport(
             Gdx.graphics.getWidth(),
             Gdx.graphics.getHeight(),
             new OrthographicCamera());
-        stage = new Stage(viewport, spriteBatch);
+
+        SpriteBatch hudBatch = new SpriteBatch();
+        stage = new Stage(viewport, hudBatch);
 
         countdownLabel = new Label(String.format("%d:%d:%03d", hours, minutes, seconds), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIMER", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -71,6 +79,7 @@ public class GamePlayHUD {
             assetManager.get(Assets.FROST_ABILITIES_SPRITE_SHEET), 1, 0, 5, 5);
 
         this.frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
+        abilityIcons.put(AbilityName.FROSTWAVE, frostWaveIcon);
 
         //define a table used to organize hud's labels
         this.table = new Table();
@@ -102,6 +111,20 @@ public class GamePlayHUD {
         this.enemiesSlain = enemiesSlain;
         enemiesSlainLabel.setText(String.format("%d", this.enemiesSlain));
     }
+
+    /**
+     * Sets the FrostWave icons to indicate if the ability is ready or not.
+     *
+     * @param ready true if the ability is ready to be cast, otherwise false
+     * */
+    public void setAbilityReady(AbilityName abilityName, boolean ready) {
+        if (ready) {
+            abilityIcons.get(abilityName).setColor(1f, 1f, 1f, 1f);
+        } else {
+            abilityIcons.get(abilityName).setColor(0.3f, 0.3f, 0.3f, 1f);
+        }
+    }
+
 
     /**
      * Updates the time displayed on the game timer.
