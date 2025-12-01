@@ -77,9 +77,13 @@ public class GamePlayHUD {
         healthValue = new Label(String.format("%d", playerHealth), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Sprite frostWaveSprite = SpriteUtils.getSpriteFromSpriteSheet(
             assetManager.get(Assets.FROST_ABILITIES_SPRITE_SHEET), 1, 0, 5, 5);
+        Sprite blinkSprite = SpriteUtils.getSpriteFromSpriteSheet(
+            assetManager.get(Assets.BLINK_ABILITY_SPRITE), 0, 0, 1, 1);
+
 
         this.frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
         abilityIcons.put(AbilityName.FROSTWAVE, frostWaveIcon);
+        abilityIcons.put(AbilityName.BLINK, new Image(new TextureRegionDrawable(blinkSprite)));
 
         //define a table used to organize hud's labels
         this.table = new Table();
@@ -102,6 +106,7 @@ public class GamePlayHUD {
         abilitiesTable.bottom();
         abilitiesTable.setFillParent(true);
 
+        abilitiesTable.add(abilityIcons.get(AbilityName.BLINK)).size(50, 50).pad(10);;
         abilitiesTable.add(frostWaveIcon).size(50, 50).pad(10);
 
         stage.addActor(abilitiesTable);
