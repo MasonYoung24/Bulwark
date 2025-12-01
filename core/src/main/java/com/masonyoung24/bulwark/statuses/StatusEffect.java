@@ -14,6 +14,11 @@ public abstract class StatusEffect {
 
     private float duration;
 
+    /**
+     * Creates an object of type StatusEffect.
+     *
+     * @param duration the duration of the status effect as a float
+     * */
     public StatusEffect(float duration) {
         if (duration > MINIMUM_DURATION) {
             this.duration = duration;
