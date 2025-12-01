@@ -11,8 +11,6 @@ import com.masonyoung24.bulwark.statuses.StatusEffect;
 import java.util.*;
 
 public class EnemyManager {
-    private final List<Enemy> activeEnemies;
-    public static int enemiesSlain = 0;
     public static final Random RANDOM = new Random();
     public static final float MINIMUM_SPAWN_POSITION_X_COORDINATE = 0.0f;
     public static final float MINIMUM_SPAWN_POSITION_Y_COORDINATE = 0.0f;
@@ -26,13 +24,22 @@ public class EnemyManager {
 
     private final AssetManager assetManager;
     private float spawnTimer;
+    private final List<Enemy> activeEnemies;
+    private final List<Enemy> enemiesToAdd;
+    public static int enemiesSlain = 0;
 
     public EnemyManager(final AssetManager assetManager) {
-        activeEnemies = new ArrayList<>();
+        this.activeEnemies = new ArrayList<>();
+        this.enemiesToAdd = new ArrayList<>();
         this.assetManager = assetManager;
         this.spawnTimer = SPAWN_TIMER_START;
     }
 
+    /**
+     * Returns the active game enemies.
+     *
+     * @return a list of active game enemies as a List<Enemy>
+     * */
     public List<Enemy> getActiveEnemies() {
         return activeEnemies;
     }
@@ -44,6 +51,16 @@ public class EnemyManager {
      * */
     public void addEnemy(Enemy newEnemy) {
         this.activeEnemies.add(newEnemy);
+    }
+
+    /**
+     * Adds enemies to the array of active enemies.
+     * */
+    public void addEnemyToActiveEnemies() {
+        if (!this.enemiesToAdd.isEmpty()) {
+            this.activeEnemies.addAll(this.enemiesToAdd);
+            enemiesToAdd.clear();
+        }
     }
 
     /**
@@ -64,6 +81,7 @@ public class EnemyManager {
             Enemy enemy = iterator.next();
             if (!enemy.getIsLiving()) {
                 iterator.remove();
+                enemy.handleDeath(this);
                 incrementEnemiesSlain();
             }
         }
@@ -223,13 +241,37 @@ public class EnemyManager {
         } else {
             activeEnemies.add(new Slime(
                 SlimeSize.LARGE,
+                2f,
                 6,
-                3.0F,
+                1.0F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)
             ));
         }
     }
+
+    /**
+     * Spawns a slime and prepares it to be activated.
+     * */
+    public void spawnSlime(int numberToSpawn,
+                           SlimeSize size,
+                           float scaleFactor,
+                           int health,
+                           float speed,
+                           Vector3 spawnPosition) {
+        for (int i = 0; i < numberToSpawn; i++) {
+            enemiesToAdd.add(new Slime(
+                size,
+                scaleFactor,
+                health,
+                speed,
+                assetManager,
+                spawnPosition
+            ));
+        }
+
+    }
+
 
     /**
      * Detects and handles collisions between two balls.

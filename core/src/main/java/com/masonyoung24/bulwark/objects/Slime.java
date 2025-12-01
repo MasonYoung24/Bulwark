@@ -1,7 +1,6 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.enums.SlimeSize;
 import com.masonyoung24.bulwark.resources.Assets;
@@ -9,6 +8,10 @@ import com.masonyoung24.bulwark.resources.Assets;
 public class Slime extends Enemy {
 
     private static final float DEFAULT_SCALE_SIZE = 2.0f;
+    private static final int SPAWN_RADIUS_MULTIPLIER = 2;
+
+    private final SlimeSize size;
+    private final float scaleFactor;
 
     /**
      * Constructs an object of type Slime.
@@ -20,7 +23,8 @@ public class Slime extends Enemy {
      *
      */
     public Slime(
-        final SlimeSize slimeSize,
+        final SlimeSize size,
+        final float scaleFactor,
         final int healthPoints,
         final float speed,
         final AssetManager assetManager,
@@ -32,6 +36,64 @@ public class Slime extends Enemy {
             Enemy.SPRITE_SHEET_COLUMNS,
             Enemy.SPRITE_SHEET_ROWS
         ), spawnPosition);
-        this.scaleActorSize(DEFAULT_SCALE_SIZE);
+        this.scaleFactor = scaleFactor;
+        this.scaleActorSize(scaleFactor);
+        this.size = size;
+    }
+
+    /**
+     * Returns the size of the slime.
+     *
+     * @return the size of the slime as a SlimeSize
+     * */
+    public SlimeSize getSlimeSize() {
+        return this.size;
+    }
+
+    /**
+     * Splits a slime into multiple slimes depending on size.
+     *
+     * @param enemyManager the enemy manager that handles spawning the slimes as an Enemy Manager
+     * */
+    private void split(EnemyManager enemyManager) {
+        switch(this.getSlimeSize()) {
+            case LARGE:
+                for (int i = 0; i < 2; i++) {
+                    enemyManager.spawnSlime(1, SlimeSize.MEDIUM, 0.5f, 2, 2.0f, getRandomOffsetSpawnPosition());
+                }
+                break;
+            case MEDIUM:
+                for (int i = 0; i < 3; i++) {
+                    enemyManager.spawnSlime(1, SlimeSize.SMALL, 0.2f, 1, 2.5f, getRandomOffsetSpawnPosition());
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Generates a randomly offset spawn position.
+     *
+     * @return the randomly offset spawn position as a Vector3
+     * */
+    private Vector3 getRandomOffsetSpawnPosition() {
+        float radius = 25f;
+
+        float offsetX = (float) (Math.random() * radius * SPAWN_RADIUS_MULTIPLIER - radius);
+        float offsetY = (float) (Math.random() * radius * SPAWN_RADIUS_MULTIPLIER - radius);
+
+        return this.getPosition().cpy().add(offsetX, offsetY, 0);
+    }
+
+
+    /**
+     * Handles the death of an Enemy by flagging it as dead.
+     *
+     * @param enemyManager an enemy manager as an EnemyManager
+     */
+    @Override
+    public void handleDeath(final EnemyManager enemyManager) {
+        split(enemyManager);
     }
 }
