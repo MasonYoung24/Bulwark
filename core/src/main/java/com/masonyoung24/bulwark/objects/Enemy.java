@@ -69,4 +69,11 @@ public abstract class Enemy extends Actor {
     public void handleDeath() {
         this.isLiving = false;
     }
+
+    /**
+     * Handles the death of an Enemy by flagging it as dead.
+     *
+     * @param enemyManager an enemy manager as an EnemyManager
+     */
+    public abstract void handleDeath(EnemyManager enemyManager);
 }
