@@ -38,9 +38,7 @@ public abstract class Enemy extends Actor {
     }
 
     public void render(SpriteBatch batch) {
-        batch.begin();
         sprite.draw(batch);
-        batch.end();
 //        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // outline
 //        shapeRenderer.setColor(Color.RED);
 //
