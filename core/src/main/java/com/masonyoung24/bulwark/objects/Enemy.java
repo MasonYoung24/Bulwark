@@ -1,17 +1,9 @@
 package com.masonyoung24.bulwark.objects;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.masonyoung24.bulwark.statuses.StatusEffect;
-import jdk.jshell.Snippet;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_ROWS = 13;
@@ -49,13 +41,13 @@ public abstract class Enemy extends Actor {
         batch.begin();
         sprite.draw(batch);
         batch.end();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // outline
-        shapeRenderer.setColor(Color.RED);
-
-        Rectangle bounds = getSpriteBoundingBox();
-        shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
-
-        shapeRenderer.end();
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // outline
+//        shapeRenderer.setColor(Color.RED);
+//
+//        Rectangle bounds = getSpriteBoundingBox();
+//        shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+//
+//        shapeRenderer.end();
     }
 
     /**
@@ -64,8 +56,10 @@ public abstract class Enemy extends Actor {
      * @param targetPosition the target position to move the Actor to as a Vector3
      * */
     public void move(Vector3 targetPosition) {
-        Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
-        this.sprite.translate(direction.x, direction.y);
+        if (getIsFrozen()) {
+            Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+            this.sprite.translate(direction.x, direction.y);
+        }
     }
 
     /**
