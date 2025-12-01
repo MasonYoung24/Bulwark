@@ -52,12 +52,11 @@ public class MainMenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         table.center();
-        table.setDebug(true);
 
         Cell<ImageButton> startButtonCell = table.add(startButton).
             width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
             .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
-        startButtonCell.padTop(300f);
+        startButtonCell.padTop(400f);
         stage.addActor(table);
 
 
