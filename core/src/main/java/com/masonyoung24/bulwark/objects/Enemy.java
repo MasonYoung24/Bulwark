@@ -56,7 +56,7 @@ public abstract class Enemy extends Actor {
     public void move(Vector3 targetPosition) {
         if (getIsFrozen()) {
             Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
-            this.sprite.translate(direction.x, direction.y);
+            this.sprite.translate(direction.x * speed, direction.y * speed);
         }
     }
 
