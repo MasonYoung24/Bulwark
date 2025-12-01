@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.enums.SlimeSize;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 import java.util.*;
@@ -205,12 +206,20 @@ public class EnemyManager {
                 3.0F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)));
-        } else {
+        } else if (Math.random() < 0.40f) {
             activeEnemies.add(new SkeletonWizard(
                 3,
                 3.0F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)));
+        } else {
+            activeEnemies.add(new Slime(
+                SlimeSize.LARGE,
+                6,
+                3.0F,
+                assetManager,
+                determineSpawnPosition(viewportWidth, viewportHeight)
+            ));
         }
     }
 
