@@ -109,6 +109,18 @@ public abstract class Actor {
     }
 
     /**
+     * Sets the current HP of the Actor.
+     *
+     * @param newHP the new HP to set the current HP to as an int
+     * */
+    public void setCurrentHP(int newHP) {
+        if (newHP > MINIMUM_HP && newHP < this.maxHP) {
+            this.currentHP = newHP;
+        }
+
+    }
+
+    /**
      * Draws the Actor's sprite.
      *
      * @param batch the game's sprite batch as a SpriteBatch
