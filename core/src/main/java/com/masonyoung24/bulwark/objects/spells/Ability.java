@@ -33,11 +33,25 @@ public abstract class Ability {
         }
     }
 
+    public void handleCollision(Actor actor) {
+    }
+
     /**
      * Checks if the ability can be cast.
      * */
     public boolean checkIfExecutable() {
         return timeSinceCast >= cooldown;
+    }
+
+    /**
+     * Sets the time since the ability has been last cast.
+     *
+     * @param deltaTime the time since the ability has last been cast as a float
+     * */
+    public void setTimeSinceLastCast(float deltaTime) {
+        if (deltaTime >= 0) {
+            this.timeSinceCast = timeSinceCast + deltaTime;
+        }
     }
 
     /**
@@ -79,5 +93,9 @@ public abstract class Ability {
      * */
     public void setIsExpired(Boolean expiredStatus) {
         this.isExpired = expiredStatus;
+    }
+
+    public void affect(Actor actor) {
+
     }
 }
