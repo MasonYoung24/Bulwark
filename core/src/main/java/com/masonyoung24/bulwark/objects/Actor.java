@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
+import com.masonyoung24.bulwark.enums.AbilityName;
 import com.masonyoung24.bulwark.enums.Direction;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 import com.masonyoung24.bulwark.objects.spells.AbilityFactory;
@@ -35,7 +36,7 @@ public abstract class Actor {
     protected final float speed;
     public final Sprite sprite;
     private Direction directionFacing;
-    private final HashMap<String, Ability> abilities;
+    private final HashMap<AbilityName, Ability> abilities;
     private Timer.Task tintTask;
     private final Color originalSpriteColor;
     private Vector3 movementDirection;
@@ -232,7 +233,7 @@ public abstract class Actor {
      * @param ability the Ability to add
      * @throws IllegalArgumentException if provided ability name or Ability object are null
      * */
-    public void addAbility(String abilityName, Ability ability) {
+    public void addAbility(AbilityName abilityName, Ability ability) {
         if (ability == null) {
             throw new IllegalArgumentException("Ability cannot be null");
         }
@@ -250,11 +251,22 @@ public abstract class Actor {
     }
 
     /**
+     * Checks if an ability is executable.
+     *
+     * @param ability the name of the ability as an AbilityName
+     * @return true if the ability is executable, otherwise false
+     * */
+    public boolean checkIfAbilityIsExecutable(AbilityName ability) {
+        Ability abilityToCheck = abilities.get(ability);
+        return abilityToCheck.checkIfExecutable();
+    }
+
+    /**
      * Executes an ability known to the actor.
      *
      * @param abilityName the Ability to execute
      * */
-    public void executeAbility(String abilityName, AbilityManager abilityManager) {
+    public void executeAbility(AbilityName abilityName, AbilityManager abilityManager) {
         Ability abilityToExecute = abilities.get(abilityName);
         if (abilityToExecute != null) {
             abilityToExecute.cast(this);
