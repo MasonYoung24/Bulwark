@@ -7,8 +7,8 @@ import com.masonyoung24.bulwark.objects.spells.FrostWave;
 import com.masonyoung24.bulwark.resources.Assets;
 
 public class PlayerCharacter extends Actor implements Shooter {
-    private static final int CHARACTER_TARGET_ROW = 2;
-    private static final int CHARACTER_TARGET_COLUMN = 3;
+    private static final int CHARACTER_TARGET_ROW = 4;
+    private static final int CHARACTER_TARGET_COLUMN = 1;
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
     public static Vector3 DEFAULT_SPAWN_POSITION = new Vector3(200, 200, 0);
