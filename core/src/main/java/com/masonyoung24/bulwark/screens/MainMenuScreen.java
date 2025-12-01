@@ -37,7 +37,7 @@ public class MainMenuScreen implements Screen {
      */
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport(), game.getSpriteBatch());
+        stage = new Stage(game.getViewport(), game.getSpriteBatch());
 
         Texture backgroundTexture = game.assets.getTexture(Assets.MAIN_MENU_BACKGROUND);
         Image backgroundImage = new Image(backgroundTexture);
