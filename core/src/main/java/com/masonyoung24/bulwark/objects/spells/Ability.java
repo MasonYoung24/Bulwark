@@ -3,6 +3,12 @@ package com.masonyoung24.bulwark.objects.spells;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Actor;
 
+/**
+ * Represents an ability.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public abstract class Ability {
     private float damage;
     private float cooldown;
