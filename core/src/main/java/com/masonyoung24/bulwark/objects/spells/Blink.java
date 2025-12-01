@@ -4,12 +4,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.objects.Actor;
 
 public class Blink extends Ability {
+
+    private static final float BASE_BLINK_DISTANCE = 150.0f;
+
     private final float distance;
 
     public Blink(final float damage,
                  final float cooldown) {
         super(damage, cooldown);
-        this.distance = 100;
+        this.distance = BASE_BLINK_DISTANCE;
     }
 
     /**
