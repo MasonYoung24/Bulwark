@@ -13,6 +13,7 @@ public abstract class StatusEffect {
     private static final float MINIMUM_DURATION = 0.0f;
 
     private float duration;
+    private float timeSinceApplication;
 
     /**
      * Creates an object of type StatusEffect.
@@ -25,6 +26,7 @@ public abstract class StatusEffect {
         } else {
             this.duration = DEFAULT_DURATION;
         }
+        this.timeSinceApplication = MINIMUM_DURATION;
     }
 
     /**
@@ -33,14 +35,14 @@ public abstract class StatusEffect {
      * @return true if the status effect is finished, otherwise false as a boolean
      * */
     public boolean isFinished() {
-        return duration <= MINIMUM_DURATION;
+        return timeSinceApplication >= duration;
     }
 
     /**
      * Updates the status effect's remaining duration.
      * */
-    public void updateDuration(float deltaTime) {
-        this.duration -= deltaTime;
+    public void updateTimeSinceApplication(float deltaTime) {
+        this.timeSinceApplication += deltaTime;
     }
 
 
