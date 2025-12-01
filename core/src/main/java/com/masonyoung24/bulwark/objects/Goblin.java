@@ -4,6 +4,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents a Goblin.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class Goblin extends Enemy {
     /**
      * The row in the spritesheet with the desired Goblin sprite
@@ -15,7 +21,7 @@ public class Goblin extends Enemy {
     private static final int GOBLIN_TARGET_COLUMN = 2;
 
     /**
-     * Constructs an object of type Bird.
+     * Constructs an object of type Goblin.
      *
      * @param healthPoints the health of the goblin as an int
      * @param speed the movement speed of the goblin as a float
