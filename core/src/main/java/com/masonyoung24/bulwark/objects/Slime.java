@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.enums.SlimeSize;
 import com.masonyoung24.bulwark.resources.Assets;
 
 public class Slime extends Enemy {
@@ -18,10 +19,12 @@ public class Slime extends Enemy {
      * @param spawnPosition the spawn position of the Slime as a Vector3
      *
      */
-    public Slime(final int healthPoints,
-                 final float speed,
-                 final AssetManager assetManager,
-                 final Vector3 spawnPosition) {
+    public Slime(
+        final SlimeSize slimeSize,
+        final int healthPoints,
+        final float speed,
+        final AssetManager assetManager,
+        final Vector3 spawnPosition) {
         super(healthPoints, speed, SpriteUtils.getSpriteFromSpriteSheet(
             assetManager.get(Assets.MONSTERS_SPRITE_SHEET),
             2,
