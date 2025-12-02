@@ -12,19 +12,19 @@ import com.masonyoung24.bulwark.resources.Assets;
  */
 public class SkeletonWizard extends RangedEnemy {
     /**
-     * The row in the spritesheet with the desired Goblin sprite
+     * The row in the spritesheet with the desired skeleton wizard sprite
      * */
     private static final int SKELETON_WIZARD_TARGET_ROW = 4;
     /**
-     * The column in the spritesheet with the desired Goblin sprite
+     * The column in the spritesheet with the desired skeleton wizard sprite
      * */
     private static final int SKELETON_WIZARD_TARGET_COLUMN = 2;
 
     /**
-     * Constructs an object of type Bird.
+     * Constructs an object of type SkeletonWizard.
      *
-     * @param healthPoints the health of the goblin as an int
-     * @param speed the movement speed of the goblin as a float
+     * @param healthPoints the health of the skeleton wizard as an int
+     * @param speed the movement speed of the skeleton wizard  as a float
      * @param assetManager the AssetManger used to get the sprite
      * @param spawnPosition the spawn position as a Vector3
      * */
