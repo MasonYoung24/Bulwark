@@ -4,6 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Represents and Enemy.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_ROWS = 13;
     public static final int SPRITE_SHEET_COLUMNS = 12;
