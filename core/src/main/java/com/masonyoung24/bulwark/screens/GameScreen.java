@@ -14,6 +14,7 @@ import com.masonyoung24.bulwark.HUDs.GamePlayHUD;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.data.GameSaveData;
 import com.masonyoung24.bulwark.data.SaveLoadManager;
+import com.masonyoung24.bulwark.enums.AbilityName;
 import com.masonyoung24.bulwark.inputs.Inputs;
 import com.masonyoung24.bulwark.objects.*;
 import com.masonyoung24.bulwark.resources.Assets;
@@ -121,7 +122,7 @@ public class GameScreen implements Screen {
         }
         gamePlayHUD.updateGameTimer(deltaTime);
         gamePlayHUD.updatePlayerHealth(playerCharacter.getCurrentHP());
-
+        updateAbilityIconReadyState();
     }
 
     /**
@@ -156,6 +157,20 @@ public class GameScreen implements Screen {
             save();
             autosaveTimer = 0;
         }
+    }
+
+    /**
+     * Updates the ability icons to reflect if they are ready for execution.
+     * */
+    private void updateAbilityIconReadyState() {
+        gamePlayHUD.setAbilityReady(
+            AbilityName.FROSTWAVE,
+            playerCharacter.checkIfAbilityIsExecutable(AbilityName.FROSTWAVE)
+        );
+        gamePlayHUD.setAbilityReady(
+            AbilityName.BLINK,
+            playerCharacter.checkIfAbilityIsExecutable(AbilityName.BLINK)
+        );
     }
 
     @Override
