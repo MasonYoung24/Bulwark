@@ -1,10 +1,16 @@
 package com.masonyoung24.bulwark.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -19,7 +25,7 @@ import com.masonyoung24.bulwark.inputs.Inputs;
 import com.masonyoung24.bulwark.objects.*;
 import com.masonyoung24.bulwark.resources.Assets;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen, InputProcessor {
     public static final float UNIT_SCALE = 1f / 32f;
 
     private final Bulwark game;
@@ -35,6 +41,12 @@ public class GameScreen implements Screen {
     private final AssetManager assetManager;
     private final AbilityManager abilityManager;
     private float autosaveTimer = 0;
+    private boolean moveLeftKeyPressed = false;
+    private boolean moveRightKeyPressed = false;
+    private boolean isFiring = false;
+    private final Vector3 touchPoint = new Vector3();
+    private final BitmapFont pauseFont;
+    private boolean isPaused;
 
 
     public GameScreen(Bulwark game, boolean loadSave) {
@@ -43,6 +55,11 @@ public class GameScreen implements Screen {
         this.projectileManager = ProjectileManager.getInstance();
         this.enemyManager = new EnemyManager(assetManager);
         this.abilityManager = new AbilityManager();
+        this.isPaused = false;
+
+        pauseFont = new BitmapFont();
+        pauseFont.getData().setScale(3f);
+        pauseFont.setColor(Color.RED);
 
         if (loadSave && SaveLoadManager.saveExists()) {
             GameSaveData save = SaveLoadManager.loadGame();
@@ -70,7 +87,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(inputs);
+        Gdx.input.setInputProcessor(this);
         this.mapRenderer.setMap(assetManager.get(Assets.MAIN_TILESET));
     }
 
@@ -80,7 +97,7 @@ public class GameScreen implements Screen {
         this.mapRenderer.setView(this.camera);
         this.mapRenderer.render();
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
-        inputs.handleMovementInput();
+        this.handleMovementInput();
         update(v);
         gamePlayHUD.draw();
         projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
@@ -93,18 +110,22 @@ public class GameScreen implements Screen {
         gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
         game.getSpriteBatch().setProjectionMatrix(camera.combined);
         game.getSpriteBatch().begin();
-        inputs.updateDirectionPlayerFacing();
+        this.updateDirectionPlayerFacing();
         projectileManager.render(game.getSpriteBatch());
         playerCharacter.render(game.getSpriteBatch());
         abilityManager.render(game.getSpriteBatch());
         enemyManager.render(game.getSpriteBatch());
         game.getSpriteBatch().end();
+
+        if (this.isPaused) {
+            renderGamePausedOverlay();
+        }
     }
 
     private void update(float deltaTime) {
         autoSave(deltaTime);
 
-        if (inputs.getIsFiring()) {
+        if (this.getIsFiring()) {
             handlePlayerFiring();
         }
         playerCharacter.updateTimeSinceLastShot(deltaTime);
@@ -160,6 +181,54 @@ public class GameScreen implements Screen {
     }
 
     /**
+     * Pause the game.
+     * */
+    private void pauseGame() {
+        this.isPaused = true;
+    }
+
+    /**
+     * Renders the game paused overlay.
+     **/
+    private void renderGamePausedOverlay() {
+        ShapeRenderer shapeRenderer = game.getShapeRenderer();
+        SpriteBatch spriteBatch = game.getSpriteBatch();
+
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0, 0, 0, 0.7f);
+        shapeRenderer.rect(0, 0, viewport.getScreenWidth(), viewport.getScreenHeight());
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
+        game.getSpriteBatch().begin();
+
+        String continueText = "CONTINUE";
+        String saveText = "SAVE & CONTINUE";
+
+        float screenWidth = viewport.getScreenWidth();
+        float screenHeight = viewport.getScreenHeight();
+
+        // Center horizontally
+        float saveX = (screenWidth - pauseFont.getRegion().getRegionWidth()) / 2f;
+
+        // Position vertically
+        float continueY = screenHeight * 0.60f;   // 60% up screen
+        float saveY = screenHeight * 0.45f;   // lower
+
+        pauseFont.draw(spriteBatch, continueText,
+            screenWidth / 2f - (pauseFont.getSpaceXadvance() * continueText.length()),
+            continueY);
+
+        pauseFont.draw(spriteBatch, saveText,
+            screenWidth / 2f - (pauseFont.getSpaceXadvance() * saveText.length()),
+            saveY);
+
+        spriteBatch.end();
+    }
+
+    /**
      * Updates the ability icons to reflect if they are ready for execution.
      * */
     private void updateAbilityIconReadyState() {
@@ -197,5 +266,179 @@ public class GameScreen implements Screen {
     public void dispose() {
         this.mapRenderer.dispose();
         this.projectileManager.dispose();
+    }
+
+    /**
+     * Returns the coordinates of the touch point as an array of floats
+     * */
+    public boolean getIsFiring() {
+        return isFiring;
+    }
+
+    public void handleMovementInput() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            playerCharacter.moveLeft();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            playerCharacter.moveRight();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            playerCharacter.moveUp();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            playerCharacter.moveDown();
+        }
+    }
+
+    public void updateDirectionPlayerFacing() {
+        if (moveLeftKeyPressed && !moveRightKeyPressed) {
+            playerCharacter.faceLeft();
+        } else if (moveRightKeyPressed && !moveLeftKeyPressed) {
+            playerCharacter.faceRight();
+        }
+    }
+
+    /**
+     * Called when a key was pressed
+     *
+     * @param keycode one of the constants in {@link Input.Keys}
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.SPACE) {
+            playerCharacter.executeAbility(AbilityName.BLINK, abilityManager);
+        }
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
+            this.moveLeftKeyPressed = true;
+        }
+        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
+            this.moveRightKeyPressed = true;
+        }
+        if (keycode == Input.Keys.ESCAPE) {
+            if (!this.isPaused) {
+                pauseGame();
+            } else {
+                isPaused = false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Called when a key was released
+     *
+     * @param keycode one of the constants in {@link Input.Keys}
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean keyUp(int keycode) {
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
+            this.moveLeftKeyPressed = false;
+        }
+        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
+            this.moveRightKeyPressed = false;
+        }
+        return false;
+    }
+
+    /**
+     * Called when a key was typed
+     *
+     * @param character The character
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    /**
+     * Called when the screen was touched or a mouse button was pressed.
+     *
+     * @param screenX The x coordinate, origin is in the upper left corner
+     * @param screenY The y coordinate, origin is in the upper left corner
+     * @param pointer the pointer for the event.
+     * @param button  the button
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            playerCharacter.executeAbility(AbilityName.FROSTWAVE, abilityManager);
+        }
+        if (button != Input.Buttons.LEFT || pointer > 0) {
+            return false;
+        }
+
+        isFiring = true;
+        return true;
+    }
+
+    /**
+     * Called when a finger was lifted or a mouse button was released.
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer the pointer for the event.
+     * @param button  the button
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        isFiring = false;
+        return false;
+    }
+
+    /**
+     * Called when the touch gesture is cancelled. Reason may be from OS interruption to touch becoming a large surface such as
+     * the user cheek. Relevant on Android and iOS only.
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer the pointer for the event.
+     * @param button  the button
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    /**
+     * Called when a finger or the mouse was dragged.
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer the pointer for the event.
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    /**
+     * Called when the mouse was moved without any buttons being pressed. Will not be called on iOS.
+     *
+     * @param screenX
+     * @param screenY
+     * @return whether the input was processed
+     */
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    /**
+     * Called when the mouse wheel was scrolled. Will not be called on iOS.
+     *
+     * @param amountX the horizontal scroll amount, negative or positive depending on the direction the wheel was scrolled.
+     * @param amountY the vertical scroll amount, negative or positive depending on the direction the wheel was scrolled.
+     * @return whether the input was processed.
+     */
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        return false;
     }
 }
