@@ -2,14 +2,12 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 
 public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_ROWS = 13;
     public static final int SPRITE_SHEET_COLUMNS = 12;
 
-    private final ShapeRenderer shapeRenderer;
     private boolean isLiving;
 
 
@@ -27,7 +25,6 @@ public abstract class Enemy extends Actor {
                  Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
         this.isLiving = true;
-        shapeRenderer = new ShapeRenderer();
     }
 
     /**
@@ -44,13 +41,6 @@ public abstract class Enemy extends Actor {
      * */
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line); // outline
-//        shapeRenderer.setColor(Color.RED);
-//
-//        Rectangle bounds = getSpriteBoundingBox();
-//        shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
-//
-//        shapeRenderer.end();
     }
 
     /**
