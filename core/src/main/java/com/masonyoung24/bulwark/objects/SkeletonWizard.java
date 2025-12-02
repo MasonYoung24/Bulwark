@@ -38,4 +38,14 @@ public class SkeletonWizard extends RangedEnemy {
             spawnPosition,
             assetManager);
     }
+
+    /**
+     * Handles the death of an Enemy by flagging it as dead.
+     *
+     * @param enemyManager an enemy manager as an EnemyManager
+     */
+    @Override
+    public void handleDeath(final EnemyManager enemyManager) {
+
+    }
 }
