@@ -43,7 +43,7 @@ public class AbilityManager {
     /**
      * Renders each active ability.
      * */
-    public void render(SpriteBatch spriteBatch) {
+    public void render(final SpriteBatch spriteBatch) {
         if (activeAbilities != null && !activeAbilities.isEmpty()) {
             for (Ability ability : activeAbilities) {
                 ability.render(spriteBatch);
@@ -54,7 +54,7 @@ public class AbilityManager {
     /**
      * Adds a new ability to the list of active abilities.
      * */
-    public void add(Ability ability) {
+    public void add(final Ability ability) {
         activeAbilities.add(ability);
     }
 }
