@@ -154,6 +154,15 @@ public class GamePlayHUD {
     }
 
     /**
+     * Updates the HUD to display the player's health.
+     *
+     * @param playerHealth the current health of the player as an int
+     * */
+    public void updatePlayerHealth(final int playerHealth) {
+        healthValue.setText(String.format("%d", playerHealth));
+    }
+
+    /**
      * Returns the game duration in minutes.
      *
      * @return the game duration in minutes as an int
