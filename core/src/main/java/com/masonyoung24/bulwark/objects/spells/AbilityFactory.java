@@ -17,7 +17,7 @@ public final class AbilityFactory {
     private AbilityFactory() {
     }
 
-    public static Ability createAbility(AbilityName abilityName, Actor actor) {
+    public static Ability createAbility(final AbilityName abilityName, final Actor actor) {
 
         switch (abilityName) {
             case FROSTWAVE: {
