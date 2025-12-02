@@ -17,6 +17,12 @@ public final class AbilityFactory {
     private AbilityFactory() {
     }
 
+    /**
+     * Creates an ability.
+     *
+     * @param abilityName the name of the ability to make as an AbilityName
+     * @param actor the Actor that will execute the ability
+     * */
     public static Ability createAbility(final AbilityName abilityName, final Actor actor) {
 
         switch (abilityName) {
