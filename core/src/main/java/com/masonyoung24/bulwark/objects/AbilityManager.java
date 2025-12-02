@@ -7,10 +7,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Represents and ability manager.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class AbilityManager {
 
     public List<Ability> activeAbilities;
 
+    /**
+     * Creates an object of type AbilityManager.
+     * */
     public AbilityManager() {
         this.activeAbilities = new ArrayList<>();
     }
