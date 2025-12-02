@@ -4,6 +4,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents a ranged skeleton wizard enemy.
+ *
+ * @author Mason Young
+ * @version 2025
+ */
 public class SkeletonWizard extends RangedEnemy {
     /**
      * The row in the spritesheet with the desired Goblin sprite
