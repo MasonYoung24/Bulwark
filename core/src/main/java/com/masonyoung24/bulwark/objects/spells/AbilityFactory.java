@@ -3,8 +3,17 @@ package com.masonyoung24.bulwark.objects.spells;
 import com.masonyoung24.bulwark.enums.AbilityName;
 import com.masonyoung24.bulwark.objects.Actor;
 
+/**
+ * Represents a factory to create abilities.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public final class AbilityFactory {
 
+    /*
+     * Constructs an object of type AbilityFactory.
+     * */
     private AbilityFactory() {
     }
 
