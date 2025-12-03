@@ -242,7 +242,7 @@ public class EnemyManager {
             activeEnemies.add(new Slime(
                 SlimeSize.LARGE,
                 2f,
-                6,
+                5,
                 0.9F,
                 assetManager,
                 determineSpawnPosition(viewportWidth, viewportHeight)
