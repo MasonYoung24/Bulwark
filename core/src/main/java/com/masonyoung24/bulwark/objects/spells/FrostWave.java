@@ -93,7 +93,7 @@ public class FrostWave extends Ability implements CollidableAbility {
      */
     @Override
     public void affect(final Actor actor) {
-        StatusEffect frozenStatus = new Frozen(50.0f);
+        StatusEffect frozenStatus = new Frozen(2.0f);
         actor.addStatusEffect(frozenStatus);
         actor.takeDamage();
     }
