@@ -15,6 +15,14 @@ public class Slime extends Enemy {
 
     private static final float DEFAULT_SCALE_SIZE = 2.0f;
     private static final int SPAWN_RADIUS_MULTIPLIER = 2;
+    private static final int LARGE_SLIME_SPLIT_COUNT = 2;
+    private static final int MEDIUM_SLIME_SPLIT_COUNT = 3;
+    private static final int LARGE_TO_MEDIUM_HP = 1;
+    private static final float LARGE_TO_MEDIUM_SCALE = 0.5F;
+    private static final float LARGE_TO_MEDIUM_SPEED = 1.8f;
+    private static final int MEDIUM_TO_SMALL_HP = 1;
+    private static final float MEDIUM_TO_SMALL_SCALE = 0.2f;
+    private static final float MEDIUM_TO_SMALL_SPEED = 2.3f;
 
     private final SlimeSize size;
     private final float scaleFactor;
@@ -64,13 +72,23 @@ public class Slime extends Enemy {
     private void split(EnemyManager enemyManager) {
         switch(this.getSlimeSize()) {
             case LARGE:
-                for (int i = 0; i < 2; i++) {
-                    enemyManager.spawnSlime(1, SlimeSize.MEDIUM, 0.5f, 2, 2.0f, getRandomOffsetSpawnPosition());
+                for (int i = 0; i < LARGE_SLIME_SPLIT_COUNT; i++) {
+                    enemyManager.spawnSlime(
+                        SlimeSize.MEDIUM,
+                        LARGE_TO_MEDIUM_SCALE,
+                        LARGE_TO_MEDIUM_HP,
+                        LARGE_TO_MEDIUM_SPEED,
+                        getRandomOffsetSpawnPosition());
                 }
                 break;
             case MEDIUM:
-                for (int i = 0; i < 3; i++) {
-                    enemyManager.spawnSlime(1, SlimeSize.SMALL, 0.2f, 1, 2.5f, getRandomOffsetSpawnPosition());
+                for (int i = 0; i < MEDIUM_SLIME_SPLIT_COUNT; i++) {
+                    enemyManager.spawnSlime(
+                        SlimeSize.SMALL,
+                        MEDIUM_TO_SMALL_SCALE,
+                        MEDIUM_TO_SMALL_HP,
+                        MEDIUM_TO_SMALL_SPEED,
+                        getRandomOffsetSpawnPosition());
                 }
                 break;
             default:
