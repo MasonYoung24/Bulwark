@@ -26,11 +26,11 @@ public class FrostWave extends Ability implements CollidableAbility {
     private static final float START_RADIUS = 0.0f;
 
     private float radius;
-    private float maxRadius;
-    private float speed;
-    private boolean expired;
-    private Texture texture;
-    private Vector3 pointOfExecution;
+    private final float maxRadius;
+    private final float speed;
+    private final boolean expired;
+    private final Texture texture;
+    private final Vector3 pointOfExecution;
     private final Circle collisionCircle;
     private final Set<Actor> enemiesHit;
 
