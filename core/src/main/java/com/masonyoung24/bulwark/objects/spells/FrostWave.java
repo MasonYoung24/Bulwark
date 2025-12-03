@@ -25,6 +25,18 @@ public class FrostWave extends Ability implements CollidableAbility {
     private static final float SPEED = 300f;
     private static final float START_RADIUS = 0.0f;
 
+    //Pixmap constants
+    private static final int PIXMAP_WIDTH = 64;
+    private static final int PIXMAP_HEIGHT = 64;
+    private static final float FROST_COLOR_RED = 0f;
+    private static final float FROST_COLOR_GREEN = 0.5f;
+    private static final float FROST_COLOR_BLUE = 1f;
+    private static final float FROST_COLOR_ALPHA = 0.7f;
+
+    private static final int CIRCLE_RADIUS = 32;
+    private static final int CIRCLE_CENTER_X = 32;
+    private static final int CIRCLE_CENTER_Y = 32;
+
     private float radius;
     private final float maxRadius;
     private final float speed;
@@ -61,9 +73,9 @@ public class FrostWave extends Ability implements CollidableAbility {
      * @return the texture of the FrostWave to be drawn as a Texture
      * */
     private Texture createTexture() {
-        Pixmap pixmap = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
-        pixmap.setColor(0f, 0.5f, 1f, 0.7f);
-        pixmap.drawCircle(32, 32, 32);
+        Pixmap pixmap = new Pixmap(PIXMAP_WIDTH, PIXMAP_HEIGHT, Pixmap.Format.RGBA8888);
+        pixmap.setColor(FROST_COLOR_RED, FROST_COLOR_GREEN, FROST_COLOR_GREEN, FROST_COLOR_ALPHA);
+        pixmap.drawCircle(CIRCLE_CENTER_X, CIRCLE_CENTER_Y, CIRCLE_RADIUS);
         Texture texture = new Texture(pixmap);
         pixmap.dispose();
         return texture;
