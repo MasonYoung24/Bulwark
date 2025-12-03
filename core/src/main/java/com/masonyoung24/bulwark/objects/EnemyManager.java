@@ -253,22 +253,19 @@ public class EnemyManager {
     /**
      * Spawns a slime and prepares it to be activated.
      * */
-    public void spawnSlime(int numberToSpawn,
-                           SlimeSize size,
+    public void spawnSlime(SlimeSize size,
                            float scaleFactor,
                            int health,
                            float speed,
                            Vector3 spawnPosition) {
-        for (int i = 0; i < numberToSpawn; i++) {
-            enemiesToAdd.add(new Slime(
-                size,
-                scaleFactor,
-                health,
-                speed,
-                assetManager,
-                spawnPosition
-            ));
-        }
+        enemiesToAdd.add(new Slime(
+            size,
+            scaleFactor,
+            health,
+            speed,
+            assetManager,
+            spawnPosition
+        ));
 
     }
 
