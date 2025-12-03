@@ -25,6 +25,12 @@ import com.masonyoung24.bulwark.inputs.Inputs;
 import com.masonyoung24.bulwark.objects.*;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents the main game screen.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class GameScreen implements Screen, InputProcessor {
     public static final float UNIT_SCALE = 1f / 32f;
 
@@ -48,6 +54,12 @@ public class GameScreen implements Screen, InputProcessor {
     private Sprite continueButton;
     private Sprite saveButton;
 
+    /**
+     * Creates an object of type GameScreen.
+     *
+     * @param game the main game class as a Bulwark
+     * @param loadSave true if the game is loaded from a save, otherwise false as a boolean
+     * */
     public GameScreen(Bulwark game, boolean loadSave) {
         this.game = game;
         this.assetManager = game.assets.manager;
