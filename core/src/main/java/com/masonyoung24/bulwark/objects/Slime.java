@@ -5,6 +5,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.enums.SlimeSize;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents a Slime enemy.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class Slime extends Enemy {
 
     private static final float DEFAULT_SCALE_SIZE = 2.0f;
