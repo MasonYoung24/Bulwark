@@ -8,7 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -44,22 +44,26 @@ public class GameScreen implements Screen, InputProcessor {
     private boolean moveLeftKeyPressed = false;
     private boolean moveRightKeyPressed = false;
     private boolean isFiring = false;
-    private final Vector3 touchPoint = new Vector3();
-    private final BitmapFont pauseFont;
     private boolean isPaused;
-
+    private Sprite continueButton;
+    private Sprite saveButton;
 
     public GameScreen(Bulwark game, boolean loadSave) {
         this.game = game;
         this.assetManager = game.assets.manager;
+
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
+        camera.update();
+        this.mapRenderer = new OrthogonalTiledMapRenderer(
+            null,
+            this.game.getSpriteBatch());
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+
         this.projectileManager = ProjectileManager.getInstance();
         this.enemyManager = new EnemyManager(assetManager);
         this.abilityManager = new AbilityManager();
         this.isPaused = false;
-
-        pauseFont = new BitmapFont();
-        pauseFont.getData().setScale(3f);
-        pauseFont.setColor(Color.RED);
 
         if (loadSave && SaveLoadManager.saveExists()) {
             GameSaveData save = SaveLoadManager.loadGame();
@@ -74,16 +78,12 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
-        camera.update();
-        this.mapRenderer = new OrthogonalTiledMapRenderer(
-            null,
-            this.game.getSpriteBatch());
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+
+        createPauseButtons(viewport.getWorldWidth(), viewport.getWorldHeight());
         inputs = new Inputs(camera, playerCharacter, projectileManager, abilityManager);
         this.gamePlayHUD = new GamePlayHUD(game.getSpriteBatch(), playerCharacter.getCurrentHP(), assetManager);
     }
+
 
     @Override
     public void show() {
@@ -92,22 +92,14 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float deltaTime) {
+        if (!this.isPaused) {
+            update(deltaTime);
+        }
         ScreenUtils.clear(Color.BLACK);
         this.mapRenderer.setView(this.camera);
         this.mapRenderer.render();
-        playerCharacter.setPreviousPosition(playerCharacter.getPosition());
-        this.handleMovementInput();
-        update(v);
-        gamePlayHUD.draw();
-        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
-        enemyManager.updateEnemyPosition(playerCharacter.getPosition());
-        enemyManager.checkEnemyCollision();
-        collisionManager.detectProjectileCollisionWithEnemy();
-        collisionManager.handleProjectileCollisionWithPlayerCharacter();
-        collisionManager.detectAbilityCollisionWithEnemy(abilityManager.activeAbilities, enemyManager.getActiveEnemies());
-        enemyManager.handleEnemyDeath();
-        gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
+
         game.getSpriteBatch().setProjectionMatrix(camera.combined);
         game.getSpriteBatch().begin();
         this.updateDirectionPlayerFacing();
@@ -115,6 +107,7 @@ public class GameScreen implements Screen, InputProcessor {
         playerCharacter.render(game.getSpriteBatch());
         abilityManager.render(game.getSpriteBatch());
         enemyManager.render(game.getSpriteBatch());
+        gamePlayHUD.draw();
         game.getSpriteBatch().end();
 
         if (this.isPaused) {
@@ -124,6 +117,17 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void update(float deltaTime) {
         autoSave(deltaTime);
+
+        playerCharacter.setPreviousPosition(playerCharacter.getPosition());
+        this.handleMovementInput();
+        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
+        enemyManager.updateEnemyPosition(playerCharacter.getPosition());
+        enemyManager.checkEnemyCollision();
+        collisionManager.detectProjectileCollisionWithEnemy();
+        collisionManager.handleProjectileCollisionWithPlayerCharacter();
+        collisionManager.detectAbilityCollisionWithEnemy(abilityManager.activeAbilities, enemyManager.getActiveEnemies());
+        enemyManager.handleEnemyDeath();
+        gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
 
         if (this.getIsFiring()) {
             handlePlayerFiring();
@@ -168,7 +172,6 @@ public class GameScreen implements Screen, InputProcessor {
         System.out.println("Game saved");
     }
 
-
     /**
      * Automatically saves the game at a set time interval.
      * */
@@ -187,45 +190,64 @@ public class GameScreen implements Screen, InputProcessor {
         this.isPaused = true;
     }
 
+    private static final float BUTTON_SPACING = 5f; // space between buttons
+
+    private void createPauseButtons(final float worldWidth, final float worldHeight) {
+
+        // Get the buttons as Sprites
+        continueButton = SpriteUtils.getSpriteFromSpriteSheet(
+            assetManager.get(Assets.CONTINUE_BUTTON), 0, 0, 1, 1);
+        continueButton.setSize(
+            continueButton.getWidth() * 0.3f,
+            continueButton.getHeight() * 0.3f
+        );
+        saveButton = SpriteUtils.getSpriteFromSpriteSheet(
+            assetManager.get(Assets.SAVE_BUTTON), 0, 0, 1, 1);
+        saveButton.setSize(
+            saveButton.getWidth() * 0.3f,
+            saveButton.getHeight() * 0.3f
+        );
+
+        // Use scaled sizes directly
+        float continueHeight = continueButton.getHeight();
+        float saveHeight = saveButton.getHeight();
+
+        float totalHeight = continueHeight + 10f + saveHeight;
+        float startY = (worldHeight - totalHeight) / 2f;
+
+        // Set the correct positions
+        continueButton.setPosition(
+            worldWidth / 2f - continueButton.getWidth() / 2f,
+            startY + saveHeight + 10f
+        );
+        saveButton.setPosition(
+            worldWidth / 2f - saveButton.getWidth() / 2f,
+            startY
+        );
+    }
+
     /**
      * Renders the game paused overlay.
      **/
     private void renderGamePausedOverlay() {
-        ShapeRenderer shapeRenderer = game.getShapeRenderer();
-        SpriteBatch spriteBatch = game.getSpriteBatch();
+        tintScreen();
 
+        SpriteBatch spriteBatch = game.getSpriteBatch();
+        spriteBatch.begin();
+        continueButton.draw(spriteBatch);
+        saveButton.draw(spriteBatch);
+        spriteBatch.end();
+    }
+
+    private void tintScreen() {
+        ShapeRenderer shapeRenderer = game.getShapeRenderer();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, 0.7f);
+        shapeRenderer.setColor(0, 0, 0, 0.5f);
         shapeRenderer.rect(0, 0, viewport.getScreenWidth(), viewport.getScreenHeight());
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
-
-        game.getSpriteBatch().begin();
-
-        String continueText = "CONTINUE";
-        String saveText = "SAVE & CONTINUE";
-
-        float screenWidth = viewport.getScreenWidth();
-        float screenHeight = viewport.getScreenHeight();
-
-        // Center horizontally
-        float saveX = (screenWidth - pauseFont.getRegion().getRegionWidth()) / 2f;
-
-        // Position vertically
-        float continueY = screenHeight * 0.60f;   // 60% up screen
-        float saveY = screenHeight * 0.45f;   // lower
-
-        pauseFont.draw(spriteBatch, continueText,
-            screenWidth / 2f - (pauseFont.getSpaceXadvance() * continueText.length()),
-            continueY);
-
-        pauseFont.draw(spriteBatch, saveText,
-            screenWidth / 2f - (pauseFont.getSpaceXadvance() * saveText.length()),
-            saveY);
-
-        spriteBatch.end();
     }
 
     /**
@@ -364,8 +386,16 @@ public class GameScreen implements Screen, InputProcessor {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector3 position = new Vector3(screenX, screenY, 0);
+        viewport.unproject(position);
         if (button == Input.Buttons.RIGHT) {
             playerCharacter.executeAbility(AbilityName.FROSTWAVE, abilityManager);
+        }
+        if (isPaused && continueButton.getBoundingRectangle().contains(position.x, position.y)) {
+            isPaused = false;
+        }
+        if (isPaused && saveButton.getBoundingRectangle().contains(position.x, position.y)) {
+            save();
         }
         if (button != Input.Buttons.LEFT || pointer > 0) {
             return false;
