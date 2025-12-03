@@ -17,12 +17,12 @@ public class Slime extends Enemy {
     private static final int SPAWN_RADIUS_MULTIPLIER = 2;
     private static final int LARGE_SLIME_SPLIT_COUNT = 2;
     private static final int MEDIUM_SLIME_SPLIT_COUNT = 3;
-    private static final int LARGE_TO_MEDIUM_HP = 1;
+    private static final int LARGE_TO_MEDIUM_HP = 2;
     private static final float LARGE_TO_MEDIUM_SCALE = 0.5F;
     private static final float LARGE_TO_MEDIUM_SPEED = 1.8f;
     private static final int MEDIUM_TO_SMALL_HP = 1;
     private static final float MEDIUM_TO_SMALL_SCALE = 0.2f;
-    private static final float MEDIUM_TO_SMALL_SPEED = 2.3f;
+    private static final float MEDIUM_TO_SMALL_SPEED = 2.2f;
 
     private final SlimeSize size;
     private final float scaleFactor;
