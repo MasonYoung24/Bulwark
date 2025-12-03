@@ -14,6 +14,12 @@ import com.masonyoung24.bulwark.statuses.StatusEffect;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents the FrostWave ability.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class FrostWave extends Ability implements CollidableAbility {
     private static final float MAX_RADIUS = 300f;
     private static final float SPEED = 300f;
@@ -28,7 +34,13 @@ public class FrostWave extends Ability implements CollidableAbility {
     private final Circle collisionCircle;
     private final Set<Actor> enemiesHit;
 
-
+    /**
+     * Creates an object of type FrostWave.
+     *
+     * @param damage the damage done as a float
+     * @param cooldown the cooldown time a float
+     * @param pointOfExecution the point where the FrostWave will commence as a Vector3
+     * */
     public FrostWave(final float damage,
                      final float cooldown,
                      Vector3 pointOfExecution) {
