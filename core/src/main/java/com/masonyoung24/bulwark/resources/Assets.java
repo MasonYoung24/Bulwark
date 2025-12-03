@@ -1,16 +1,12 @@
 package com.masonyoung24.bulwark.resources;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import java.awt.*;
-
-
 
 public class Assets {
     // asset manager
@@ -31,9 +27,13 @@ public class Assets {
 //    public final Texture health = new Texture(Gdx.files.internal("image.jpg"));
 
     // Main Menu
-    public static final String START_BUTTON = "MainMenu/startbutton.png";
+    public static final String START_BUTTON = "MainMenu/loadbutton.png";
     public static final String LOAD_BUTTON = "MainMenu/loadbutton.png";
     public static final String MAIN_MENU_BACKGROUND = "MainMenu/MainMenuBackground.png";
+
+    //Pause Screen
+    public static final String SAVE_BUTTON = "pause/saveButton.png";
+    public static final String CONTINUE_BUTTON = "pause/continueButton.png";
 
     // Tilesets
     public static final String MAIN_TILESET = "maps/objects/main.tmx";
@@ -73,6 +73,8 @@ public class Assets {
         manager.load(MAIN_MENU_BACKGROUND, Texture.class);
         manager.load(FROST_ABILITIES_SPRITE_SHEET, Texture.class);
         manager.load(BLINK_ABILITY_SPRITE, Texture.class);
+        manager.load(SAVE_BUTTON, Texture.class);
+        manager.load(CONTINUE_BUTTON, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
