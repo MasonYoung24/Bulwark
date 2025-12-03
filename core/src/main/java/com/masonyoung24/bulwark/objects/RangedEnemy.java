@@ -5,6 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Represents a ranged enemy.
+ *
+ * @author Mason Yooung
+ * @version 2025
+ * */
 public abstract class RangedEnemy extends Enemy {
     public static final float BASE_CAST_SPEED = 4.0f;
     public static final float HALF_MULTIPLIER = 0.5f;
@@ -19,6 +25,15 @@ public abstract class RangedEnemy extends Enemy {
     private final Projectile projectile;
     private float timeSinceLastShot;
 
+    /**
+     * Creates an object of type RangedEnemy.
+     *
+     * @param maxHP the maximum health of the RangedEnemy as an int
+     * @param speed the movement speed of the RangedEnemy as a float
+     * @param sprite the sprite to used for the RangedEnemy as a Sprite
+     * @param spawnPosition the spawn position of the RangedEnemy as a Vector3
+     * @param assetManager the asset manager of the game as an AssetManager
+     * */
     public RangedEnemy(final int maxHP,
                        final float speed,
                        final Sprite sprite,
