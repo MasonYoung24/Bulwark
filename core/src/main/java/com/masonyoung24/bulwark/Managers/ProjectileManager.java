@@ -65,4 +65,12 @@ public class ProjectileManager {
     public List<Projectile> getProjectiles() {
         return activeProjectiles;
     }
+
+    /**
+     * Disposes of the active Projectiles.
+     * */
+    public void dispose() {
+        activeProjectiles.clear();
+        instance = null;
+    }
 }
