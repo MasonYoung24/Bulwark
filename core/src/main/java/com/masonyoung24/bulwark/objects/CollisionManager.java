@@ -6,10 +6,16 @@ import com.masonyoung24.bulwark.objects.spells.Ability;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Manages the collisions between different objects.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class CollisionManager {
-    private EnemyManager enemyManager;
-    private ProjectileManager projectileManager;
-    private PlayerCharacter playerCharacter;
+    private final EnemyManager enemyManager;
+    private final ProjectileManager projectileManager;
+    private final PlayerCharacter playerCharacter;
 
     /**
      * Constructs an object of type CollisionManager.
@@ -35,6 +41,9 @@ public class CollisionManager {
         this.playerCharacter = playerCharacter;
     }
 
+    /**
+     * Handles collisions between player fired projectiles and enemies.
+     * */
     public void detectProjectileCollisionWithEnemy() {
         Iterator<Projectile> projectileIterator = projectileManager.getProjectiles().iterator();
 
