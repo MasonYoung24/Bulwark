@@ -25,13 +25,14 @@ public class PlayerCharacter extends Actor implements Shooter {
 
     public PlayerCharacter(int healthPoints,
                            float speed,
-                           AssetManager assetManager) {
+                           AssetManager assetManager,
+                           Vector3 spawnPosition) {
         super(healthPoints,
             speed,
             Actor.getSprite(assetManager.get(Assets.HUMANS_SPRITE_SHEET),
                 CHARACTER_TARGET_ROW,
                 CHARACTER_TARGET_COLUMN),
-            DEFAULT_SPAWN_POSITION
+            spawnPosition
         );
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
