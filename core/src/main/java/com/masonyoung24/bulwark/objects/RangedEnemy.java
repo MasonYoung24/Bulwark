@@ -4,7 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class RangedEnemy extends Enemy {
     public static final float BASE_CAST_SPEED = 4.0f;
@@ -40,7 +39,7 @@ public abstract class RangedEnemy extends Enemy {
      * */
     @Override
     public void move(Vector3 targetPosition) {
-        if (!getIsFrozen()) {
+        if (getIsFrozen()) {
             Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
             float distanceBetweenEnemyAndPlayer = targetPosition.dst(this.getPosition());
             if (distanceBetweenEnemyAndPlayer > DEFAULT_MINIMUM_DISTANCE) {
