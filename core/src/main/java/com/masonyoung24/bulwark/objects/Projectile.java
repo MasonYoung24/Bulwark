@@ -1,8 +1,11 @@
 package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
@@ -18,6 +21,12 @@ public class Projectile {
     public static final int SPRITE_SHEET_COLUMNS = 11;
     public static final int SPRITESHEET_TARGET_ROW = 1;
     public static final int SPRITE_SHEET_TARGET_COLUMN = 1;
+    private static final int FRAME_COLUMNS = 5;
+    private static final int FRAME_ROWS = 1;
+    private static final float FRAME_DURATION = 0.1f;
+    private static final int FIRST_FRAME_INDEX = 0;
+    private static final int DESTINATION_POSITION = 0;
+
     /**
      * The default speed of a projectile
      * */
@@ -26,8 +35,15 @@ public class Projectile {
      * The default refractory period of a projectile
      * */
     private static final float DEFAULT_REFRACTORY_PERIOD = 2.0f;
+    private static final float START_ANIMATION_TIME = 0.0f;
 
-    private final Sprite sprite;
+    // animation states
+    private Animation<TextureRegion> animation;
+    private TextureRegion currentFrame;
+    private float animationTime;
+
+
+    private Sprite sprite;
     private final float speed;
     private Vector3 position;
     private final Vector3 direction;
@@ -36,12 +52,14 @@ public class Projectile {
 
     public Projectile(AssetManager assetManager) {
         this(
-            new Vector3(0, 0, 0),               // startPosition
-            DEFAULT_SPEED,                      // speed
-            new Vector3(1, 0, 0),               // direction (default right)
-            assetManager,                       // assetManager
-            DEFAULT_REFRACTORY_PERIOD           // refractoryPeriod
+            new Vector3(0, 0, 0),
+            DEFAULT_SPEED,
+            new Vector3(1, 0, 0),
+            assetManager,
+            DEFAULT_REFRACTORY_PERIOD
         );
+        this.animationTime = START_ANIMATION_TIME;
+        createAnimation(assetManager);
     }
 
     /**
@@ -69,6 +87,7 @@ public class Projectile {
         this.refractoryPeriod = refractoryPeriod;
         this.sprite.setPosition(position.x, position.y);
         this.isFriendly = true;
+        createAnimation(assetManager);
     }
 
     /**
@@ -81,8 +100,12 @@ public class Projectile {
     /**
      * Updates the position of the projectile by translating its sprite
      * */
-    public void updatePosition() {
+    public void updatePosition(float deltaTime) {
         sprite.translate(direction.x * speed, direction.y * speed);
+
+        animationTime += deltaTime;
+        currentFrame = animation.getKeyFrame(animationTime);
+        sprite.setRegion(currentFrame);
     }
 
     /**
@@ -119,6 +142,45 @@ public class Projectile {
     public void setIsFriendly(boolean isFriendly) {
         this.isFriendly = isFriendly;
     }
+
+    /**
+     * Creates the projectile animation.
+     *
+     * @param assetManager the game asset manager
+     * */
+    public void createAnimation(AssetManager assetManager) {
+
+        Texture projectileTexture = assetManager.get(Assets.FIRE_BALL_PROJECTILE);
+
+        int frameWidth = projectileTexture.getWidth() / FRAME_COLUMNS;
+        int frameHeight = projectileTexture.getHeight() / FRAME_ROWS;
+
+        // Split into individual frames
+        TextureRegion[][] splitFrames = TextureRegion.split(projectileTexture, frameWidth, frameHeight);
+
+        // Extract first row frames
+        TextureRegion[] animationFrames = new TextureRegion[FRAME_COLUMNS];
+        System.arraycopy( // compiler suggestion
+            splitFrames[FIRST_FRAME_INDEX],
+            FIRST_FRAME_INDEX,
+            animationFrames,
+            DESTINATION_POSITION,
+            FRAME_COLUMNS);
+
+        // Create animation
+        animation = new Animation<>(FRAME_DURATION, animationFrames);
+        animation.setPlayMode(Animation.PlayMode.LOOP);
+
+        // Initial frame
+        currentFrame = animationFrames[FIRST_FRAME_INDEX];
+        sprite.setRegion(currentFrame);
+
+        sprite.setSize(
+            currentFrame.getRegionWidth(),
+            currentFrame.getRegionHeight()
+        );
+    }
+
 
     /**
      * Draws the Projectile.
