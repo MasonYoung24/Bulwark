@@ -3,7 +3,6 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.masonyoung24.bulwark.enums.Direction;
 
 /**
  * Represents and Enemy.
