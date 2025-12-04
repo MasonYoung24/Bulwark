@@ -22,6 +22,9 @@ public class Assets {
     public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frost/frostAbilities.png";
     public static final String BLINK_ABILITY_SPRITE = "sprites/abilities/arcane/blink.png";
 
+    // Projectiles
+    public static final String FIRE_BALL_PROJECTILE = "sprites/projectiles/fireballProjectileFrames.png";
+
     // HUD
     public static final String HEALTH_HEART = "sprites/health.png";
 //    public final Texture health = new Texture(Gdx.files.internal("image.jpg"));
@@ -75,6 +78,7 @@ public class Assets {
         manager.load(BLINK_ABILITY_SPRITE, Texture.class);
         manager.load(SAVE_BUTTON, Texture.class);
         manager.load(CONTINUE_BUTTON, Texture.class);
+        manager.load(FIRE_BALL_PROJECTILE, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAIN_TILESET, TiledMap.class);
