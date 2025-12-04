@@ -56,6 +56,7 @@ public abstract class RangedEnemy extends Enemy {
     public void move(Vector3 targetPosition) {
         if (getIsFrozen()) {
             Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+            this.updateDirectionFacing(direction);
             float distanceBetweenEnemyAndPlayer = targetPosition.dst(this.getPosition());
             if (distanceBetweenEnemyAndPlayer > DEFAULT_MINIMUM_DISTANCE) {
                 this.sprite.translate(direction.x, direction.y);

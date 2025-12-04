@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.enums.Direction;
 
 /**
  * Represents and Enemy.
@@ -16,7 +17,6 @@ public abstract class Enemy extends Actor {
 
     private boolean isLiving;
 
-
     /**
      * Constructs an object of type Enemy.
      *
@@ -27,8 +27,8 @@ public abstract class Enemy extends Actor {
      * */
     public Enemy(final int healthPoints,
                  final float speed,
-                 Sprite sprite,
-                 Vector3 spawnPosition) {
+                 final Sprite sprite,
+                 final Vector3 spawnPosition) {
         super(healthPoints, speed, sprite, spawnPosition);
         this.isLiving = true;
     }
@@ -45,7 +45,7 @@ public abstract class Enemy extends Actor {
      *
      * @param batch the game's sprite batch as a SpriteBatch used to render the Enemy
      * */
-    public void render(SpriteBatch batch) {
+    public void render(final SpriteBatch batch) {
         sprite.draw(batch);
     }
 
@@ -54,10 +54,24 @@ public abstract class Enemy extends Actor {
      *
      * @param targetPosition the target position to move the Actor to as a Vector3
      * */
-    public void move(Vector3 targetPosition) {
+    public void move(final Vector3 targetPosition) {
         if (getIsFrozen()) {
             Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
+            this.updateDirectionFacing(direction);
             this.sprite.translate(direction.x * speed, direction.y * speed);
+        }
+    }
+
+    /**
+     * Updates the direction that the enemy is facing.
+     *
+     * @param direction the direction that the Enemy is moving as a Vector3
+     * */
+    public void updateDirectionFacing(final Vector3 direction) {
+        if (direction.x < 0) {
+            this.faceLeft();
+        } else {
+            this.faceRight();
         }
     }
 
