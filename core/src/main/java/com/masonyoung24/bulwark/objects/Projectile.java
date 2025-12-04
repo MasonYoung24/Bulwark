@@ -43,7 +43,7 @@ public class Projectile {
     private float animationTime;
 
 
-    private Sprite sprite;
+    private final Sprite sprite;
     private final float speed;
     private Vector3 position;
     private final Vector3 direction;
@@ -88,6 +88,7 @@ public class Projectile {
         this.sprite.setPosition(position.x, position.y);
         this.isFriendly = true;
         createAnimation(assetManager);
+        this.rotateProjectile();
     }
 
     /**
@@ -101,11 +102,21 @@ public class Projectile {
      * Updates the position of the projectile by translating its sprite
      * */
     public void updatePosition(float deltaTime) {
+        // update position
         sprite.translate(direction.x * speed, direction.y * speed);
 
+        // update animation
         animationTime += deltaTime;
         currentFrame = animation.getKeyFrame(animationTime);
         sprite.setRegion(currentFrame);
+    }
+
+    /**
+     * Rotates the projectile depending on its fired direction.
+     * */
+    public void rotateProjectile() {
+        float angleDeg = (float) Math.toDegrees(Math.atan2(direction.y, direction.x));
+        this.sprite.setRotation(angleDeg);
     }
 
     /**
@@ -180,7 +191,6 @@ public class Projectile {
             currentFrame.getRegionHeight()
         );
     }
-
 
     /**
      * Draws the Projectile.
