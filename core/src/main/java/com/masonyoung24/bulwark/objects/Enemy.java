@@ -14,6 +14,7 @@ import com.masonyoung24.bulwark.enums.Direction;
 public abstract class Enemy extends Actor {
     public static final int SPRITE_SHEET_ROWS = 13;
     public static final int SPRITE_SHEET_COLUMNS = 12;
+    private static final float LEFT_DIRECTION_BOUNDARY = 0f;
 
     private boolean isLiving;
 
@@ -68,7 +69,7 @@ public abstract class Enemy extends Actor {
      * @param direction the direction that the Enemy is moving as a Vector3
      * */
     public void updateDirectionFacing(final Vector3 direction) {
-        if (direction.x < 0) {
+        if (direction.x < LEFT_DIRECTION_BOUNDARY) {
             this.faceLeft();
         } else {
             this.faceRight();
