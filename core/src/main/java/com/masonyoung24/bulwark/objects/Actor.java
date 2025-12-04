@@ -45,6 +45,7 @@ public abstract class Actor {
     private List<StatusEffect> statusEffects;
     private boolean isFrozen;
     private boolean isDamageTintActive;
+    private Vector3 position;
 
     /**
      * Constructs an object of type Actor.
@@ -59,7 +60,8 @@ public abstract class Actor {
         this.speed = speed;
         this.sprite = sprite;
         this.directionFacing = Direction.LEFT;
-        this.sprite.setPosition(spawnPosition.x, spawnPosition.y);
+        this.position = spawnPosition;
+        this.sprite.setPosition(position.x, position.y);
         this.abilities = new HashMap<>();
         this.originalSpriteColor = new Color(this.sprite.getColor());
         this.movementDirection = new Vector3();
