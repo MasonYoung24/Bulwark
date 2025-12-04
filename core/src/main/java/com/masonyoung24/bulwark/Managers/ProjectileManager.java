@@ -45,10 +45,15 @@ public class ProjectileManager {
     /**
      * Updates the position of every active Projectile.
      * */
-    public void updateProjectiles(float minBoundX, float maxBoundX, float minBoundY, float maxBoundY) {
+    public void updateProjectiles(
+        float minBoundX,
+        float maxBoundX,
+        float minBoundY,
+        float maxBoundY,
+        float deltaTime) {
         ArrayList<Projectile> projectilesToRemove = new ArrayList<>();
         for (Projectile projectile : activeProjectiles) {
-            projectile.updatePosition();
+            projectile.updatePosition(deltaTime);
             if (projectile.getPosition().x < minBoundX || projectile.getPosition().x > maxBoundX ||
                 projectile.getPosition().y < minBoundY || projectile.getPosition().y > maxBoundY) {
                 projectilesToRemove.add(projectile);
