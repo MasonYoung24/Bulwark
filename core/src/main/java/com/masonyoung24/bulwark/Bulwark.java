@@ -27,11 +27,13 @@ public class Bulwark extends Game {
     private Texture image;
     public Assets assets;
     public GameScreen gameScreen;
+    private ShapeRenderer shapeRenderer;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         assets = new Assets();
+        this.shapeRenderer = new ShapeRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -63,6 +65,15 @@ public class Bulwark extends Game {
      * */
     public FitViewport getViewport() {
         return this.viewport;
+    }
+
+    /**
+     * Returns the game's shape renderer.
+     *
+     * @return the game's shape renderer as a ShapeRenderer
+     * */
+    public ShapeRenderer getShapeRenderer() {
+        return this.shapeRenderer;
     }
 
     /**
