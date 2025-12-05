@@ -82,7 +82,7 @@ public class GamePlayHUD {
 
 
         this.frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
-        abilityIcons.put(AbilityName.FROSTWAVE, frostWaveIcon);
+        abilityIcons.put(AbilityName.FROST_WAVE, frostWaveIcon);
         abilityIcons.put(AbilityName.BLINK, new Image(new TextureRegionDrawable(blinkSprite)));
 
         //define a table used to organize hud's labels
