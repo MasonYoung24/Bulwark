@@ -71,13 +71,15 @@ public class GameOverScreen implements Screen {
     }
 
     /**
-     * @param width
-     * @param height
+     * Resizes the game's viewport.
+     *
+     * @param width the new width of the viewport
+     * @param height the new height of the viewport
      * @see ApplicationListener#resize(int, int)
      */
     @Override
     public void resize(final int width, final int height) {
-
+        game.getViewport().update(width, height, true);
     }
 
     /**
