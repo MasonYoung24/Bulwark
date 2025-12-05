@@ -3,10 +3,13 @@ package com.masonyoung24.bulwark;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.masonyoung24.bulwark.resources.Assets;
@@ -15,6 +18,8 @@ import com.masonyoung24.bulwark.screens.MainMenuScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Bulwark extends Game {
+    public static final float WORLD_WIDTH = 800f;
+    public static final float WORLD_HEIGHT = 600f;
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
@@ -27,17 +32,13 @@ public class Bulwark extends Game {
     public void create() {
         batch = new SpriteBatch();
         assets = new Assets();
-        image = new Texture("libgdx.png");
 
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
-        camera.update();
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
         assets.load();
         assets.manager.finishLoading();
 
-        gameScreen = new GameScreen(this);
         setScreen(new MainMenuScreen(this));
     }
 
