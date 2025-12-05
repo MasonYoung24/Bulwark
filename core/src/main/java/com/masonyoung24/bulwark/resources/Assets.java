@@ -13,10 +13,8 @@ public class Assets {
     public final AssetManager manager = new AssetManager();
 
     // Sprites
-    public static final String ANIMALS_SPRITE_SHEET = "sprites/AnimalsSpriteSheet.png";
     public static final String MONSTERS_SPRITE_SHEET = "sprites/MonstersSpriteSheet.png";
     public static final String HUMANS_SPRITE_SHEET = "sprites/HumansSpriteSheet.png";
-    public static final String ITEMS_SPRITE_SHEET = "sprites/ItemsSpriteSheet.png";
 
     // Abilities
     public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frost/frostAbilities.png";
@@ -24,10 +22,6 @@ public class Assets {
 
     // Projectiles
     public static final String FIRE_BALL_PROJECTILE = "sprites/projectiles/fireballProjectileFrames.png";
-
-    // HUD
-    public static final String HEALTH_HEART = "sprites/health.png";
-//    public final Texture health = new Texture(Gdx.files.internal("image.jpg"));
 
     // Main Menu
     public static final String START_BUTTON = "MainMenu/loadbutton.png";
@@ -66,11 +60,8 @@ public class Assets {
      *  Loads gameplay assets into the asset manager.
      * */
     private void loadGameplayAssets() {
-        manager.load(ANIMALS_SPRITE_SHEET, Texture.class);
         manager.load(MONSTERS_SPRITE_SHEET, Texture.class);
         manager.load(HUMANS_SPRITE_SHEET, Texture.class);
-        manager.load(ITEMS_SPRITE_SHEET, Texture.class);
-        manager.load(HEALTH_HEART, Texture.class);
         manager.load(START_BUTTON, Texture.class);
         manager.load(LOAD_BUTTON, Texture.class);
         manager.load(MAIN_MENU_BACKGROUND, Texture.class);
