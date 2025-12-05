@@ -3,14 +3,57 @@ package com.masonyoung24.bulwark.screens;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.masonyoung24.bulwark.Bulwark;
 
 public class GameOverScreen implements Screen {
+
+    private final Bulwark game;
+    private final Stage stage;
+    private Label enemiesSlainCountLabel;
+
+    public GameOverScreen(final Bulwark game, int enemiesSlain) {
+        this.game = game;
+        stage = new Stage(game.getViewport(), game.getSpriteBatch());
+
+        Label youLose = new Label("YOU LOSE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label timeSurvivedLabel = new Label("TIME SURVIVED", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label enemiesSlainLabel = new Label("ENEMIES SLAIN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        enemiesSlainCountLabel = new Label(String.format("%d", enemiesSlain), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        //define a table used to organize hud's labels
+        Table table = new Table();
+        table.top();
+        table.setFillParent(true);
+
+        //add labels to table, padding the top, and giving them all equal width with expandX
+        table.add(youLose).expandX().center().padTop(50);
+        table.row();
+
+        table.add(enemiesSlainLabel).expandX().center().padTop(20);
+        table.row();
+
+        table.add(timeSurvivedLabel).expandX().center().padTop(20);
+        table.row();
+
+        table.add(enemiesSlainCountLabel).expandX().center().padTop(20);
+        table.row();
+
+        table.add(enemiesSlainCountLabel).expandX();
+
+        stage.addActor(table);
+    }
+
     /**
      * Called when this screen becomes the current screen for a {@link Game}.
      */
     @Override
     public void show() {
-
     }
 
     /**
@@ -20,7 +63,11 @@ public class GameOverScreen implements Screen {
      */
     @Override
     public void render(final float delta) {
+        ScreenUtils.clear(Color.BLACK);
 
+        // Update and draw the stage
+        stage.act(delta);
+        stage.draw();
     }
 
     /**
