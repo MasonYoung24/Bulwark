@@ -141,7 +141,6 @@ public class Projectile {
      * Returns true if the Projectile is friendly to the player character, otherwise false.
      *
      * @return true if the Projectile is friendly to the player character, otherwise false as a boolean
-     *
      */
     public boolean getIsFriendly() {
         return this.isFriendly;
@@ -149,7 +148,7 @@ public class Projectile {
 
     /**
      * Sets the IsFriendly state of the Projectile.
-     *  */
+     * */
     public void setIsFriendly(boolean isFriendly) {
         this.isFriendly = isFriendly;
     }
