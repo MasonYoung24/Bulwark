@@ -26,7 +26,7 @@ public final class AbilityFactory {
     public static Ability createAbility(final AbilityName abilityName, final Actor actor) {
 
         switch (abilityName) {
-            case FROSTWAVE: {
+            case FROST_WAVE: {
                 float baseDamage = 25f;
                 float baseCooldown = 3f;
 
