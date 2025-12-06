@@ -148,7 +148,7 @@ public class EnemyManager {
      *
      * @param deltaTime the change in time as a float
      * */
-    public void updateEnemyStatusEffects(float deltaTime) {
+    public void updateEnemyStatusEffects(final float deltaTime) {
         for (Enemy enemy : activeEnemies) {
             enemy.updateStatusEffect(deltaTime);
         }
@@ -160,7 +160,7 @@ public class EnemyManager {
      * @param viewportWidth the width of the game screen viewport as a float
      * @param viewportHeight the height of the game screen viewport as a float
      * */
-    private Vector3 determineSpawnPosition(float viewportWidth, float viewportHeight) {
+    private Vector3 determineSpawnPosition(final float viewportWidth, final float viewportHeight) {
         String[] sidesOfScreen = {"Top", "Bottom", "Left", "Right"};
         Vector3 spawnPosition;
         switch (sidesOfScreen[RANDOM.nextInt(sidesOfScreen.length)]) {
@@ -194,7 +194,12 @@ public class EnemyManager {
      * @param viewportWidth the width of the viewport as a float
      * @param viewportHeight the height of the viewport as a float
      * */
-    public void spawnEnemies(float viewportWidth, float viewportHeight, int minutesSurvived, float deltaTime) {
+    public void spawnEnemies(
+        final float viewportWidth,
+        final float viewportHeight,
+        final int minutesSurvived,
+        final float deltaTime
+    ) {
         spawnTimer += deltaTime;
         if (spawnTimer > BASE_SPAWN_INTERVAL) {
             int numberToSpawn = generateNumberOfEnemiesToSpawn(minutesSurvived);
@@ -210,7 +215,7 @@ public class EnemyManager {
      *
      * @return the number of enemies randomly generated as an int
      * */
-    private int generateNumberOfEnemiesToSpawn(int minutesSurvived) {
+    private int generateNumberOfEnemiesToSpawn(final int minutesSurvived) {
         Random random = new Random();
         int maximumNumberOfEnemiesToSpawn = MINIMUM_NUMBER_OF_ENEMIES_TO_SPAWN
             + (minutesSurvived * SPAWN_MULTIPLIER);
@@ -225,7 +230,7 @@ public class EnemyManager {
      * @param viewportWidth the width of the viewport as a float
      * @param viewportHeight the height of the viewport as a float
      * */
-    private void spawnEnemy(float viewportWidth, float viewportHeight) {
+    private void spawnEnemy(final float viewportWidth, final float viewportHeight) {
         if (Math.random() < GOBLIN_SPAWN_CHANCE) {
             activeEnemies.add(new Goblin(
                 3,
@@ -253,11 +258,11 @@ public class EnemyManager {
     /**
      * Spawns a slime and prepares it to be activated.
      * */
-    public void spawnSlime(SlimeSize size,
-                           float scaleFactor,
-                           int health,
-                           float speed,
-                           Vector3 spawnPosition) {
+    public void spawnSlime(final SlimeSize size,
+                           final float scaleFactor,
+                           final int health,
+                           final float speed,
+                           final Vector3 spawnPosition) {
         enemiesToAdd.add(new Slime(
             size,
             scaleFactor,
