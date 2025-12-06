@@ -28,15 +28,21 @@ public class Bulwark extends Game {
     public Assets assets;
     public GameScreen gameScreen;
     private ShapeRenderer shapeRenderer;
+    private BitmapFont bitmapFont;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         assets = new Assets();
         this.shapeRenderer = new ShapeRenderer();
+        this.bitmapFont = new BitmapFont();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+
+        //font has 15pt, but we need to scale it to our viewport. Scaling seems to make it fuzzy.
+        bitmapFont.setUseIntegerPositions(false);
+        bitmapFont.getData().setScale((viewport.getWorldHeight() / Gdx.graphics.getHeight() * 2));
 
         assets.load();
         assets.manager.finishLoading();
@@ -74,6 +80,15 @@ public class Bulwark extends Game {
      * */
     public ShapeRenderer getShapeRenderer() {
         return this.shapeRenderer;
+    }
+
+    /**
+     * Returns the game's bitmap font.
+     *
+     * @return the game's bitmap font as a BitmapFont
+     * */
+    public BitmapFont getBitmapFont() {
+        return this.bitmapFont;
     }
 
     /**
