@@ -191,3 +191,4 @@ public class Projectile {
         sprite.draw(batch);
     }
 }
+
