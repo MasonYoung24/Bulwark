@@ -28,6 +28,11 @@ import java.util.HashMap;
  * */
 public class GamePlayHUD {
     private final static int GAME_START_TIME = 0;
+    private static final int SECONDS_PER_MINUTE = 60;
+    private static final int MINUTES_PER_HOUR = 60;
+    private static final int TIME_RESET_VALUE = 0;
+    private static final String TIME_FORMAT = "%02d:%02d:%02d";
+
 
     private Stage stage;
     private Viewport viewport;
@@ -145,19 +150,19 @@ public class GamePlayHUD {
      * */
     public void updateGameTimer(final float delta) {
         this.timeCount += delta;
-        seconds = (int) timeCount;
+        seconds = (int) timeCount; // just want to show flat seconds
 
-        if (seconds >= 60) {
-            seconds = 0;
-            timeCount = 0;
+        if (seconds >= SECONDS_PER_MINUTE) {
+            seconds = TIME_RESET_VALUE;
+            timeCount = TIME_RESET_VALUE;
             minutes++;
 
         }
-        if (minutes >= 60) {
-            minutes = 0;
+        if (minutes >= MINUTES_PER_HOUR) {
+            minutes = TIME_RESET_VALUE;
             hours++;
         }
-        countdownLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        countdownLabel.setText(String.format(TIME_FORMAT, hours, minutes, seconds));
     }
 
     /**
