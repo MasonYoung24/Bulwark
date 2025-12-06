@@ -118,5 +118,4 @@ public abstract class Enemy extends Actor {
      * */
     public abstract <T extends EnemySaveData> void loadData(final T data);
 
-
 }
