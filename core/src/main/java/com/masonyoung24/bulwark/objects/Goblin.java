@@ -2,6 +2,8 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.data.EnemySaveData;
+import com.masonyoung24.bulwark.enums.EnemyType;
 import com.masonyoung24.bulwark.resources.Assets;
 
 /**
@@ -37,7 +39,8 @@ public class Goblin extends Enemy {
                 Enemy.SPRITE_SHEET_COLUMNS,
                 Enemy.SPRITE_SHEET_ROWS
             ),
-            spawnPosition);
+            spawnPosition,
+            EnemyType.GOBLIN);
     }
 
     /**
@@ -48,5 +51,27 @@ public class Goblin extends Enemy {
     @Override
     public void handleDeath(final EnemyManager enemyManager) {
 
+    }
+
+    @Override
+    public EnemySaveData saveData() {
+        EnemySaveData data = new EnemySaveData();
+
+        data.setXCoordinate(this.getPosition().x);
+        data.setYCoordinate(this.getPosition().y);
+        data.setHP(this.getCurrentHP());
+        data.setMaxHP(this.getMaxHP());
+        data.setEnemyType(this.getEnemyType());
+        data.setSpeed(this.getSpeed());
+
+        return data;
+    }
+
+    @Override
+    public void loadData(EnemySaveData base) {
+
+        this.setCurrentHP(base.getHP());
+        this.sprite.setPosition(base.getXCoordinate(), base.getYCoordinate());
+        this.setSpeed(base.getSpeed());
     }
 }
