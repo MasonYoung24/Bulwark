@@ -76,7 +76,7 @@ public class Projectile {
                       Vector3 direction,
                       AssetManager assetManager,
                       float refractoryPeriod) {
-        this.sprite = SpriteUtils.getSpriteFromSpriteSheet(assetManager.get(Assets.ITEMS_SPRITE_SHEET),
+        this.sprite = SpriteUtils.getSpriteFromSpriteSheet(assetManager.get(Assets.FIRE_BALL_PROJECTILE),
             SPRITESHEET_TARGET_ROW,
             SPRITE_SHEET_TARGET_COLUMN,
             SPRITE_SHEET_COLUMNS,
