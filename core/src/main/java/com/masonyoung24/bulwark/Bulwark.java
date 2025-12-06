@@ -18,8 +18,8 @@ import com.masonyoung24.bulwark.screens.MainMenuScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Bulwark extends Game {
-    public static final float WORLD_WIDTH = 800f;
-    public static final float WORLD_HEIGHT = 600f;
+    private static final float WORLD_WIDTH = 800f;
+    private static final float WORLD_HEIGHT = 600f;
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
