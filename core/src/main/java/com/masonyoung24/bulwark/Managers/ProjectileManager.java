@@ -4,17 +4,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Projectile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents a ProjectileManager that manages the game's active projectiles.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class ProjectileManager {
     private static ProjectileManager instance;
     private List<Projectile> activeProjectiles;
 
+    /*
+     * Constructs an object of type ProjectileManager.
+     * */
     private ProjectileManager() {
         activeProjectiles = new ArrayList<>();
     }
 
+    /**
+     * Returns the shared instance of the ProjectileManager.
+     *
+     * @return the shared instance of the projectile manager as a Projectile Manager
+     * */
     public static ProjectileManager getInstance() {
         if (instance == null) {
             instance = new ProjectileManager();
