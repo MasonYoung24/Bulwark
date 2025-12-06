@@ -54,11 +54,10 @@ public class GamePlayHUD {
     /**
      * Constructs an object of type GamePlayHUD.
      *
-     * @param spriteBatch the SpriteBatch used to render the HUD
      * @param playerHealth the current health of the player character as an int
      * @param assetManager the asset manager of the game as an AssetManager
      * */
-    public GamePlayHUD(final SpriteBatch spriteBatch, final int playerHealth, final AssetManager assetManager) {
+    public GamePlayHUD(final int playerHealth, final AssetManager assetManager) {
         enemiesSlain = 0;
         seconds = GAME_START_TIME;
         minutes = GAME_START_TIME;
@@ -74,12 +73,17 @@ public class GamePlayHUD {
         SpriteBatch hudBatch = new SpriteBatch();
         stage = new Stage(viewport, hudBatch);
 
-        countdownLabel = new Label(String.format("%d:%d:%03d", hours, minutes, seconds), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(
+            String.format("%d:%d:%03d", hours, minutes, seconds),
+            new Label.LabelStyle(new BitmapFont(), Color.WHITE)
+        );
         timeLabel = new Label("TIMER", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         linkLabel = new Label("ENEMIES SLAIN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        enemiesSlainLabel = new Label(String.format("%d", enemiesSlain), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthValue = new Label(String.format("%d", playerHealth), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        enemiesSlainLabel = new Label(String.format("%d", enemiesSlain),
+            new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthValue = new Label(String.format("%d", playerHealth),
+            new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Sprite frostWaveSprite = SpriteUtils.getSpriteFromSpriteSheet(
             assetManager.get(Assets.FROST_ABILITIES_SPRITE_SHEET), 1, 0, 5, 5);
         Sprite blinkSprite = SpriteUtils.getSpriteFromSpriteSheet(
