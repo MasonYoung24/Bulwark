@@ -38,7 +38,7 @@ public class MainMenuScreen implements Screen {
      *
      * @param game the main game as a Bulwark
      * */
-    public MainMenuScreen(Bulwark game) {
+    public MainMenuScreen(final Bulwark game) {
         this.game = game;
     }
 
@@ -88,7 +88,13 @@ public class MainMenuScreen implements Screen {
              * @param fromActor the actor that the pointer was previously over as an Actor
              * */
             @Override
-            public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
+            public void enter(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate,
+                final int pointer,
+                final Actor fromActor
+            ) {
                 startButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER_ENTER);
                 startButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER_ENTER);
                 table.invalidateHierarchy();
@@ -104,7 +110,13 @@ public class MainMenuScreen implements Screen {
              * @param toActor the actor that the pointer is currently over as an Actor
              * */
             @Override
-            public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
+            public void exit(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate,
+                final int pointer,
+                final Actor toActor
+            ) {
                 startButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER);
                 startButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
@@ -118,7 +130,11 @@ public class MainMenuScreen implements Screen {
              * @param yCoordinate the y-coordinate of the pointer as a float
              * */
             @Override
-            public void clicked(InputEvent event, float xCoordinate, float yCoordinate) {
+            public void clicked(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate
+            ) {
                 game.setScreen(new GameScreen(game, false));
             }
         });
@@ -134,7 +150,13 @@ public class MainMenuScreen implements Screen {
              * @param fromActor the actor that the pointer was previously over as an Actor
              * */
             @Override
-            public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
+            public void enter(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate,
+                final int pointer,
+                final Actor fromActor
+            ) {
                 loadButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER_ENTER);
                 loadButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER_ENTER);
                 table.invalidateHierarchy();
@@ -150,7 +172,13 @@ public class MainMenuScreen implements Screen {
              * @param toActor the actor that the pointer is currently over as an Actor
              * */
             @Override
-            public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
+            public void exit(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate,
+                final int pointer,
+                final Actor toActor
+            ) {
                 loadButtonCell.width(loadButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER);
                 loadButtonCell.height(loadButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
@@ -164,7 +192,11 @@ public class MainMenuScreen implements Screen {
              * @param yCoordinate the y-coordinate of the pointer as a float
              * */
             @Override
-            public void clicked(InputEvent event, float xCoordinate, float yCoordinate) {
+            public void clicked(
+                final InputEvent event,
+                final float xCoordinate,
+                final float yCoordinate
+            ) {
                 game.setScreen(new GameScreen(game, true));
             }
         });
@@ -179,7 +211,7 @@ public class MainMenuScreen implements Screen {
      * @param delta The time in seconds since the last render.
      */
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         ScreenUtils.clear(Color.BLACK);
 
         // Update and draw the stage
@@ -195,7 +227,7 @@ public class MainMenuScreen implements Screen {
      * @see ApplicationListener#resize(int, int)
      */
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 
