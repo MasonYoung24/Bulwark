@@ -52,8 +52,10 @@ public class GamePlayHUD {
      * Constructs an object of type GamePlayHUD.
      *
      * @param spriteBatch the SpriteBatch used to render the HUD
+     * @param playerHealth the current health of the player character as an int
+     * @param assetManager the asset manager of the game as an AssetManager
      * */
-    public GamePlayHUD(final SpriteBatch spriteBatch, int playerHealth, AssetManager assetManager) {
+    public GamePlayHUD(final SpriteBatch spriteBatch, final int playerHealth, final AssetManager assetManager) {
         enemiesSlain = 0;
         seconds = GAME_START_TIME;
         minutes = GAME_START_TIME;
@@ -112,6 +114,11 @@ public class GamePlayHUD {
         stage.addActor(abilitiesTable);
     }
 
+    /**
+     * Updates the displayed number of enemies slain.
+     *
+     * @param enemiesSlain the current number of enemies slain
+     * */
     public void updateEnemiesSlain(final int enemiesSlain) {
         this.enemiesSlain = enemiesSlain;
         enemiesSlainLabel.setText(String.format("%d", this.enemiesSlain));
