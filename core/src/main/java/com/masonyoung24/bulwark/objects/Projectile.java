@@ -38,7 +38,6 @@ public class Projectile {
 
     private final Sprite sprite;
     private final float speed;
-    private Vector3 position;
     private final Vector3 direction;
     private final float refractoryPeriod;
     private boolean isFriendly;
@@ -74,11 +73,10 @@ public class Projectile {
             SPRITE_SHEET_TARGET_COLUMN,
             SPRITE_SHEET_COLUMNS,
             SPRITE_SHEET_ROWS);
-        this.position = startPosition;
         this.speed = speed;
         this.direction = direction;
         this.refractoryPeriod = refractoryPeriod;
-        this.sprite.setPosition(position.x, position.y);
+        this.sprite.setPosition(startPosition.x, startPosition.y);
         this.isFriendly = true;
         createAnimation(assetManager);
         this.rotateProjectile();
