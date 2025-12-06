@@ -19,6 +19,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents the main menu screen.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class MainMenuScreen implements Screen {
 
     private static final float START_BUTTON_SCALE_MODIFIER = 0.2f;
@@ -26,6 +32,11 @@ public class MainMenuScreen implements Screen {
     private final Bulwark game;
     private Stage stage;
 
+    /**
+     * Constructs an object of type MainMenuScreen.
+     *
+     * @param game the main game as a Bulwark
+     * */
     public MainMenuScreen(Bulwark game) {
         this.game = game;
     }
@@ -65,45 +76,94 @@ public class MainMenuScreen implements Screen {
 
         stage.addActor(table);
 
-
         startButton.addListener(new ClickListener() {
+            /**
+             * Enlarges the button when entering it.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * @param pointer the pointer index for the mouse cursor as an int
+             * @param fromActor the actor that the pointer was previously over as an Actor
+             * */
             @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
                 startButtonCell.width(startButtonTexture.getWidth() * 0.21f);
                 startButtonCell.height(startButtonTexture.getHeight() * 0.21f);
                 table.invalidateHierarchy();
             }
 
+            /**
+             * Shrinks the button when exiting it.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * @param pointer the pointer index for the mouse cursor as an int
+             * @param toActor the actor that the pointer is currently over as an Actor
+             * */
             @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
                 startButtonCell.width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER);
                 startButtonCell.height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
             }
 
+            /**
+             * Starts a fresh game.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * */
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float xCoordinate, float yCoordinate) {
                 game.setScreen(new GameScreen(game, false));
             }
         });
 
         loadButton.addListener(new ClickListener() {
+            /**
+             * Enlarges the button when entering it.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * @param pointer the pointer index for the mouse cursor as an int
+             * @param fromActor the actor that the pointer was previously over as an Actor
+             * */
             @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
                 loadButtonCell.width(startButtonTexture.getWidth() * 0.21f);
                 loadButtonCell.height(startButtonTexture.getHeight() * 0.21f);
                 table.invalidateHierarchy();
             }
 
+            /**
+             * Shrinks the button when exiting it.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * @param pointer the pointer index for the mouse cursor as an int
+             * @param toActor the actor that the pointer is currently over as an Actor
+             * */
             @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
                 loadButtonCell.width(loadButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER);
                 loadButtonCell.height(loadButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
             }
 
+            /**
+             * Loads and starts a saved game.
+             *
+             * @param event the input event as an InputEvent
+             * @param xCoordinate the x-coordinate of the pointer as a float
+             * @param yCoordinate the y-coordinate of the pointer as a float
+             * */
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float xCoordinate, float yCoordinate) {
                 game.setScreen(new GameScreen(game, true));
             }
         });
@@ -127,8 +187,10 @@ public class MainMenuScreen implements Screen {
     }
 
     /**
-     * @param width
-     * @param height
+     * Resizes the game's viewport.
+     *
+     * @param width the new width of the viewport
+     * @param height the new height of the viewport
      * @see ApplicationListener#resize(int, int)
      */
     @Override
