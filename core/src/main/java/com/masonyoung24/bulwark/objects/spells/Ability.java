@@ -62,13 +62,6 @@ public abstract class Ability {
     }
 
     /**
-     * Returns the damage done by the ability
-     * */
-    public float getDamage() {
-        return this.damage;
-    }
-
-    /**
      * Executes the ability.
      * */
     abstract void execute(Actor actor);
