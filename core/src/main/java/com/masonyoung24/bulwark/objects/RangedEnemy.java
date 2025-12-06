@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.enums.EnemyType;
 
+import java.util.Objects;
+
 /**
  * Represents a ranged enemy.
  *
@@ -134,5 +136,63 @@ public abstract class RangedEnemy extends Enemy {
         );
 
         return new Vector3(getPosition()).add(projectileDirectionNormalized.scl(bufferDistance));
+    }
+
+    /**
+     * Returns a String representation of this RangedEnemy.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("RangedEnemy{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", assetManager=").append(assetManager);
+        stringBuilder.append(", castSpeed=").append(castSpeed);
+        stringBuilder.append(", projectile=").append(projectile);
+        stringBuilder.append(", timeSinceLastShot=").append(timeSinceLastShot);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this RangedEnemy to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        RangedEnemy that = (RangedEnemy) object;
+        return Float.compare(castSpeed, that.castSpeed) == 0
+            && Float.compare(getTimeSinceLastShot(), that.getTimeSinceLastShot()) == 0
+            && Objects.equals(assetManager, that.assetManager)
+            && Objects.equals(projectile, that.projectile);
+    }
+
+    /**
+     * Returns a hash code for this RangedEnemy.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode(),
+            assetManager,
+            castSpeed,
+            projectile,
+            getTimeSinceLastShot()
+        );
     }
 }
