@@ -16,7 +16,6 @@ public class GameOverScreen implements Screen {
 
     private final Bulwark game;
     private final Stage stage;
-    private Label enemiesSlainCountLabel;
 
     public GameOverScreen(final Bulwark game, int enemiesSlain) {
         this.game = game;
@@ -33,7 +32,7 @@ public class GameOverScreen implements Screen {
             "ENEMIES SLAIN",
             new Label.LabelStyle(bitmapFont, Color.WHITE));
 
-        enemiesSlainCountLabel = new Label(
+        Label enemiesSlainCountLabel = new Label(
             String.format("%d", enemiesSlain),
             new Label.LabelStyle(bitmapFont,
                 Color.WHITE));
