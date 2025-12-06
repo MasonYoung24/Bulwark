@@ -42,10 +42,10 @@ public class PlayerCharacter extends Actor implements Shooter {
      * @param assetManager the asset manager of the game as an AssetManager
      * @param spawnPosition the initial position of the player as a Vector3
      * */
-    public PlayerCharacter(int healthPoints,
+    public PlayerCharacter(final int healthPoints,
                            float speed,
-                           AssetManager assetManager,
-                           Vector3 spawnPosition) {
+                           final AssetManager assetManager,
+                           final Vector3 spawnPosition) {
         super(healthPoints,
             speed,
             Actor.getSprite(assetManager.get(Assets.HUMANS_SPRITE_SHEET),
