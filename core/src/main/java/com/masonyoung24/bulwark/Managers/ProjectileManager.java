@@ -14,7 +14,7 @@ import java.util.List;
  * */
 public class ProjectileManager {
     private static ProjectileManager instance;
-    private List<Projectile> activeProjectiles;
+    private final List<Projectile> activeProjectiles;
 
     /*
      * Constructs an object of type ProjectileManager.
