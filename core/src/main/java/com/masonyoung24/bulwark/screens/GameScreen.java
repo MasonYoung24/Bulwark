@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.HUDs.GamePlayHUD;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.data.GameSaveData;
 import com.masonyoung24.bulwark.data.SaveLoadManager;
 import com.masonyoung24.bulwark.enums.AbilityName;
@@ -33,6 +34,7 @@ import com.masonyoung24.bulwark.resources.Assets;
  * */
 public class GameScreen implements Screen, InputProcessor {
     public static final float UNIT_SCALE = 1f / 32f;
+    private static final float HALF_MODIFIER = 2f;
 
     private final Bulwark game;
     private final OrthographicCamera camera;
@@ -80,13 +82,24 @@ public class GameScreen implements Screen, InputProcessor {
         if (loadSave && SaveLoadManager.saveExists()) {
             GameSaveData save = SaveLoadManager.loadGame();
             if (save != null) {
-                this.playerCharacter = SaveLoadManager.restorePlayer(save.player, assetManager);
+                this.playerCharacter = SaveLoadManager.restorePlayer(
+                    save.getPlayerSaveData(),
+                    assetManager,
+                    getPlayerSpawnPosition()
+                );
                 System.out.println("Player created from save!");
+
+                for (EnemySaveData enemySave : save.getEnemySaveData()) {
+                    Enemy restoredEnemy = SaveLoadManager.restoreEnemy(
+                        enemySave,
+                        assetManager);
+                    enemyManager.getActiveEnemies().add(restoredEnemy);
+                }
             } else {
-                this.playerCharacter = new PlayerCharacter(3, 100, assetManager);
+                this.playerCharacter = new PlayerCharacter(3, 100, assetManager, getPlayerSpawnPosition());
             }
         } else {
-            this.playerCharacter = new PlayerCharacter(3, 100, assetManager);
+            this.playerCharacter = new PlayerCharacter(3, 100, assetManager, getPlayerSpawnPosition());
         }
 
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
@@ -132,7 +145,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         this.handleMovementInput();
-        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight);
+        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight, deltaTime);
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
         collisionManager.detectProjectileCollisionWithEnemy();
@@ -162,6 +175,17 @@ public class GameScreen implements Screen, InputProcessor {
         updateAbilityIconReadyState();
     }
 
+    /*
+     * Gets the spawn position for the player character.
+     * */
+    private Vector3 getPlayerSpawnPosition() {
+        return new Vector3(
+            (this.viewport.getWorldWidth() / HALF_MODIFIER),
+            (this.viewport.getWorldHeight() / HALF_MODIFIER),
+            0
+        );
+    }
+
     /**
      * Handles firing a projectile from the player character.
      * */
@@ -179,7 +203,13 @@ public class GameScreen implements Screen, InputProcessor {
      * */
     public void save() {
         GameSaveData save = new GameSaveData();
-        save.player = SaveLoadManager.createPlayerSave(playerCharacter);
+        save.setPlayerSaveData(SaveLoadManager.createPlayerSave(playerCharacter));
+
+        // Save active enemies
+        for (Enemy enemy : enemyManager.getActiveEnemies()) {
+            save.addEnemySaveData(enemy.saveData());
+        }
+
         SaveLoadManager.saveGame(save);
         System.out.println("Game saved");
     }
@@ -201,8 +231,6 @@ public class GameScreen implements Screen, InputProcessor {
     private void pauseGame() {
         this.isPaused = true;
     }
-
-    private static final float BUTTON_SPACING = 5f; // space between buttons
 
     private void createPauseButtons(final float worldWidth, final float worldHeight) {
 
@@ -267,8 +295,8 @@ public class GameScreen implements Screen, InputProcessor {
      * */
     private void updateAbilityIconReadyState() {
         gamePlayHUD.setAbilityReady(
-            AbilityName.FROSTWAVE,
-            playerCharacter.checkIfAbilityIsExecutable(AbilityName.FROSTWAVE)
+            AbilityName.FROST_WAVE,
+            playerCharacter.checkIfAbilityIsExecutable(AbilityName.FROST_WAVE)
         );
         gamePlayHUD.setAbilityReady(
             AbilityName.BLINK,
@@ -401,7 +429,7 @@ public class GameScreen implements Screen, InputProcessor {
         Vector3 position = new Vector3(screenX, screenY, 0);
         viewport.unproject(position);
         if (button == Input.Buttons.RIGHT) {
-            playerCharacter.executeAbility(AbilityName.FROSTWAVE, abilityManager);
+            playerCharacter.executeAbility(AbilityName.FROST_WAVE, abilityManager);
         }
         if (isPaused && continueButton.getBoundingRectangle().contains(position.x, position.y)) {
             isPaused = false;
