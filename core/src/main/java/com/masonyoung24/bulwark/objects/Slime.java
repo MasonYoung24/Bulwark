@@ -8,6 +8,8 @@ import com.masonyoung24.bulwark.enums.EnemyType;
 import com.masonyoung24.bulwark.enums.SlimeSize;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents a Slime enemy.
  *
@@ -189,5 +191,57 @@ public class Slime extends Enemy {
         this.setSpeed(data.getSpeed());
         this.setSlimeSize(data.getSlimeSize());
         this.setSlimeScaleFactor(data.getScaleFactor());
+    }
+
+    /**
+     * Returns a String representation of this Slime.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Slime{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", size=").append(size);
+        stringBuilder.append(", scaleFactor=").append(scaleFactor);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Slime to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        Slime slime = (Slime) object;
+        return Float.compare(scaleFactor, slime.scaleFactor) == 0
+            && size == slime.size;
+    }
+
+    /**
+     * Returns a hash code for this Slime.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode(),
+            size,
+            scaleFactor
+        );
     }
 }

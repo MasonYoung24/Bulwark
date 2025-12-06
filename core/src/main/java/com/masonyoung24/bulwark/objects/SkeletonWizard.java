@@ -7,6 +7,8 @@ import com.masonyoung24.bulwark.data.SkeletonWizardSaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents a ranged skeleton wizard enemy.
  *
@@ -89,5 +91,42 @@ public class SkeletonWizard extends RangedEnemy {
         this.setCurrentHP(data.getHP());
         this.sprite.setPosition(data.getXCoordinate(), data.getYCoordinate());
         this.setSpeed(data.getSpeed());
+    }
+
+    /**
+     * Returns a String representation of this SkeletonWizard.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("SkeletonWizard{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this SkeletonWizard to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        return super.equals(object);
+    }
+
+    /**
+     * Returns a hash code for this SkeletonWizard.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode()
+        );
     }
 }
