@@ -5,7 +5,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,15 +16,20 @@ public class GameOverScreen implements Screen {
     private final Bulwark game;
     private final Stage stage;
 
-    public GameOverScreen(final Bulwark game, int enemiesSlain) {
+    public GameOverScreen(final Bulwark game, int enemiesSlain, String timeSurvived) {
         this.game = game;
         stage = new Stage(game.getViewport(), game.getSpriteBatch());
 
         BitmapFont bitmapFont = game.getBitmapFont();
 
         Label youLose = new Label("YOU LOSE", new Label.LabelStyle(bitmapFont, Color.WHITE));
+
         Label timeSurvivedLabel = new Label(
             "TIME SURVIVED",
+            new Label.LabelStyle(bitmapFont, Color.WHITE));
+
+        Label timeSurvivedValue = new Label(
+            timeSurvived,
             new Label.LabelStyle(bitmapFont, Color.WHITE));
 
         Label enemiesSlainLabel = new Label(
@@ -54,6 +58,8 @@ public class GameOverScreen implements Screen {
 
         table.add(timeSurvivedLabel).expandX().center().padTop(20);
         table.row();
+
+        table.add(timeSurvivedValue).expandX().center().padTop(20);
 
         stage.addActor(table);
     }
