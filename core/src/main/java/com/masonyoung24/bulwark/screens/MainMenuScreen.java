@@ -27,7 +27,8 @@ import com.masonyoung24.bulwark.resources.Assets;
  * */
 public class MainMenuScreen implements Screen {
 
-    private static final float START_BUTTON_SCALE_MODIFIER = 0.2f;
+    private static final float BUTTON_SCALE_MODIFIER = 0.2f;
+    private static final float BUTTON_SCALE_MODIFIER_ENTER = 0.21f;
 
     private final Bulwark game;
     private Stage stage;
@@ -67,12 +68,12 @@ public class MainMenuScreen implements Screen {
         table.bottom();
 
         Cell<ImageButton> startButtonCell = table.add(startButton).
-            width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
-            .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+            width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER)
+            .height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
 
         Cell<ImageButton> loadButtonCell = table.add(loadButton).
-            width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
-            .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+            width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER)
+            .height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
 
         stage.addActor(table);
 
@@ -88,8 +89,8 @@ public class MainMenuScreen implements Screen {
              * */
             @Override
             public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
-                startButtonCell.width(startButtonTexture.getWidth() * 0.21f);
-                startButtonCell.height(startButtonTexture.getHeight() * 0.21f);
+                startButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER_ENTER);
+                startButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER_ENTER);
                 table.invalidateHierarchy();
             }
 
@@ -104,8 +105,8 @@ public class MainMenuScreen implements Screen {
              * */
             @Override
             public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
-                startButtonCell.width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER);
-                startButtonCell.height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+                startButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER);
+                startButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
             }
 
@@ -134,8 +135,8 @@ public class MainMenuScreen implements Screen {
              * */
             @Override
             public void enter(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor fromActor) {
-                loadButtonCell.width(startButtonTexture.getWidth() * 0.21f);
-                loadButtonCell.height(startButtonTexture.getHeight() * 0.21f);
+                loadButtonCell.width(startButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER_ENTER);
+                loadButtonCell.height(startButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER_ENTER);
                 table.invalidateHierarchy();
             }
 
@@ -150,8 +151,8 @@ public class MainMenuScreen implements Screen {
              * */
             @Override
             public void exit(InputEvent event, float xCoordinate, float yCoordinate, int pointer, Actor toActor) {
-                loadButtonCell.width(loadButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER);
-                loadButtonCell.height(loadButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+                loadButtonCell.width(loadButtonTexture.getWidth() * BUTTON_SCALE_MODIFIER);
+                loadButtonCell.height(loadButtonTexture.getHeight() * BUTTON_SCALE_MODIFIER);
                 table.invalidateHierarchy();
             }
 
