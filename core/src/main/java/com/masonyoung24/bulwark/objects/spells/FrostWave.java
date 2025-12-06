@@ -74,7 +74,7 @@ public class FrostWave extends Ability {
      * */
     private Texture createTexture() {
         Pixmap pixmap = new Pixmap(PIXMAP_WIDTH, PIXMAP_HEIGHT, Pixmap.Format.RGBA8888);
-        pixmap.setColor(FROST_COLOR_RED, FROST_COLOR_GREEN, FROST_COLOR_GREEN, FROST_COLOR_ALPHA);
+        pixmap.setColor(FROST_COLOR_RED, FROST_COLOR_GREEN, FROST_COLOR_BLUE, FROST_COLOR_ALPHA);
         pixmap.drawCircle(CIRCLE_CENTER_X, CIRCLE_CENTER_Y, CIRCLE_RADIUS);
         Texture texture = new Texture(pixmap);
         pixmap.dispose();
