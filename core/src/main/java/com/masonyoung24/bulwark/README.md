@@ -95,3 +95,22 @@ requires rerunning the program.
 - **Asset management**
     - Handle loading assets using LibGDX's AssetManager
     - Organized texture, sprite sheet, UI, and tileset paths
+
+## Technologies Used
+
+- **Java**
+- **LibGDX**
+- **Scene2D UI**
+    - To create UI for the main menu and game over screens
+- **Tiled Maps (TMX)**
+    - I used the Tiled software to create the main game background
+- **Object-Oriented Design Patterns**
+    - Factory
+        - Static ability and enemy factor classes
+    - Singleton
+        - For the projectile manager class.
+        - Not positive if it was the best design decision, but I game it a go.
+    - Inheritance
+        - e.g. Enemy, sub Enemy classes, PlayerCharacter all extend Actor
+        - Parent Ability class for the abilities
+        - Parent StatusEffect class for status effects.
