@@ -49,13 +49,11 @@ public class GameOverScreen implements Screen {
         table.add(enemiesSlainLabel).expandX().center().padTop(20);
         table.row();
 
-        table.add(timeSurvivedLabel).expandX().center().padTop(20);
-        table.row();
-
         table.add(enemiesSlainCountLabel).expandX().center().padTop(20);
         table.row();
 
-        table.add(enemiesSlainCountLabel).expandX();
+        table.add(timeSurvivedLabel).expandX().center().padTop(20);
+        table.row();
 
         stage.addActor(table);
     }
