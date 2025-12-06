@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class SpriteUtils {
-    public SpriteUtils() {
+public final class SpriteUtils {
+
+    private SpriteUtils() {
 
     }
 
