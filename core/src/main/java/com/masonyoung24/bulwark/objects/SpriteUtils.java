@@ -34,14 +34,4 @@ public class SpriteUtils {
 
         return new Sprite(actorFrame);
     }
-
-    /**
-     * Tints the sprite to a new color.
-     *
-     * @param sprite a sprite to tint
-     * @param color the color to tint the sprite
-     * */
-    public static void tint(Sprite sprite, Color color) {
-        sprite.setColor(color);
-    }
 }
