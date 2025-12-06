@@ -50,7 +50,7 @@ public class Projectile {
     private final float refractoryPeriod;
     private boolean isFriendly;
 
-    public Projectile(AssetManager assetManager) {
+    public Projectile(final AssetManager assetManager) {
         this(
             new Vector3(0, 0, 0),
             DEFAULT_SPEED,
@@ -101,7 +101,7 @@ public class Projectile {
     /**
      * Updates the position of the projectile by translating its sprite
      * */
-    public void updatePosition(float deltaTime) {
+    public void updatePosition(final float deltaTime) {
         // update position
         sprite.translate(direction.x * speed, direction.y * speed);
 
@@ -149,7 +149,7 @@ public class Projectile {
     /**
      * Sets the IsFriendly state of the Projectile.
      * */
-    public void setIsFriendly(boolean isFriendly) {
+    public void setIsFriendly(final boolean isFriendly) {
         this.isFriendly = isFriendly;
     }
 
@@ -158,7 +158,7 @@ public class Projectile {
      *
      * @param assetManager the game asset manager
      * */
-    public void createAnimation(AssetManager assetManager) {
+    public void createAnimation(final AssetManager assetManager) {
 
         Texture projectileTexture = assetManager.get(Assets.FIRE_BALL_PROJECTILE);
 
@@ -196,7 +196,7 @@ public class Projectile {
      *
      * @param batch the game's sprite batch as a SpriteBatch
      * */
-    public void render(SpriteBatch batch) {
+    public void render(final SpriteBatch batch) {
         sprite.draw(batch);
     }
 }
