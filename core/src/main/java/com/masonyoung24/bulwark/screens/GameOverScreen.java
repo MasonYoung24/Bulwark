@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,10 +22,21 @@ public class GameOverScreen implements Screen {
         this.game = game;
         stage = new Stage(game.getViewport(), game.getSpriteBatch());
 
-        Label youLose = new Label("YOU LOSE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label timeSurvivedLabel = new Label("TIME SURVIVED", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label enemiesSlainLabel = new Label("ENEMIES SLAIN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        enemiesSlainCountLabel = new Label(String.format("%d", enemiesSlain), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        BitmapFont bitmapFont = game.getBitmapFont();
+
+        Label youLose = new Label("YOU LOSE", new Label.LabelStyle(bitmapFont, Color.WHITE));
+        Label timeSurvivedLabel = new Label(
+            "TIME SURVIVED",
+            new Label.LabelStyle(bitmapFont, Color.WHITE));
+
+        Label enemiesSlainLabel = new Label(
+            "ENEMIES SLAIN",
+            new Label.LabelStyle(bitmapFont, Color.WHITE));
+
+        enemiesSlainCountLabel = new Label(
+            String.format("%d", enemiesSlain),
+            new Label.LabelStyle(bitmapFont,
+                Color.WHITE));
 
         //define a table used to organize hud's labels
         Table table = new Table();
