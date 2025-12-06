@@ -42,6 +42,9 @@ public class Bulwark extends Game {
         setScreen(new MainMenuScreen(this));
     }
 
+    /**
+     * Renders the game.
+     * */
     @Override
     public void render() {
         super.render();
@@ -92,6 +95,9 @@ public class Bulwark extends Game {
         return this.camera;
     }
 
+    /**
+     * Disposes of the game's resources.
+     * */
     @Override
     public void dispose() {
         batch.dispose();
