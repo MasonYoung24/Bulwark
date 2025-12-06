@@ -9,30 +9,71 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import java.awt.*;
 
 public class Assets {
-    // asset manager
+
+    /**
+     * The global AssetManager used to load and manage game assets.
+     * */
     public final AssetManager manager = new AssetManager();
 
     // Sprites
+    /**
+     * File path to the monster sprite sheet.
+     * */
     public static final String MONSTERS_SPRITE_SHEET = "sprites/MonstersSpriteSheet.png";
+
+    /**
+     * File path to the humanoid sprite sheet use for the player character sprite.
+     * */
     public static final String HUMANS_SPRITE_SHEET = "sprites/HumansSpriteSheet.png";
 
     // Abilities
+    /**
+     * File path to the sprite sheet containing all frost ability frames.
+     * */
     public static final String FROST_ABILITIES_SPRITE_SHEET = "sprites/abilities/frost/frostAbilities.png";
+
+    /**
+     * File path to the sprite used for the Blink ability.
+     * */
     public static final String BLINK_ABILITY_SPRITE = "sprites/abilities/arcane/blink.png";
 
     // Projectiles
+    /**
+     * File path to the fireball projectile animation frames.
+     * */
     public static final String FIRE_BALL_PROJECTILE = "sprites/projectiles/fireballProjectileFrames.png";
 
     // Main Menu
+    /**
+     * File path to the START button image used in the main menu.
+     * */
     public static final String START_BUTTON = "MainMenu/loadbutton.png";
+
+    /**
+     * File path to the LOAD button image used in the main menu.
+     * */
     public static final String LOAD_BUTTON = "MainMenu/loadbutton.png";
+
+    /**
+     * File path to the background image displayed on the main menu.
+     * */
     public static final String MAIN_MENU_BACKGROUND = "MainMenu/MainMenuBackground.png";
 
     //Pause Screen
+    /**
+     * File path to the SAVE button image used on the pause screen.
+     * */
     public static final String SAVE_BUTTON = "pause/saveButton.png";
+
+    /**
+     * File path to the CONTINUE button image used on the pause screen.
+     * */
     public static final String CONTINUE_BUTTON = "pause/continueButton.png";
 
     // Tilesets
+    /**
+     * File path to the main tileset used for map and level rendering.
+     * */
     public static final String MAIN_TILESET = "maps/objects/main.tmx";
 
     /**
