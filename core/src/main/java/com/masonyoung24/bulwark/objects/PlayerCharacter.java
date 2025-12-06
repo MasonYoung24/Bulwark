@@ -7,6 +7,12 @@ import com.masonyoung24.bulwark.objects.spells.Blink;
 import com.masonyoung24.bulwark.objects.spells.FrostWave;
 import com.masonyoung24.bulwark.resources.Assets;
 
+/**
+ * Represents the controllable player character.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class PlayerCharacter extends Actor implements Shooter {
     private static final int CHARACTER_TARGET_ROW = 4;
     private static final int CHARACTER_TARGET_COLUMN = 1;
@@ -22,6 +28,14 @@ public class PlayerCharacter extends Actor implements Shooter {
     private Vector3 previousPosition;
     private final float fireRateModifier;
 
+    /**
+     * Constructs an object of type PlayerCharacter.
+     *
+     * @param healthPoints the number of health points that the player has as an int
+     * @param speed the speed of the player character as a float
+     * @param assetManager the asset manager of the game as an AssetManager
+     * @param spawnPosition the initial position of the player as a Vector3
+     * */
     public PlayerCharacter(int healthPoints,
                            float speed,
                            AssetManager assetManager,
