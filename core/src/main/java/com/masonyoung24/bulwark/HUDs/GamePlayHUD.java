@@ -49,9 +49,7 @@ public class GamePlayHUD {
     private int hours;
     private int enemiesSlain;
 
-    // Abilities
-    private Image frostWaveIcon;
-    private HashMap<AbilityName, Image> abilityIcons;
+    private final HashMap<AbilityName, Image> abilityIcons;
 
     /**
      * Constructs an object of type GamePlayHUD.
@@ -88,7 +86,8 @@ public class GamePlayHUD {
             assetManager.get(Assets.BLINK_ABILITY_SPRITE), 0, 0, 1, 1);
 
 
-        this.frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
+        // Abilities
+        Image frostWaveIcon = new Image(new TextureRegionDrawable(frostWaveSprite));
         abilityIcons.put(AbilityName.FROST_WAVE, frostWaveIcon);
         abilityIcons.put(AbilityName.BLINK, new Image(new TextureRegionDrawable(blinkSprite)));
 
