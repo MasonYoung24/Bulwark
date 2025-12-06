@@ -175,9 +175,13 @@ public class Slime extends Enemy {
      * Sets the instance variables of the Slime based on saved data.
      *
      * @param base the save data for a base enemy as an EnemySaveData
+     * @throws IllegalArgumentException if the data provided is null
      * */
     @Override
     public void loadData(final EnemySaveData base) {
+        if (base == null) {
+            throw new IllegalArgumentException("Provided save data must not be null.");
+        }
         SlimeSaveData data = (SlimeSaveData) base;
 
         this.setCurrentHP(data.getHP());
