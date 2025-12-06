@@ -166,6 +166,16 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
+     * Handles the collision between an Enemy and the PlayerCharacter
+     * */
+    public void handleEnemyCollision(int enemyDamage) {
+        setCurrentHP(this.getCurrentHP() - enemyDamage);
+        if (getCurrentHP() <= 0) {
+            handleDeath();
+        }
+    }
+
+    /**
      * Handles the death of the player character.
      * */
     @Override
