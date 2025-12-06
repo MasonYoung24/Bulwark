@@ -20,7 +20,7 @@ import java.util.Set;
  * @author Mason Young
  * @version 2025
  * */
-public class FrostWave extends Ability implements CollidableAbility {
+public class FrostWave extends Ability {
     private static final float MAX_RADIUS = 300f;
     private static final float SPEED = 300f;
     private static final float START_RADIUS = 0.0f;
