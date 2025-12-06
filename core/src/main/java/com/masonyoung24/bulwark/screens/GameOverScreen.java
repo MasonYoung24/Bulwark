@@ -11,6 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
 
+/**
+ * Represents the game over screen.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class GameOverScreen implements Screen {
 
     private static final int TITLE_PAD_TOP = 50;
@@ -19,10 +25,16 @@ public class GameOverScreen implements Screen {
     private static final String TEXT_TIME_SURVIVED = "TIME SURVIVED";
     private static final String TEXT_ENEMIES_SLAIN = "ENEMIES SLAIN";
 
-
     private final Bulwark game;
     private final Stage stage;
 
+    /**
+     * Constructs an object of type GameOverScreen.
+     *
+     * @param game the game as a Bulwark
+     * @param enemiesSlain the number of enemies slain as an int
+     * @param timeSurvived the time survived as a String
+     * */
     public GameOverScreen(final Bulwark game, int enemiesSlain, String timeSurvived) {
         this.game = game;
         stage = new Stage(game.getViewport(), game.getSpriteBatch());
