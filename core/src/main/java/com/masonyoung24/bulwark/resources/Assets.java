@@ -53,7 +53,7 @@ public class Assets {
     /**
      * File path to the START button image used in the main menu.
      * */
-    public static final String START_BUTTON = "MainMenu/loadbutton.png";
+    public static final String START_BUTTON = "MainMenu/startbutton.png";
 
     /**
      * File path to the LOAD button image used in the main menu.
