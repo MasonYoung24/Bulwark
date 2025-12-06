@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.enums.EnemyType;
 
 /**
  * Represents a ranged enemy.
@@ -38,8 +39,9 @@ public abstract class RangedEnemy extends Enemy {
                        final float speed,
                        final Sprite sprite,
                        final Vector3 spawnPosition,
-                       final AssetManager assetManager) {
-        super(maxHP, speed, sprite, spawnPosition);
+                       final AssetManager assetManager,
+                       final EnemyType enemyType) {
+        super(maxHP, speed, sprite, spawnPosition, enemyType);
         this.projectile = new Projectile(assetManager);
         this.assetManager = assetManager;
         this.castSpeed = BASE_CAST_SPEED;
