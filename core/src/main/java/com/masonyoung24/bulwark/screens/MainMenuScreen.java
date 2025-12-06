@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.resources.Assets;
 
@@ -26,7 +25,6 @@ public class MainMenuScreen implements Screen {
 
     private final Bulwark game;
     private Stage stage;
-    private ImageButton startButton;
 
     public MainMenuScreen(Bulwark game) {
         this.game = game;
@@ -45,18 +43,26 @@ public class MainMenuScreen implements Screen {
         stage.addActor(backgroundImage);
 
         Texture startButtonTexture = game.assets.getTexture(Assets.START_BUTTON);
-        TextureRegionDrawable drawable = new TextureRegionDrawable(startButtonTexture);
+        TextureRegionDrawable drawableStartButton = new TextureRegionDrawable(startButtonTexture);
 
-        this.startButton = new ImageButton(drawable);
+        Texture loadButtonTexture = game.assets.getTexture(Assets.LOAD_BUTTON);
+        TextureRegionDrawable drawableLoadButton = new TextureRegionDrawable(loadButtonTexture);
+
+        ImageButton startButton = new ImageButton(drawableStartButton);
+        ImageButton loadButton = new ImageButton(drawableLoadButton);
 
         Table table = new Table();
         table.setFillParent(true);
-        table.center();
+        table.bottom();
 
         Cell<ImageButton> startButtonCell = table.add(startButton).
             width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
             .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
-        startButtonCell.padTop(400f);
+
+        Cell<ImageButton> loadButtonCell = table.add(loadButton).
+            width(startButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER)
+            .height(startButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+
         stage.addActor(table);
 
 
@@ -77,7 +83,28 @@ public class MainMenuScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, false));
+            }
+        });
+
+        loadButton.addListener(new ClickListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                loadButtonCell.width(startButtonTexture.getWidth() * 0.21f);
+                loadButtonCell.height(startButtonTexture.getHeight() * 0.21f);
+                table.invalidateHierarchy();
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                loadButtonCell.width(loadButtonTexture.getWidth() * START_BUTTON_SCALE_MODIFIER);
+                loadButtonCell.height(loadButtonTexture.getHeight() * START_BUTTON_SCALE_MODIFIER);
+                table.invalidateHierarchy();
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new GameScreen(game, true));
             }
         });
 
