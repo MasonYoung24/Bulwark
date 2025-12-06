@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="maintileset.tsx"/>
+ <tileset firstgid="1597" source="32Rogues.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxbzMbAsHgA8ZIBtn8wuZEUe3CpHezhuYxKagYjJhT25MTNYI9PcuINXR0uP1KaDgjpX0LA/sGO0d1NzXxDaZhgcwst8gct8VAth6iJ0eOEmmUYteN7sKUfEAYAB9uMVw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh+YCcb5XoXs+NXQ4kdAwEGs3tp5TZqpANqm0sLcwYa4MsrQwkM5vgYzG6jBJCbdoZieNCjnMPFpsRMEFg0xPL4YEkfAPMLENU=
+  </data>
+ </layer>
+</map>
