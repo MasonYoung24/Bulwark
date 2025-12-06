@@ -26,14 +26,7 @@ public class Projectile {
     private static final float FRAME_DURATION = 0.1f;
     private static final int FIRST_FRAME_INDEX = 0;
     private static final int DESTINATION_POSITION = 0;
-
-    /**
-     * The default speed of a projectile
-     * */
     private static final float DEFAULT_SPEED = 300f;
-    /**
-     * The default refractory period of a projectile
-     * */
     private static final float DEFAULT_REFRACTORY_PERIOD = 2.0f;
     private static final float START_ANIMATION_TIME = 0.0f;
 
