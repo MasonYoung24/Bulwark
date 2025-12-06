@@ -4,8 +4,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Represents a utility class for working with Sprite objects.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public final class SpriteUtils {
 
+    /*
+     * Constructs an object of type SpriteUtils.
+     * */
     private SpriteUtils() {
 
     }
