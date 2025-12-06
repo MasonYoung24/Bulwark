@@ -31,9 +31,10 @@ public class Blink extends Ability {
     /**
      * Executes the ability.
      *
+     * @param actor the actor that is executing the ability
      */
     @Override
-    void execute(Actor actor) {
+    void execute(final Actor actor) {
         Vector3 movementDirectionNormalized = actor.getMovementDirection().nor();
         actor.sprite.translate(
             movementDirectionNormalized.x * distance,
@@ -43,8 +44,7 @@ public class Blink extends Ability {
     /**
      * Updates the state of the Ability.
      *
-     * @param deltaTime
-     *
+     * @param deltaTime the time elapsed since the last update
      */
     @Override
     public void update(final float deltaTime) {
@@ -54,7 +54,7 @@ public class Blink extends Ability {
     /**
      * Renders the ability.
      *
-     * @param batch
+     * @param batch the game's sprite batch as a SpriteBatch
      *
      */
     @Override
@@ -64,7 +64,6 @@ public class Blink extends Ability {
 
     /**
      * Disposes of the Ability.
-     *
      */
     @Override
     public void dispose() {
