@@ -141,6 +141,15 @@ public class GamePlayHUD {
         }
     }
 
+    /**
+     * Returns the current time survived.
+     *
+     * @return the current time survived as a String
+     * */
+    public String getCurrentTimeSurvived() {
+        return String.format(TIME_FORMAT, hours, minutes, seconds);
+    }
+
 
     /**
      * Updates the time displayed on the game timer.
