@@ -13,6 +13,13 @@ import com.masonyoung24.bulwark.Bulwark;
 
 public class GameOverScreen implements Screen {
 
+    private static final int TITLE_PAD_TOP = 50;
+    private static final int LABEL_PAD_TOP = 20;
+    private static final String TEXT_YOU_LOSE = "YOU LOSE";
+    private static final String TEXT_TIME_SURVIVED = "TIME SURVIVED";
+    private static final String TEXT_ENEMIES_SLAIN = "ENEMIES SLAIN";
+
+
     private final Bulwark game;
     private final Stage stage;
 
@@ -22,10 +29,10 @@ public class GameOverScreen implements Screen {
 
         BitmapFont bitmapFont = game.getBitmapFont();
 
-        Label youLose = new Label("YOU LOSE", new Label.LabelStyle(bitmapFont, Color.WHITE));
+        Label youLose = new Label(TEXT_YOU_LOSE, new Label.LabelStyle(bitmapFont, Color.WHITE));
 
         Label timeSurvivedLabel = new Label(
-            "TIME SURVIVED",
+            TEXT_TIME_SURVIVED,
             new Label.LabelStyle(bitmapFont, Color.WHITE));
 
         Label timeSurvivedValue = new Label(
@@ -33,7 +40,7 @@ public class GameOverScreen implements Screen {
             new Label.LabelStyle(bitmapFont, Color.WHITE));
 
         Label enemiesSlainLabel = new Label(
-            "ENEMIES SLAIN",
+            TEXT_ENEMIES_SLAIN,
             new Label.LabelStyle(bitmapFont, Color.WHITE));
 
         Label enemiesSlainCountLabel = new Label(
@@ -47,19 +54,19 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         //add labels to table, padding the top, and giving them all equal width with expandX
-        table.add(youLose).expandX().center().padTop(50);
+        table.add(youLose).expandX().center().padTop(TITLE_PAD_TOP);
         table.row();
 
-        table.add(enemiesSlainLabel).expandX().center().padTop(20);
+        table.add(enemiesSlainLabel).expandX().center().padTop(LABEL_PAD_TOP);
         table.row();
 
-        table.add(enemiesSlainCountLabel).expandX().center().padTop(20);
+        table.add(enemiesSlainCountLabel).expandX().center().padTop(LABEL_PAD_TOP);
         table.row();
 
-        table.add(timeSurvivedLabel).expandX().center().padTop(20);
+        table.add(timeSurvivedLabel).expandX().center().padTop(LABEL_PAD_TOP);
         table.row();
 
-        table.add(timeSurvivedValue).expandX().center().padTop(20);
+        table.add(timeSurvivedValue).expandX().center().padTop(LABEL_PAD_TOP);
 
         stage.addActor(table);
     }
