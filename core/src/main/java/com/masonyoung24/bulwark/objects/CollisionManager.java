@@ -63,10 +63,25 @@ public class CollisionManager {
     /**
      * Handles collisions between active abilities and enemies.
      * */
-    public void detectAbilityCollisionWithEnemy(List<Ability> activeAbilities, List<Enemy> activeEnemies) {
+    public void detectAbilityCollisionWithEnemy(
+        final List<Ability> activeAbilities,
+        final List<Enemy> activeEnemies) {
         for (final Ability ability : activeAbilities) {
             for (Enemy enemy : activeEnemies) {
                 ability.handleCollision(enemy);
+            }
+        }
+    }
+
+    public void detectEnemyCollisionWithPlayer(
+        final PlayerCharacter playerCharacter,
+        final List<Enemy> activeEnemies) {
+        for (final Enemy enemy : activeEnemies) {
+            if (
+                playerCharacter.getSpriteBoundingBox().overlaps(enemy.getSpriteBoundingBox())
+                    && !playerCharacter.getIsImmune()
+            ) {
+                playerCharacter.handleEnemyCollision();
             }
         }
     }

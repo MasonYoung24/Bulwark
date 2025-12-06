@@ -19,14 +19,20 @@ public class PlayerCharacter extends Actor implements Shooter {
     private static final float BASE_CAST_SPEED = 4.0f;
     private static final float HALF_MULTIPLIER = 0.5f;
     private static final float BASE_FIRE_RATE_MODIFIER = 0.25f;
+    private static final float COLLISION_IMMUNITY_DURATION = 1.0f;
+    private static final boolean DEFAULT_IS_IMMUNE = false;
+    private static final float IMMUNITY_TIMER_START_TIME = 0.0f;
 
     private final AssetManager assetManager;
     private boolean isAlive;
     private final float castSpeed;
     private final Projectile projectile;
     private float timeSinceLastShot = 0.0F;
-    private Vector3 previousPosition;
     private final float fireRateModifier;
+    private Vector3 previousPosition;
+    private float immunityTimer;
+    private boolean isImmune;
+
 
     /**
      * Constructs an object of type PlayerCharacter.
@@ -54,6 +60,8 @@ public class PlayerCharacter extends Actor implements Shooter {
         this.castSpeed = BASE_CAST_SPEED;
         this.fireRateModifier = BASE_FIRE_RATE_MODIFIER;
         this.isAlive = true;
+        immunityTimer = IMMUNITY_TIMER_START_TIME;
+        isImmune = DEFAULT_IS_IMMUNE;
     }
 
     /**
@@ -105,6 +113,15 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
+     * Returns true if the player character is immune, otherwise false.
+     *
+     * @return true if the player character is immune, otherwise false as a boolean
+     * */
+    public boolean getIsImmune() {
+        return this.isImmune;
+    }
+
+    /**
      * Determines if another shot can be fired.
      *
      * @return a boolean true if a shot can be fired, false otherwise
@@ -122,7 +139,7 @@ public class PlayerCharacter extends Actor implements Shooter {
      * @return a projectile as a Projectile
      * */
     @Override
-    public Projectile fireProjectile(Vector3 targetPosition) {
+    public Projectile fireProjectile(final Vector3 targetPosition) {
         Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
         Projectile newProjectile = new Projectile(
             bufferProjectileStartPosition(direction),
@@ -134,13 +151,34 @@ public class PlayerCharacter extends Actor implements Shooter {
     }
 
     /**
+     * Updates the state of the player character.
+     *
+     * @param deltaTime the time since the last update
+     * */
+    public void update(final float deltaTime) {
+        updateTimeSinceLastShot(deltaTime);
+        updateTimeSinceCast(deltaTime);
+        updateCollisionImmunity(deltaTime);
+    }
+
+    public void updateCollisionImmunity(final float deltaTime) {
+        if (isImmune) {
+            immunityTimer += deltaTime;
+            if (immunityTimer >= COLLISION_IMMUNITY_DURATION) {
+                immunityTimer = 0f;
+                isImmune = false;
+            }
+        }
+    }
+
+    /**
      * Updates the time until the next shot can be fired.
      *
      * @param deltaTime the time elapsed since the last update
      *
      */
     @Override
-    public void updateTimeSinceLastShot(float deltaTime) {
+    public void updateTimeSinceLastShot(final float deltaTime) {
         this.timeSinceLastShot += deltaTime;
     }
 
@@ -150,7 +188,7 @@ public class PlayerCharacter extends Actor implements Shooter {
      * @param projectileDirection the direction of the fired projectile as a Vector3
      * @return the buffered starting position of the projectile as a Vector3
      * */
-    private Vector3 bufferProjectileStartPosition(Vector3 projectileDirection) {
+    private Vector3 bufferProjectileStartPosition(final Vector3 projectileDirection) {
         Vector3 projectileDirectionNormalized = new Vector3(projectileDirection).nor();
         float halfSpriteWidth = sprite.getWidth() * HALF_MULTIPLIER;
         float halfSpriteHeight = sprite.getHeight() * HALF_MULTIPLIER;
@@ -168,11 +206,11 @@ public class PlayerCharacter extends Actor implements Shooter {
     /**
      * Handles the collision between an Enemy and the PlayerCharacter
      * */
-    public void handleEnemyCollision(int enemyDamage) {
-        setCurrentHP(this.getCurrentHP() - enemyDamage);
-        if (getCurrentHP() <= 0) {
-            handleDeath();
+    public void handleEnemyCollision() {
+        if (!this.isImmune) {
+            this.takeDamage();
         }
+        this.isImmune = true;
     }
 
     /**
