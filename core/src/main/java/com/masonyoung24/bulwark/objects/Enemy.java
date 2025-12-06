@@ -3,6 +3,8 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.data.EnemySaveData;
+import com.masonyoung24.bulwark.enums.EnemyType;
 
 /**
  * Represents and Enemy.
@@ -16,6 +18,7 @@ public abstract class Enemy extends Actor {
     private static final float LEFT_DIRECTION_BOUNDARY = 0f;
 
     private boolean isLiving;
+    private EnemyType enemyType;
 
     /**
      * Constructs an object of type Enemy.
@@ -24,13 +27,16 @@ public abstract class Enemy extends Actor {
      * @param speed the movement speed of the Enemy as a float
      * @param sprite the sprite of the Enemy as a Sprite
      * @param spawnPosition the spawn position of the Enemy as a Vector3
+     * @param enemyType the type of the enemy as an EnemyType
      * */
     public Enemy(final int healthPoints,
                  final float speed,
                  final Sprite sprite,
-                 final Vector3 spawnPosition) {
+                 final Vector3 spawnPosition,
+                 final EnemyType enemyType) {
         super(healthPoints, speed, sprite, spawnPosition);
         this.isLiving = true;
+        this.enemyType = enemyType;
     }
 
     /**
@@ -38,6 +44,13 @@ public abstract class Enemy extends Actor {
      */
     public boolean getIsLiving() {
         return this.isLiving;
+    }
+
+    /**
+     * Returns the type of the enemy as an EnemyType
+     * */
+    public EnemyType getEnemyType() {
+        return this.enemyType;
     }
 
     /**
@@ -58,7 +71,7 @@ public abstract class Enemy extends Actor {
         if (getIsFrozen()) {
             Vector3 direction = new Vector3(targetPosition).sub(this.getPosition()).nor();
             this.updateDirectionFacing(direction);
-            this.sprite.translate(direction.x * speed, direction.y * speed);
+            this.sprite.translate(direction.x * this.getSpeed(), direction.y * this.getSpeed());
         }
     }
 
@@ -89,4 +102,21 @@ public abstract class Enemy extends Actor {
      * @param enemyManager an enemy manager as an EnemyManager
      */
     public abstract void handleDeath(EnemyManager enemyManager);
+
+    /**
+     * Saves enemy data.
+     *
+     * @return the saved data as an EnemySaveData.
+     * */
+    public abstract EnemySaveData saveData();
+
+    /**
+     * Loads previously saved data into the object
+     *
+     * @param data the save data containing the state to be loaded
+     * @throws IllegalArgumentException if the data provided is null
+     * */
+    public abstract <T extends EnemySaveData> void loadData(T data);
+
+
 }
