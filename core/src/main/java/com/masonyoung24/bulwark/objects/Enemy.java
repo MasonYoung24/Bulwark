@@ -18,7 +18,7 @@ public abstract class Enemy extends Actor {
     private static final float LEFT_DIRECTION_BOUNDARY = 0f;
 
     private boolean isLiving;
-    private EnemyType enemyType;
+    private final EnemyType enemyType;
 
     /**
      * Constructs an object of type Enemy.
@@ -101,7 +101,7 @@ public abstract class Enemy extends Actor {
      *
      * @param enemyManager an enemy manager as an EnemyManager
      */
-    public abstract void handleDeath(EnemyManager enemyManager);
+    public abstract void handleDeath(final EnemyManager enemyManager);
 
     /**
      * Saves enemy data.
@@ -116,7 +116,7 @@ public abstract class Enemy extends Actor {
      * @param data the save data containing the state to be loaded
      * @throws IllegalArgumentException if the data provided is null
      * */
-    public abstract <T extends EnemySaveData> void loadData(T data);
+    public abstract <T extends EnemySaveData> void loadData(final T data);
 
 
 }
