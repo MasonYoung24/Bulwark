@@ -10,6 +10,9 @@ import com.masonyoung24.bulwark.objects.Actor;
  * @version 2025
  * */
 public abstract class Ability {
+
+    private static final float TIME_SINCE_CAST_REST_VALUE = 0.0f;
+
     private final float damage;
     private final float cooldown;
     private float timeSinceCast;
@@ -36,7 +39,7 @@ public abstract class Ability {
     public void cast(Actor actor) {
         if (checkIfExecutable()) {
             execute(actor);
-            this.timeSinceCast = 0.0f;
+            this.timeSinceCast = TIME_SINCE_CAST_REST_VALUE;
         }
     }
 
