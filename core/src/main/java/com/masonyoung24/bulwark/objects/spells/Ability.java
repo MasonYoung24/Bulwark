@@ -23,10 +23,20 @@ public abstract class Ability {
      *
      * @param damage the damage done by the Ability as a float
      * @param cooldown the cooldown of the Ability as a float
+     * @throws IllegalArgumentException if damage is negative
+     * @throws IllegalArgumentException if cooldown is negative
      * */
     public Ability(final float damage, final float cooldown) {
+        if (damage < 0) {
+            throw new IllegalArgumentException("Ability damage cannot be negative.");
+        }
         this.damage = damage;
+
+        if (cooldown < 0) {
+            throw new IllegalArgumentException("Ability cooldown cannot be negative.");
+        }
         this.cooldown = cooldown;
+
         this.timeSinceCast = cooldown;
         this.isExpired = false;
     }
