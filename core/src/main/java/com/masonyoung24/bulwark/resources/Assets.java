@@ -8,6 +8,12 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import java.awt.*;
 
+/**
+ * Represents a class for loading, accessing, and disposing of game assets.
+ *
+ * @author Mason Young
+ * @version 2025
+ * */
 public class Assets {
 
     /**
