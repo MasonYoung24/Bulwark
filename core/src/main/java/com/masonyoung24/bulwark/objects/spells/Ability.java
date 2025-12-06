@@ -10,8 +10,8 @@ import com.masonyoung24.bulwark.objects.Actor;
  * @version 2025
  * */
 public abstract class Ability {
-    private float damage;
-    private float cooldown;
+    private final float damage;
+    private final float cooldown;
     private float timeSinceCast;
     private boolean isExpired;
 
