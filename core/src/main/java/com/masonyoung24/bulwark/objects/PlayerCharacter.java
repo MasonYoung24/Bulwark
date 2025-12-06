@@ -145,7 +145,7 @@ public class PlayerCharacter extends Actor implements Shooter {
             bufferProjectileStartPosition(direction),
             castSpeed, direction,
             assetManager,
-            2.0F);
+            this.projectile.getRefractoryPeriod());
         this.timeSinceLastShot = 0;
         return newProjectile;
     }
