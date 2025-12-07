@@ -19,6 +19,7 @@ import com.masonyoung24.bulwark.objects.SpriteUtils;
 import com.masonyoung24.bulwark.resources.Assets;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Represents the main gameplay HUD.
@@ -200,5 +201,91 @@ public class GamePlayHUD {
      * */
     public void draw() {
         this.stage.draw();
+    }
+
+    /**
+     * Returns a String representation of this GamePlayHUD.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("GamePlayHUD{");
+        stringBuilder.append("stage=").append(stage);
+        stringBuilder.append(", viewport=").append(viewport);
+        stringBuilder.append(", table=").append(table);
+        stringBuilder.append(", countdownLabel=").append(countdownLabel);
+        stringBuilder.append(", timeLabel=").append(timeLabel);
+        stringBuilder.append(", linkLabel=").append(linkLabel);
+        stringBuilder.append(", enemiesSlainLabel=").append(enemiesSlainLabel);
+        stringBuilder.append(", healthLabel=").append(healthLabel);
+        stringBuilder.append(", healthValue=").append(healthValue);
+        stringBuilder.append(", timeCount=").append(timeCount);
+        stringBuilder.append(", seconds=").append(seconds);
+        stringBuilder.append(", minutes=").append(minutes);
+        stringBuilder.append(", hours=").append(hours);
+        stringBuilder.append(", enemiesSlain=").append(enemiesSlain);
+        stringBuilder.append(", abilityIcons=").append(abilityIcons);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this GamePlayHUD to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        GamePlayHUD that = (GamePlayHUD) object;
+        return Float.compare(timeCount, that.timeCount) == 0
+            && seconds == that.seconds
+            && getMinutes() == that.getMinutes()
+            && hours == that.hours
+            && enemiesSlain == that.enemiesSlain
+            && Objects.equals(stage, that.stage)
+            && Objects.equals(viewport, that.viewport)
+            && Objects.equals(table, that.table)
+            && Objects.equals(countdownLabel, that.countdownLabel)
+            && Objects.equals(timeLabel, that.timeLabel)
+            && Objects.equals(linkLabel, that.linkLabel)
+            && Objects.equals(enemiesSlainLabel, that.enemiesSlainLabel)
+            && Objects.equals(healthLabel, that.healthLabel)
+            && Objects.equals(healthValue, that.healthValue)
+            && Objects.equals(abilityIcons, that.abilityIcons);
+    }
+
+    /**
+     * Returns a hash code for this GamePlayHUD.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            stage,
+            viewport,
+            table,
+            countdownLabel,
+            timeLabel,
+            linkLabel,
+            enemiesSlainLabel,
+            healthLabel,
+            healthValue,
+            timeCount,
+            seconds,
+            getMinutes(),
+            hours,
+            enemiesSlain,
+            abilityIcons
+        );
     }
 }

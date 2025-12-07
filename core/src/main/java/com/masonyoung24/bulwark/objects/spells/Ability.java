@@ -3,6 +3,8 @@ package com.masonyoung24.bulwark.objects.spells;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.Actor;
 
+import java.util.Objects;
+
 /**
  * Represents an ability.
  *
@@ -108,5 +110,55 @@ public abstract class Ability {
 
     public void affect(Actor actor) {
 
+    }
+
+    /**
+     * Returns a String representation of this Ability.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Ability{");
+        stringBuilder.append("cooldown=").append(cooldown);
+        stringBuilder.append(", timeSinceCast=").append(timeSinceCast);
+        stringBuilder.append(", isExpired=").append(isExpired);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Ability to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Ability ability = (Ability) object;
+        return Float.compare(cooldown, ability.cooldown) == 0
+            && Float.compare(timeSinceCast, ability.timeSinceCast) == 0
+            && isExpired == ability.isExpired;
+    }
+
+    /**
+     * Returns a hash code for this Ability.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            cooldown,
+            timeSinceCast,
+            isExpired
+        );
     }
 }

@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents a projectile that can be fired.
  *
@@ -189,6 +191,71 @@ public class Projectile {
      * */
     public void render(final SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    /**
+     * Returns a String representation of this Projectile.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Projectile{");
+        stringBuilder.append("animation=").append(animation);
+        stringBuilder.append(", currentFrame=").append(currentFrame);
+        stringBuilder.append(", animationTime=").append(animationTime);
+        stringBuilder.append(", sprite=").append(sprite);
+        stringBuilder.append(", speed=").append(speed);
+        stringBuilder.append(", direction=").append(direction);
+        stringBuilder.append(", refractoryPeriod=").append(refractoryPeriod);
+        stringBuilder.append(", isFriendly=").append(isFriendly);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Projectile to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Projectile that = (Projectile) object;
+        return Float.compare(animationTime, that.animationTime) == 0
+            && Float.compare(speed, that.speed) == 0
+            && Float.compare(getRefractoryPeriod(), that.getRefractoryPeriod()) == 0
+            && isFriendly == that.isFriendly
+            && Objects.equals(animation, that.animation)
+            && Objects.equals(currentFrame, that.currentFrame)
+            && Objects.equals(sprite, that.sprite)
+            && Objects.equals(direction, that.direction);
+    }
+
+    /**
+     * Returns a hash code for this Projectile.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            animation,
+            currentFrame,
+            animationTime,
+            sprite,
+            speed,
+            direction,
+            getRefractoryPeriod(),
+            isFriendly
+        );
     }
 }
 

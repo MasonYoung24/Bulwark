@@ -7,6 +7,8 @@ import com.masonyoung24.bulwark.objects.spells.Blink;
 import com.masonyoung24.bulwark.objects.spells.FrostWave;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents the controllable player character.
  *
@@ -219,5 +221,74 @@ public class PlayerCharacter extends Actor implements Shooter {
     @Override
     public void handleDeath() {
         this.isAlive = false;
+    }
+
+    /**
+     * Returns a String representation of this PlayerCharacter.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("PlayerCharacter{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", assetManager=").append(assetManager);
+        stringBuilder.append(", isAlive=").append(isAlive);
+        stringBuilder.append(", castSpeed=").append(castSpeed);
+        stringBuilder.append(", projectile=").append(projectile);
+        stringBuilder.append(", timeSinceLastShot=").append(timeSinceLastShot);
+        stringBuilder.append(", fireRateModifier=").append(fireRateModifier);
+        stringBuilder.append(", previousPosition=").append(previousPosition);
+        stringBuilder.append(", immunityTimer=").append(immunityTimer);
+        stringBuilder.append(", isImmune=").append(isImmune);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this PlayerCharacter to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        PlayerCharacter that = (PlayerCharacter) object;
+        return isAlive == that.isAlive
+            && Float.compare(castSpeed, that.castSpeed) == 0
+            && Float.compare(getTimeSinceLastShot(), that.getTimeSinceLastShot()) == 0
+            && Float.compare(getFireRateModifier(), that.getFireRateModifier()) == 0
+            && Float.compare(immunityTimer, that.immunityTimer) == 0
+            && isImmune == that.isImmune
+            && Objects.equals(assetManager, that.assetManager)
+            && Objects.equals(projectile, that.projectile)
+            && Objects.equals(previousPosition, that.previousPosition);
+    }
+
+    /**
+     * Returns a hash code for this PlayerCharacter.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            assetManager,
+            isAlive,
+            castSpeed,
+            projectile,
+            getTimeSinceLastShot(),
+            getFireRateModifier(),
+            previousPosition,
+            immunityTimer,
+            isImmune
+        );
     }
 }

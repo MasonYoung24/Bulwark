@@ -5,6 +5,7 @@ import com.masonyoung24.bulwark.objects.Projectile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents a ProjectileManager that manages the game's active projectiles.
@@ -90,5 +91,47 @@ public class ProjectileManager {
     public void dispose() {
         activeProjectiles.clear();
         instance = null;
+    }
+
+    /**
+     * Returns a String representation of this ProjectileManager.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("ProjectileManager{");
+        stringBuilder.append("activeProjectiles=").append(activeProjectiles);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this ProjectileManager to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        ProjectileManager that = (ProjectileManager) object;
+        return Objects.equals(activeProjectiles, that.activeProjectiles);
+    }
+
+    /**
+     * Returns a hash code for this ProjectileManager.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(activeProjectiles);
     }
 }

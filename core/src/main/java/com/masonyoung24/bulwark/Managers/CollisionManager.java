@@ -7,6 +7,7 @@ import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manages the collisions between different objects.
@@ -103,5 +104,55 @@ public class CollisionManager {
                 break;
             }
         }
+    }
+
+    /**
+     * Returns a String representation of this CollisionManager.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("CollisionManager{");
+        stringBuilder.append("enemyManager=").append(enemyManager);
+        stringBuilder.append(", projectileManager=").append(projectileManager);
+        stringBuilder.append(", playerCharacter=").append(playerCharacter);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this CollisionManager to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        CollisionManager that = (CollisionManager) object;
+        return Objects.equals(enemyManager, that.enemyManager)
+            && Objects.equals(projectileManager, that.projectileManager)
+            && Objects.equals(playerCharacter, that.playerCharacter);
+    }
+
+    /**
+     * Returns a hash code for this CollisionManager.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            enemyManager,
+            projectileManager,
+            playerCharacter
+        );
     }
 }

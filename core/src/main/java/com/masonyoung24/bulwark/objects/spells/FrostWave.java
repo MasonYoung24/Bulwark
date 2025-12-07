@@ -12,6 +12,7 @@ import com.masonyoung24.bulwark.statuses.Frozen;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -152,5 +153,71 @@ public class FrostWave extends Ability {
     @Override
     public void dispose() {
         this.texture.dispose();
+    }
+
+    /**
+     * Returns a String representation of this FrostWave.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("FrostWave{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", radius=").append(radius);
+        stringBuilder.append(", maxRadius=").append(maxRadius);
+        stringBuilder.append(", speed=").append(speed);
+        stringBuilder.append(", expired=").append(expired);
+        stringBuilder.append(", texture=").append(texture);
+        stringBuilder.append(", pointOfExecution=").append(pointOfExecution);
+        stringBuilder.append(", collisionCircle=").append(collisionCircle);
+        stringBuilder.append(", enemiesHit=").append(enemiesHit);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this FrostWave to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        FrostWave frostWave = (FrostWave) object;
+        return Float.compare(radius, frostWave.radius) == 0
+            && Float.compare(maxRadius, frostWave.maxRadius) == 0
+            && Float.compare(speed, frostWave.speed) == 0
+            && expired == frostWave.expired
+            && Objects.equals(texture, frostWave.texture)
+            && Objects.equals(pointOfExecution, frostWave.pointOfExecution)
+            && Objects.equals(collisionCircle, frostWave.collisionCircle)
+            && Objects.equals(enemiesHit, frostWave.enemiesHit);
+    }
+
+    /**
+     * Returns a hash code for this FrostWave.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode(),
+            radius,
+            maxRadius,
+            speed,
+            expired,
+            texture,
+            pointOfExecution,
+            collisionCircle,
+            enemiesHit
+        );
     }
 }

@@ -7,6 +7,8 @@ import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents a Goblin.
  *
@@ -60,5 +62,42 @@ public class Goblin extends Enemy {
         this.setCurrentHP(base.getHP());
         this.sprite.setPosition(base.getXCoordinate(), base.getYCoordinate());
         this.setSpeed(base.getSpeed());
+    }
+
+    /**
+     * Returns a String representation of this Goblin.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Goblin{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Goblin to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        return super.equals(object);
+    }
+
+    /**
+     * Returns a hash code for this Goblin.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode()
+        );
     }
 }

@@ -2,6 +2,8 @@ package com.masonyoung24.bulwark.data;
 
 import com.masonyoung24.bulwark.enums.EnemyType;
 
+import java.util.Objects;
+
 
 /**
  * Represents the base data to be saved for all Enemy objects.
@@ -114,5 +116,64 @@ public class EnemySaveData {
      */
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    /**
+     * Returns a String representation of this EnemySaveData.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("EnemySaveData{");
+        stringBuilder.append("xCoordinate=").append(xCoordinate);
+        stringBuilder.append(", yCoordinate=").append(yCoordinate);
+        stringBuilder.append(", hp=").append(hp);
+        stringBuilder.append(", maxHP=").append(maxHP);
+        stringBuilder.append(", speed=").append(speed);
+        stringBuilder.append(", enemyType=").append(enemyType);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this EnemySaveData to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        EnemySaveData that = (EnemySaveData) object;
+        return Float.compare(xCoordinate, that.xCoordinate) == 0
+            && Float.compare(yCoordinate, that.yCoordinate) == 0
+            && hp == that.hp
+            && maxHP == that.maxHP
+            && Float.compare(getSpeed(), that.getSpeed()) == 0
+            && enemyType == that.enemyType;
+    }
+
+    /**
+     * Returns a hash code for this EnemySaveData.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            xCoordinate,
+            yCoordinate,
+            hp,
+            maxHP,
+            getSpeed(),
+            enemyType
+        );
     }
 }

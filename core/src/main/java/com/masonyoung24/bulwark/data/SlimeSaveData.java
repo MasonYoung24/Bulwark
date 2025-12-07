@@ -2,6 +2,8 @@ package com.masonyoung24.bulwark.data;
 
 import com.masonyoung24.bulwark.enums.SlimeSize;
 
+import java.util.Objects;
+
 /**
  * Represents the save data for a Slime Enemy.
  *
@@ -54,5 +56,57 @@ public class SlimeSaveData extends EnemySaveData {
      * */
     public void setSlimeSize(final SlimeSize slimeSize) {
         this.slimeSize = slimeSize;
+    }
+
+    /**
+     * Returns a String representation of this SlimeSaveData.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("SlimeSaveData{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", scaleFactor=").append(scaleFactor);
+        stringBuilder.append(", slimeSize=").append(slimeSize);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this SlimeSaveData to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        SlimeSaveData that = (SlimeSaveData) object;
+        return Float.compare(getScaleFactor(), that.getScaleFactor()) == 0
+            && getSlimeSize() == that.getSlimeSize();
+    }
+
+    /**
+     * Returns a hash code for this SlimeSaveData.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode(),
+            getScaleFactor(),
+            getSlimeSize()
+        );
     }
 }

@@ -28,6 +28,8 @@ import com.masonyoung24.bulwark.enums.AbilityName;
 import com.masonyoung24.bulwark.objects.*;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents the main game screen.
  *
@@ -534,5 +536,100 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public boolean scrolled(float amountX, float amountY) {
         return false;
+    }
+
+    /**
+     * Returns a String representation of this GameScreen.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("GameScreen{");
+        stringBuilder.append("game=").append(game);
+        stringBuilder.append(", camera=").append(camera);
+        stringBuilder.append(", viewport=").append(viewport);
+        stringBuilder.append(", mapRenderer=").append(mapRenderer);
+        stringBuilder.append(", gamePlayHUD=").append(gamePlayHUD);
+        stringBuilder.append(", playerCharacter=").append(playerCharacter);
+        stringBuilder.append(", projectileManager=").append(projectileManager);
+        stringBuilder.append(", enemyManager=").append(enemyManager);
+        stringBuilder.append(", collisionManager=").append(collisionManager);
+        stringBuilder.append(", assetManager=").append(assetManager);
+        stringBuilder.append(", abilityManager=").append(abilityManager);
+        stringBuilder.append(", autosaveTimer=").append(autosaveTimer);
+        stringBuilder.append(", moveLeftKeyPressed=").append(moveLeftKeyPressed);
+        stringBuilder.append(", moveRightKeyPressed=").append(moveRightKeyPressed);
+        stringBuilder.append(", isFiring=").append(isFiring);
+        stringBuilder.append(", isPaused=").append(isPaused);
+        stringBuilder.append(", continueButton=").append(continueButton);
+        stringBuilder.append(", saveButton=").append(saveButton);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this GameScreen to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        GameScreen that = (GameScreen) object;
+        return Float.compare(autosaveTimer, that.autosaveTimer) == 0
+            && moveLeftKeyPressed == that.moveLeftKeyPressed
+            && moveRightKeyPressed == that.moveRightKeyPressed
+            && isFiring == that.isFiring
+            && isPaused == that.isPaused
+            && Objects.equals(game, that.game)
+            && Objects.equals(camera, that.camera)
+            && Objects.equals(viewport, that.viewport)
+            && Objects.equals(mapRenderer, that.mapRenderer)
+            && Objects.equals(gamePlayHUD, that.gamePlayHUD)
+            && Objects.equals(playerCharacter, that.playerCharacter)
+            && Objects.equals(projectileManager, that.projectileManager)
+            && Objects.equals(enemyManager, that.enemyManager)
+            && Objects.equals(collisionManager, that.collisionManager)
+            && Objects.equals(assetManager, that.assetManager)
+            && Objects.equals(abilityManager, that.abilityManager)
+            && Objects.equals(continueButton, that.continueButton)
+            && Objects.equals(saveButton, that.saveButton);
+    }
+
+    /**
+     * Returns a hash code for this GameScreen.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            game,
+            camera,
+            viewport,
+            mapRenderer,
+            gamePlayHUD,
+            playerCharacter,
+            projectileManager,
+            enemyManager,
+            collisionManager,
+            assetManager,
+            abilityManager,
+            autosaveTimer,
+            moveLeftKeyPressed,
+            moveRightKeyPressed,
+            isFiring,
+            isPaused,
+            continueButton,
+            saveButton
+        );
     }
 }

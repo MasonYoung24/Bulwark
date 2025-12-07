@@ -351,4 +351,57 @@ public class EnemyManager {
             Math.min(overlapTop, overlapBottom)
         );
     }
+
+    /**
+     * Returns a String representation of this EnemyManager.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("EnemyManager{");
+        stringBuilder.append("assetManager=").append(assetManager);
+        stringBuilder.append(", spawnTimer=").append(spawnTimer);
+        stringBuilder.append(", activeEnemies=").append(activeEnemies);
+        stringBuilder.append(", enemiesToAdd=").append(enemiesToAdd);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this EnemyManager to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        EnemyManager that = (EnemyManager) object;
+        return Float.compare(spawnTimer, that.spawnTimer) == 0
+            && Objects.equals(assetManager, that.assetManager)
+            && Objects.equals(getActiveEnemies(), that.getActiveEnemies())
+            && Objects.equals(enemiesToAdd, that.enemiesToAdd);
+    }
+
+    /**
+     * Returns a hash code for this EnemyManager.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            assetManager,
+            spawnTimer,
+            getActiveEnemies(),
+            enemiesToAdd
+        );
+    }
 }

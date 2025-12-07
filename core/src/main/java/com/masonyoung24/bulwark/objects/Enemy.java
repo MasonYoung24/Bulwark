@@ -7,6 +7,8 @@ import com.masonyoung24.bulwark.Managers.EnemyManager;
 import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
 
+import java.util.Objects;
+
 /**
  * Represents and Enemy.
  *
@@ -130,4 +132,51 @@ public abstract class Enemy extends Actor {
      * */
     public abstract <T extends EnemySaveData> void loadData(final T data);
 
+    /**
+     * Returns a String representation of this Enemy.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Enemy{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", isLiving=").append(isLiving);
+        stringBuilder.append(", enemyType=").append(enemyType);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Enemy to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Enemy enemy = (Enemy) object;
+        return isLiving == enemy.isLiving
+            && getEnemyType() == enemy.getEnemyType();
+    }
+
+    /**
+     * Returns a hash code for this Enemy.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            isLiving,
+            getEnemyType()
+        );
+    }
 }

@@ -19,6 +19,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.resources.Assets;
 
+import java.util.Objects;
+
 /**
  * Represents the main menu screen.
  *
@@ -258,6 +260,53 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    /**
+     * Returns a String representation of this MainMenuScreen.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("MainMenuScreen{");
+        stringBuilder.append("game=").append(game);
+        stringBuilder.append(", stage=").append(stage);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this MainMenuScreen to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        MainMenuScreen that = (MainMenuScreen) object;
+        return Objects.equals(game, that.game)
+            && Objects.equals(stage, that.stage);
+    }
+
+    /**
+     * Returns a hash code for this MainMenuScreen.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            game,
+            stage
+        );
     }
 }
 

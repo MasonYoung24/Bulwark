@@ -426,4 +426,90 @@ public abstract class Actor {
      * Handles the death of the Actor.
      * */
     public abstract void handleDeath();
+
+    /**
+     * Returns a String representation of this Actor.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Actor{");
+        stringBuilder.append("currentHP=").append(currentHP);
+        stringBuilder.append(", maxHP=").append(maxHP);
+        stringBuilder.append(", speed=").append(speed);
+        stringBuilder.append(", sprite=").append(sprite);
+        stringBuilder.append(", directionFacing=").append(directionFacing);
+        stringBuilder.append(", abilities=").append(abilities);
+        stringBuilder.append(", tintTask=").append(tintTask);
+        stringBuilder.append(", originalSpriteColor=").append(originalSpriteColor);
+        stringBuilder.append(", movementDirection=").append(movementDirection);
+        stringBuilder.append(", movementDirectionX=").append(movementDirectionX);
+        stringBuilder.append(", movementDirectionY=").append(movementDirectionY);
+        stringBuilder.append(", statusEffects=").append(statusEffects);
+        stringBuilder.append(", isFrozen=").append(isFrozen);
+        stringBuilder.append(", isDamageTintActive=").append(isDamageTintActive);
+        stringBuilder.append(", position=").append(position);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Actor to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Actor actor = (Actor) object;
+        return getCurrentHP() == actor.getCurrentHP()
+            && getMaxHP() == actor.getMaxHP()
+            && Float.compare(getSpeed(), actor.getSpeed()) == 0
+            && Float.compare(movementDirectionX, actor.movementDirectionX) == 0
+            && Float.compare(movementDirectionY, actor.movementDirectionY) == 0
+            && isFrozen == actor.isFrozen
+            && isDamageTintActive == actor.isDamageTintActive
+            && Objects.equals(sprite, actor.sprite)
+            && directionFacing == actor.directionFacing
+            && Objects.equals(abilities, actor.abilities)
+            && Objects.equals(tintTask, actor.tintTask)
+            && Objects.equals(originalSpriteColor, actor.originalSpriteColor)
+            && Objects.equals(getMovementDirection(), actor.getMovementDirection())
+            && Objects.equals(statusEffects, actor.statusEffects)
+            && Objects.equals(getPosition(), actor.getPosition());
+    }
+
+    /**
+     * Returns a hash code for this Actor.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            getCurrentHP(),
+            getMaxHP(),
+            getSpeed(),
+            sprite,
+            directionFacing,
+            abilities,
+            tintTask,
+            originalSpriteColor,
+            getMovementDirection(),
+            movementDirectionX,
+            movementDirectionY,
+            statusEffects,
+            isFrozen,
+            isDamageTintActive,
+            getPosition()
+        );
+    }
 }

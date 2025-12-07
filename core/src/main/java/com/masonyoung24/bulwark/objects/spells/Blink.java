@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.masonyoung24.bulwark.objects.Actor;
 
+import java.util.Objects;
+
 /**
  * Represents the teleportation ability Blink.
  *
@@ -68,5 +70,52 @@ public class Blink extends Ability {
     @Override
     public void dispose() {
 
+    }
+
+    /**
+     * Returns a String representation of this Blink.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Blink{");
+        stringBuilder.append(super.toString());
+        stringBuilder.append(", distance=").append(distance);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Blink to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) return false;
+        Blink blink = (Blink) object;
+        return Float.compare(distance, blink.distance) == 0;
+    }
+
+    /**
+     * Returns a hash code for this Blink.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            super.hashCode(),
+            distance
+        );
     }
 }

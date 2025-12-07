@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.masonyoung24.bulwark.Bulwark;
 
+import java.util.Objects;
+
 /**
  * Represents the game over screen.
  *
@@ -146,5 +148,50 @@ public class GameOverScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    /**
+     * Returns a String representation of this GameOverScreen.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("GameOverScreen{");
+        stringBuilder.append("game=").append(game);
+        stringBuilder.append(", stage=").append(stage);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this GameOverScreen to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) return false;
+        GameOverScreen that = (GameOverScreen) object;
+        return Objects.equals(game, that.game)
+            && Objects.equals(stage, that.stage);
+    }
+
+    /**
+     * Returns a hash code for this GameOverScreen.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            game,
+            stage
+        );
     }
 }
