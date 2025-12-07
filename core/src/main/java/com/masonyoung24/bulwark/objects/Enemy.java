@@ -3,6 +3,7 @@ package com.masonyoung24.bulwark.objects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.Managers.EnemyManager;
 import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
 
@@ -108,7 +109,18 @@ public abstract class Enemy extends Actor {
      *
      * @return the saved data as an EnemySaveData.
      * */
-    public abstract EnemySaveData saveData();
+    public EnemySaveData saveData() {
+        EnemySaveData data = new EnemySaveData();
+
+        data.setXCoordinate(this.getPosition().x);
+        data.setYCoordinate(this.getPosition().y);
+        data.setHP(this.getCurrentHP());
+        data.setMaxHP(this.getMaxHP());
+        data.setEnemyType(this.getEnemyType());
+        data.setSpeed(this.getSpeed());
+
+        return data;
+    }
 
     /**
      * Loads previously saved data into the object
