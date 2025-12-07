@@ -35,7 +35,6 @@ import com.masonyoung24.bulwark.resources.Assets;
  * @version 2025
  * */
 public class GameScreen implements Screen, InputProcessor {
-    public static final float UNIT_SCALE = 1f / 32f;
     private static final float HALF_MODIFIER = 2f;
 
     private final Bulwark game;
@@ -97,10 +96,18 @@ public class GameScreen implements Screen, InputProcessor {
                     enemyManager.getActiveEnemies().add(restoredEnemy);
                 }
             } else {
-                this.playerCharacter = new PlayerCharacter(3, 100, assetManager, getPlayerSpawnPosition());
+                this.playerCharacter = new PlayerCharacter(
+                    3,
+                    100,
+                    assetManager,
+                    getPlayerSpawnPosition());
             }
         } else {
-            this.playerCharacter = new PlayerCharacter(3, 100, assetManager, getPlayerSpawnPosition());
+            this.playerCharacter = new PlayerCharacter(
+                3,
+                100,
+                assetManager,
+                getPlayerSpawnPosition());
         }
 
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
@@ -145,12 +152,19 @@ public class GameScreen implements Screen, InputProcessor {
 
         playerCharacter.setPreviousPosition(playerCharacter.getPosition());
         this.handleMovementInput();
-        projectileManager.updateProjectiles(0, camera.viewportWidth, 0, camera.viewportHeight, deltaTime);
+        projectileManager.updateProjectiles(
+            0,
+            camera.viewportWidth,
+            0,
+            camera.viewportHeight,
+            deltaTime);
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
         collisionManager.detectProjectileCollisionWithEnemy();
         collisionManager.handleProjectileCollisionWithPlayerCharacter();
-        collisionManager.detectAbilityCollisionWithEnemy(abilityManager.activeAbilities, enemyManager.getActiveEnemies());
+        collisionManager.detectAbilityCollisionWithEnemy(
+            abilityManager.activeAbilities,
+            enemyManager.getActiveEnemies());
         enemyManager.handleEnemyDeath();
         gamePlayHUD.updateEnemiesSlain(EnemyManager.getEnemiesSlain());
 
@@ -158,7 +172,10 @@ public class GameScreen implements Screen, InputProcessor {
             handlePlayerFiring();
         }
         playerCharacter.update(deltaTime);
-        enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, gamePlayHUD.getMinutes(), deltaTime);
+        enemyManager.spawnEnemies(camera.viewportWidth,
+            camera.viewportHeight,
+            gamePlayHUD.getMinutes(),
+            deltaTime);
         enemyManager.addEnemyToActiveEnemies();
         enemyManager.updateEnemyFire(playerCharacter.getPosition(), deltaTime);
         enemyManager.updateEnemyStatusEffects(deltaTime);
@@ -166,7 +183,10 @@ public class GameScreen implements Screen, InputProcessor {
 
         // if the player character dies, switch to the game over screen
         if (!playerCharacter.getIsAlive()) {
-            game.setScreen(new GameOverScreen(game, EnemyManager.getEnemiesSlain(), gamePlayHUD.getCurrentTimeSurvived()));
+            game.setScreen(
+                new GameOverScreen(game, EnemyManager.getEnemiesSlain(),
+                    gamePlayHUD.getCurrentTimeSurvived())
+            );
             this.dispose();
         }
         gamePlayHUD.updateGameTimer(deltaTime);
