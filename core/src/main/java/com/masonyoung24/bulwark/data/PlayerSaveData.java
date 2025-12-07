@@ -7,6 +7,7 @@ package com.masonyoung24.bulwark.data;
  * @version 2025
  * */
 public class PlayerSaveData {
+
     protected float xCoordinate;
     protected float yCoordinate;
     protected int hp;
@@ -14,4 +15,8 @@ public class PlayerSaveData {
     protected boolean isAlive;
     protected float timeSinceLastShot;
     protected float fireRateModifier;
+
+    public PlayerSaveData() {
+
+    }
 }
