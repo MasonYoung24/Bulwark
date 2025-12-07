@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
+import com.masonyoung24.bulwark.Managers.AbilityManager;
 import com.masonyoung24.bulwark.enums.AbilityName;
-import com.masonyoung24.bulwark.enums.Direction;
+import com.masonyoung24.bulwark.enums.DirectionFacing;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 import com.masonyoung24.bulwark.objects.spells.AbilityFactory;
 import com.masonyoung24.bulwark.statuses.StatusEffect;
@@ -30,12 +31,14 @@ public abstract class Actor {
     private static final int MINIMUM_HP = 1;
     private static final float[] FROZEN_TINT_RGBA = {0.6f, 0.8f, 1.0f, 1.0f};
     private static final float LOWER_SCALE_VALUE_BOUND_EXCLUSIVE = 0.0f;
+    private static final float DEFAULT_SPEED = 1.0f;
+    private static final float INVALID_SPEED_LOWER_BOUND = 0.0f;
 
     private int currentHP;
     private int maxHP;
-    protected final float speed;
+    private float speed;
     public final Sprite sprite;
-    private Direction directionFacing;
+    private DirectionFacing directionFacing;
     private final HashMap<AbilityName, Ability> abilities;
     private Timer.Task tintTask;
     private final Color originalSpriteColor;
@@ -59,7 +62,7 @@ public abstract class Actor {
         this.currentHP = maxHP;
         this.speed = speed;
         this.sprite = sprite;
-        this.directionFacing = Direction.LEFT;
+        this.directionFacing = DirectionFacing.LEFT;
         this.position = spawnPosition;
         this.sprite.setPosition(position.x, position.y);
         this.abilities = new HashMap<>();
@@ -80,6 +83,28 @@ public abstract class Actor {
     }
 
     /**
+     * Returns the speed of the Actor.
+     *
+     * @return the speed of the Actor as a float.
+     * */
+    public float getSpeed() {
+        return this.speed;
+    }
+
+    /**
+     * Sets the speed of the Actor.
+     *
+     * @param speed the speed to set for the Actor as a float
+     * */
+    public void setSpeed(float speed) {
+        if (speed <= INVALID_SPEED_LOWER_BOUND) {
+            this.speed = DEFAULT_SPEED;
+        } else {
+            this.speed = speed;
+        }
+    }
+
+    /**
      * Returns the isFrozen status of the Actor.
      * */
     public boolean getIsFrozen() {
@@ -91,6 +116,15 @@ public abstract class Actor {
      * */
     public void setIsFrozen(boolean frozenStatus) {
         this.isFrozen = frozenStatus;
+    }
+
+    /**
+     * Returns the maximum HP of the Enemy.
+     *
+     * @return the maximum HP of the Actor as an int
+     * */
+    public int getMaxHP() {
+        return this.maxHP;
     }
 
     /**
@@ -135,8 +169,8 @@ public abstract class Actor {
      * Faces the Actor in the left direction.
      * */
     public void faceLeft() {
-        if (directionFacing != Direction.LEFT) {
-            this.directionFacing = Direction.LEFT;
+        if (directionFacing != DirectionFacing.LEFT) {
+            this.directionFacing = DirectionFacing.LEFT;
             this.sprite.flip(true, false);
         }
     }
@@ -145,8 +179,8 @@ public abstract class Actor {
      * Faces the Actor in the right direction.
      * */
     public void faceRight() {
-        if (directionFacing != Direction.RIGHT) {
-            this.directionFacing = Direction.RIGHT;
+        if (directionFacing != DirectionFacing.RIGHT) {
+            this.directionFacing = DirectionFacing.RIGHT;
             this.sprite.flip(true, false);
         }
     }
