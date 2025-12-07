@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Represents a class for loading, accessing, and disposing of game assets.
@@ -140,5 +141,45 @@ public class Assets {
      * */
     public void dispose() {
         manager.dispose();
+    }
+
+    /**
+     * Returns a String representation of this Assets.
+     *
+     * @return a String
+     */
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder;
+        stringBuilder = new StringBuilder("Assets{");
+        stringBuilder.append("manager=").append(manager);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Compares this Assets to another Object for equality.
+     *
+     * @param object an Object
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) return false;
+        Assets assets = (Assets) object;
+        return Objects.equals(getManager(), assets.getManager());
+    }
+
+    /**
+     * Returns a hash code for this Assets.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getManager());
     }
 }
