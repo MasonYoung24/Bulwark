@@ -160,6 +160,10 @@ public class GameScreen implements Screen, InputProcessor {
             deltaTime);
         enemyManager.updateEnemyPosition(playerCharacter.getPosition());
         enemyManager.checkEnemyCollision();
+        collisionManager.detectEnemyCollisionWithPlayer(
+            this.playerCharacter,
+            enemyManager.getActiveEnemies()
+        );
         collisionManager.detectProjectileCollisionWithEnemy();
         collisionManager.handleProjectileCollisionWithPlayerCharacter();
         collisionManager.detectAbilityCollisionWithEnemy(
