@@ -2,6 +2,7 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.Managers.EnemyManager;
 import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.data.SlimeSaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
