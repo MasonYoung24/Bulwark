@@ -16,10 +16,23 @@ import java.awt.*;
  * */
 public class Assets {
 
+    private final AssetManager manager;
+
     /**
-     * The global AssetManager used to load and manage game assets.
+     * Creates an object of type Assets.
      * */
-    public final AssetManager manager = new AssetManager();
+    public Assets() {
+        manager = new AssetManager();
+    }
+
+    /**
+     * Returns the asset manager.
+     *
+     * @return the game's asset manager as an AssetManager
+     * */
+    public AssetManager getManager() {
+        return manager;
+    }
 
     // Sprites
     /**
