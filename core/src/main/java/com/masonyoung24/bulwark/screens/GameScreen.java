@@ -17,12 +17,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.masonyoung24.bulwark.Bulwark;
 import com.masonyoung24.bulwark.HUDs.GamePlayHUD;
+import com.masonyoung24.bulwark.Managers.AbilityManager;
+import com.masonyoung24.bulwark.Managers.CollisionManager;
+import com.masonyoung24.bulwark.Managers.EnemyManager;
 import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.data.EnemySaveData;
 import com.masonyoung24.bulwark.data.GameSaveData;
 import com.masonyoung24.bulwark.data.SaveLoadManager;
 import com.masonyoung24.bulwark.enums.AbilityName;
-import com.masonyoung24.bulwark.inputs.Inputs;
 import com.masonyoung24.bulwark.objects.*;
 import com.masonyoung24.bulwark.resources.Assets;
 
@@ -42,7 +44,6 @@ public class GameScreen implements Screen, InputProcessor {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final GamePlayHUD gamePlayHUD;
     private final PlayerCharacter playerCharacter;
-    private final Inputs inputs;
     private final ProjectileManager projectileManager;
     private final EnemyManager enemyManager;
     private final CollisionManager collisionManager;
@@ -105,8 +106,7 @@ public class GameScreen implements Screen, InputProcessor {
         this.collisionManager = new CollisionManager(enemyManager, projectileManager, playerCharacter);
 
         createPauseButtons(viewport.getWorldWidth(), viewport.getWorldHeight());
-        inputs = new Inputs(camera, playerCharacter, projectileManager, abilityManager);
-        this.gamePlayHUD = new GamePlayHUD(game.getSpriteBatch(), playerCharacter.getCurrentHP(), assetManager);
+        this.gamePlayHUD = new GamePlayHUD(playerCharacter.getCurrentHP(), assetManager);
     }
 
 
@@ -167,7 +167,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         // if the player character dies, switch to the game over screen
         if (!playerCharacter.getIsAlive()) {
-            game.setScreen(new GameOverScreen(game, EnemyManager.getEnemiesSlain()));
+            game.setScreen(new GameOverScreen(game, EnemyManager.getEnemiesSlain(), gamePlayHUD.getCurrentTimeSurvived()));
             this.dispose();
         }
         gamePlayHUD.updateGameTimer(deltaTime);
