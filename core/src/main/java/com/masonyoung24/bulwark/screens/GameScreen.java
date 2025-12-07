@@ -66,7 +66,7 @@ public class GameScreen implements Screen, InputProcessor {
      * */
     public GameScreen(Bulwark game, boolean loadSave) {
         this.game = game;
-        this.assetManager = game.assets.manager;
+        this.assetManager = game.assets.getManager();
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.translate(camera.viewportWidth / 2f, camera.viewportHeight / 2f);

@@ -37,7 +37,7 @@ public class Bulwark extends Game {
         bitmapFont.getData().setScale((viewport.getWorldHeight() / Gdx.graphics.getHeight() * 2));
 
         assets.load();
-        assets.manager.finishLoading();
+        assets.getManager().finishLoading();
 
         setScreen(new MainMenuScreen(this));
     }
