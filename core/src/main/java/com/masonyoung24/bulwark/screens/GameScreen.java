@@ -134,7 +134,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         game.getSpriteBatch().setProjectionMatrix(camera.combined);
         game.getSpriteBatch().begin();
-        this.updateDirectionPlayerFacing();
+
         projectileManager.render(game.getSpriteBatch());
         playerCharacter.render(game.getSpriteBatch());
         abilityManager.render(game.getSpriteBatch());
@@ -175,6 +175,7 @@ public class GameScreen implements Screen, InputProcessor {
         if (this.getIsFiring()) {
             handlePlayerFiring();
         }
+        this.updateDirectionPlayerFacing();
         playerCharacter.update(deltaTime);
         enemyManager.spawnEnemies(camera.viewportWidth,
             camera.viewportHeight,
