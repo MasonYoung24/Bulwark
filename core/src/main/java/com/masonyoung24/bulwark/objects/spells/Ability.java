@@ -13,7 +13,6 @@ public abstract class Ability {
 
     private static final float TIME_SINCE_CAST_REST_VALUE = 0.0f;
 
-    private final float damage;
     private final float cooldown;
     private float timeSinceCast;
     private boolean isExpired;
@@ -30,7 +29,6 @@ public abstract class Ability {
         if (damage < 0) {
             throw new IllegalArgumentException("Ability damage cannot be negative.");
         }
-        this.damage = damage;
 
         if (cooldown < 0) {
             throw new IllegalArgumentException("Ability cooldown cannot be negative.");
