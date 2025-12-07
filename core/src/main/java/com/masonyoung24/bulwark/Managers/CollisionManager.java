@@ -1,6 +1,8 @@
-package com.masonyoung24.bulwark.objects;
+package com.masonyoung24.bulwark.Managers;
 
-import com.masonyoung24.bulwark.Managers.ProjectileManager;
+import com.masonyoung24.bulwark.objects.Enemy;
+import com.masonyoung24.bulwark.objects.PlayerCharacter;
+import com.masonyoung24.bulwark.objects.Projectile;
 import com.masonyoung24.bulwark.objects.spells.Ability;
 
 import java.util.Iterator;

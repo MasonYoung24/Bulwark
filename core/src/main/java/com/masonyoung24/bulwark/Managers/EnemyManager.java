@@ -1,12 +1,10 @@
-package com.masonyoung24.bulwark.objects;
+package com.masonyoung24.bulwark.Managers;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.masonyoung24.bulwark.Managers.ProjectileManager;
 import com.masonyoung24.bulwark.enums.SlimeSize;
-import com.masonyoung24.bulwark.statuses.StatusEffect;
+import com.masonyoung24.bulwark.objects.*;
 
 import java.util.*;
 

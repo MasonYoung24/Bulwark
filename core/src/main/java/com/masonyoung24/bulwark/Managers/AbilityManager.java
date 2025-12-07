@@ -1,4 +1,4 @@
-package com.masonyoung24.bulwark.objects;
+package com.masonyoung24.bulwark.Managers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.masonyoung24.bulwark.objects.spells.Ability;
