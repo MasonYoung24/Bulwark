@@ -2,8 +2,8 @@ package com.masonyoung24.bulwark.objects;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
+import com.masonyoung24.bulwark.Managers.EnemyManager;
 import com.masonyoung24.bulwark.data.EnemySaveData;
-import com.masonyoung24.bulwark.data.SkeletonWizardSaveData;
 import com.masonyoung24.bulwark.enums.EnemyType;
 import com.masonyoung24.bulwark.resources.Assets;
 
@@ -57,25 +57,6 @@ public class SkeletonWizard extends RangedEnemy {
     }
 
     /**
-     * Saves the state of the skeleton wizard to a new SkeletonWizardSaveData object.
-     *
-     * @return the created skeleton wizard save data as a SkeletonWizardSaveData
-     * */
-    @Override
-    public SkeletonWizardSaveData saveData() {
-        SkeletonWizardSaveData data = new SkeletonWizardSaveData();
-
-        data.setXCoordinate(this.getPosition().x);
-        data.setYCoordinate(this.getPosition().y);
-        data.setHP(this.getCurrentHP());
-        data.setMaxHP(this.getMaxHP());
-        data.setEnemyType(this.getEnemyType());
-        data.setSpeed(this.getSpeed());
-
-        return data;
-    }
-
-    /**
      * Sets the instance variables of the SkeletonWizard based on saved data.
      *
      * @param base the save data for a base enemy as an EnemySaveData
@@ -86,11 +67,10 @@ public class SkeletonWizard extends RangedEnemy {
         if (base == null) {
             throw new IllegalArgumentException("Provided save data must not be null.");
         }
-        SkeletonWizardSaveData data = (SkeletonWizardSaveData) base;
 
-        this.setCurrentHP(data.getHP());
-        this.sprite.setPosition(data.getXCoordinate(), data.getYCoordinate());
-        this.setSpeed(data.getSpeed());
+        this.setCurrentHP(base.getHP());
+        this.sprite.setPosition(base.getXCoordinate(), base.getYCoordinate());
+        this.setSpeed(base.getSpeed());
     }
 
     /**
