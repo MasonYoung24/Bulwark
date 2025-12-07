@@ -157,8 +157,7 @@ public class GameScreen implements Screen, InputProcessor {
         if (this.getIsFiring()) {
             handlePlayerFiring();
         }
-        playerCharacter.updateTimeSinceLastShot(deltaTime);
-        playerCharacter.updateTimeSinceCast(deltaTime);
+        playerCharacter.update(deltaTime);
         enemyManager.spawnEnemies(camera.viewportWidth, camera.viewportHeight, gamePlayHUD.getMinutes(), deltaTime);
         enemyManager.addEnemyToActiveEnemies();
         enemyManager.updateEnemyFire(playerCharacter.getPosition(), deltaTime);
